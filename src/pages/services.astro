@@ -9,55 +9,55 @@ const services = [
     icon: "🤖",
     title: "Agents IA sur mesure",
     accent: "violet",
-    lead: "Nous concevons et déployons des agents IA adaptés à votre métier.",
-    points: [
-      "Architecture multi-modèles : Claude, GPT, Gemini selon la tâche",
-      "Intégration MCP (Model Context Protocol) pour outils et données métier",
-      "Mémoire long terme et persistance dans Supabase / PostgreSQL",
-      "Tool use et orchestration de workflows complexes",
-      "Pionniers du déploiement : premier agent IA en OT français (OTO, mars 2025)",
+    lead: "Des assistants IA dédiés à votre métier, qui travaillent pour vous 24/7.",
+    benefits: [
+      "Vos équipes libérées des tâches répétitives à faible valeur ajoutée",
+      "Réponses instantanées aux questions de vos clients ou collaborateurs",
+      "Intégration native avec vos outils existants (Office 365, Google Workspace, CRM, ERP)",
+      "Évolutif : on commence petit, on grandit avec vos besoins",
+      "Retour sur investissement dès le premier mois",
     ],
   },
   {
     id: "automation",
     icon: "⚙️",
-    title: "Automatisation Make / n8n / Zapier",
+    title: "Automatisation des workflows",
     accent: "red",
-    lead: "Orchestration de scénarios à grande échelle, monitoring, robustesse.",
-    points: [
-      "Make.com, n8n, Zapier, Microsoft Power Automate",
-      "Audits d'opportunités d'automatisation (jusqu'à 215h hebdo identifiées en organisation type OT)",
-      "60+ scénarios actifs supervisés sur tableau de bord unifié",
-      "Lauréat international concours Make Grid (juillet 2025)",
-      "Plan de continuité, error handling, alerting",
+    lead: "On débranche vos équipes du copier-coller et de la double saisie.",
+    benefits: [
+      "Jusqu'à 80 % des tâches manuelles automatisées",
+      "Données synchronisées en temps réel entre vos outils",
+      "Reporting automatique : finis les tableurs à jour à la main",
+      "Gain de temps massif dès la première semaine",
+      "Plans de continuité et alertes en cas d'incident",
     ],
   },
   {
     id: "conseil",
     icon: "🧠",
-    title: "Conseil & stratégie IA",
+    title: "Conseil stratégique IA",
     accent: "fuchsia",
-    lead: "Cadrer une stratégie IA pragmatique qui livre dans le trimestre.",
-    points: [
-      "Charte IA et gouvernance interne",
-      "COPIL IA, feuille de route 2025-2027",
-      "Audit IA par pôle métier (accueil, marketing, dev, com, RH...)",
-      "Formation des équipes : webinaire FROT 130 spectateurs, 4,8/5",
-      "Cadre RGPD, EU AI Act, conformité",
+    lead: "Un cadre clair pour faire de l'IA un levier de croissance, pas un gadget.",
+    benefits: [
+      "Audit de vos opportunités IA en 30 minutes, offert",
+      "Feuille de route concrète sur 12-24 mois",
+      "Charte interne d'utilisation de l'IA (RGPD, EU AI Act)",
+      "Formation et accompagnement de vos équipes",
+      "Quick wins identifiés dès la première semaine",
     ],
   },
   {
     id: "dev",
     icon: "🏗️",
-    title: "Développement web IA-assisté",
+    title: "Sites web & plateformes métier",
     accent: "violet",
-    lead: "Sites web, ERP, CRM, plateformes métier via Lovable et Claude Code.",
-    points: [
-      "Lovable : top 1 % France National Treasure (2025)",
-      "Claude Code et Claude Cowork pour les projets complexes",
-      "Astro, React, Vite, Tailwind, TypeScript",
-      "Edge sur Cloudflare Pages + Workers",
-      "Refonte de 5+ sites web (économies annuelles ~7 600 €)",
+    lead: "Des outils web livrés vite, qui marchent, qui durent.",
+    benefits: [
+      "Sites vitrine, e-commerce, plateformes SaaS",
+      "ERP et CRM sur mesure, taillés pour votre métier",
+      "Performance élevée et SEO optimisé en standard",
+      "Maintenance et évolutions assurées dans la durée",
+      "Hébergement en edge mondial inclus",
     ],
   },
 ];
@@ -80,14 +80,13 @@ const accentBorder: Record<string, string> = {
 ---
 
 <Layout
-  title="Services LOGIQ IA · Agents IA, automatisation, conseil, développement"
-  description="Nos services : agents IA sur mesure, automatisation Make/n8n, conseil stratégique IA, développement web IA-assisté avec Lovable et Claude. Devis et audit gratuit."
+  title="Services LOGIQ IA · Agents IA, automatisation, conseil, web"
+  description="Quatre piliers pour transformer votre entreprise avec l'IA : agents IA sur mesure, automatisation des workflows, conseil stratégique, plateformes web métier. Audit gratuit."
   canonical="https://logiq-ia.fr/services/"
 >
   <Header />
 
   <main class="bg-white">
-    {/* HERO */}
     <section class="relative overflow-hidden pt-32 sm:pt-40">
       <div
         aria-hidden
@@ -104,18 +103,17 @@ const accentBorder: Record<string, string> = {
           Services
         </div>
         <h1 class="mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl" style="color: #0a0a0a;">
-          Quatre piliers,<br />
-          une seule promesse :<br />
-          <span class="text-gradient">livrer</span>.
+          Tout ce qu'il faut<br />
+          pour <span class="text-gradient">passer à l'action</span>.
         </h1>
         <p class="mt-6 max-w-2xl text-lg" style="color: #404040;">
-          Nous intervenons là où ça compte : produire des solutions IA qui
-          tournent en production, sans usine à gaz ni vapeur de slides.
+          Pas de promesses creuses, pas de slides sans suite. Nous livrons des
+          solutions IA et des plateformes qui tournent en production dès la
+          première semaine.
         </p>
       </div>
     </section>
 
-    {/* 4 SECTIONS */}
     <section class="mx-auto max-w-5xl space-y-16 px-6 py-16 sm:space-y-24 sm:py-24">
       {services.map((s) => (
         <article id={s.id} class="grid gap-8 md:grid-cols-[200px_1fr]">
@@ -135,14 +133,18 @@ const accentBorder: Record<string, string> = {
               {s.lead}
             </p>
             <ul class="mt-6 space-y-2.5" style="color: #404040;">
-              {s.points.map((p) => (
+              {s.benefits.map((b) => (
                 <li class="flex gap-3">
-                  <span
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    class="mt-1 h-4 w-4 shrink-0"
+                    style={`color: ${accent[s.accent]};`}
                     aria-hidden
-                    class="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full"
-                    style={`background: ${accent[s.accent]};`}
-                  ></span>
-                  <span>{p}</span>
+                  >
+                    <path d="M13.854 3.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L6.5 9.793l6.646-6.647a.5.5 0 01.708 0z"/>
+                  </svg>
+                  <span>{b}</span>
                 </li>
               ))}
             </ul>
@@ -151,23 +153,22 @@ const accentBorder: Record<string, string> = {
       ))}
     </section>
 
-    {/* CTA */}
     <section class="relative overflow-hidden bg-neutral-50 py-24 sm:py-32">
       <div class="mx-auto max-w-3xl px-6 text-center">
         <h2 class="text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
           Audit gratuit en <span class="text-gradient">30 minutes</span>.
         </h2>
         <p class="mx-auto mt-6 max-w-xl text-lg" style="color: #404040;">
-          On regarde votre stack, votre métier, vos points de friction. À l'issue
-          de l'audit, vous avez un diagnostic clair et un devis transparent. Pas
-          de bullshit.
+          On échange sur votre métier, vos points de friction, vos ambitions.
+          Vous repartez avec un diagnostic clair et un plan d'action concret.
+          Sans engagement.
         </p>
         <a
           href="/contact"
           class="mt-10 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
           style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.45);"
         >
-          Prendre rendez-vous
+          Réserver un créneau
           <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
             <path d="M6 3l5 5-5 5V3z" />
           </svg>

@@ -9,10 +9,10 @@ interface Props {
 }
 
 const {
-  title = "LOGIQ IA · Cabinet d'ingénierie IA & automatisation | Provence",
-  description = "LOGIQ IA accompagne les entreprises et les acteurs touristiques dans leur transformation IA : agents IA sur mesure, automatisation Make/n8n, Lovable, Claude, MCP. Basé en Alpes-de-Haute-Provence, intervention en PACA et France.",
+  title = "LOGIQ IA · L'IA qui transforme votre entreprise",
+  description = "LOGIQ IA conçoit, déploie et opère des produits IA qui livrent. Manga AI, Apidia, OTO : nos solutions IA en production. Cabinet d'ingénierie IA basé en Provence, intervention partout en France.",
   canonical = "https://logiq-ia.fr/",
-  keywords = "LOGIQ IA, agent IA, automatisation IA, Make.com, Lovable, Claude, MCP, intelligence artificielle entreprise, consultant IA, expert IA, Gréoux-les-Bains, Alpes-de-Haute-Provence, PACA, transformation digitale, Quentin DUROY",
+  keywords = "LOGIQ IA, Manga AI, générateur de manga, agent IA, automatisation, intelligence artificielle entreprise, transformation digitale, IA, PACA, France, produit IA",
 } = Astro.props;
 ---
 
@@ -26,7 +26,7 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <meta name="author" content="Quentin DUROY · LOGIQ IA" />
+    <meta name="author" content="LOGIQ IA" />
     <meta name="geo.region" content="FR-04" />
     <meta name="geo.placename" content="Gréoux-les-Bains, Alpes-de-Haute-Provence" />
     <link rel="canonical" href={canonical} />
@@ -51,13 +51,8 @@ const {
         name: "LOGIQ IA",
         url: "https://logiq-ia.fr",
         logo: "https://logiq-ia.fr/logo.png",
-        founder: {
-          "@type": "Person",
-          name: "Quentin DUROY",
-          url: "https://quentin-duroy.fr",
-        },
         description:
-          "Cabinet d'ingénierie IA et automatisation pour entreprises et acteurs touristiques.",
+          "Cabinet d'ingénierie IA. Concepteur et éditeur de produits IA grand public et métier.",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Gréoux-les-Bains",
@@ -66,16 +61,12 @@ const {
           addressCountry: "FR",
         },
         areaServed: [
-          { "@type": "AdministrativeArea", name: "Pays de Manosque" },
-          { "@type": "AdministrativeArea", name: "Alpes-de-Haute-Provence" },
           { "@type": "AdministrativeArea", name: "Provence-Alpes-Côte d'Azur" },
           { "@type": "Country", name: "France" },
         ],
         sameAs: [
           "https://www.linkedin.com/company/logiq-ia",
-          "https://quentin-duroy.fr",
           "https://manga-ai.fr",
-          "https://github.com/exosuppra",
         ],
         owns: [
           {

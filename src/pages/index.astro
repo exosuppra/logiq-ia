@@ -3,60 +3,66 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-const services = [
-  {
-    icon: "🤖",
-    title: "Agents IA sur mesure",
-    body: "Conception et déploiement d'agents IA dédiés à votre métier. Intégration MCP, tool use, mémoire long terme. Premier agent IA pionnier déployé en office de tourisme français : OTO (mars 2025).",
-    href: "/services#agents",
-  },
-  {
-    icon: "⚙️",
-    title: "Automatisation Make / n8n",
-    body: "Orchestration de scénarios complexes, intégration multi-API, monitoring temps réel. 60+ scénarios actifs en production chez nos clients. Lauréat international concours Make Grid (juillet 2025).",
-    href: "/services#automation",
-  },
-  {
-    icon: "🧠",
-    title: "Conseil & stratégie IA",
-    body: "Audit, charte d'utilisation, feuille de route 2025-2027, formation des équipes. Approche éprouvée : 215h hebdo d'automatisation identifiées en audit de 16 personnes.",
-    href: "/services#conseil",
-  },
-  {
-    icon: "🏗️",
-    title: "Développement web IA-assisté",
-    body: "Lovable, Claude Code, Claude Cowork. Sites web, ERP, CRM, plateformes métier. Top 1 % France des créateurs Lovable (statut National Treasure 2025).",
-    href: "/services#dev",
-  },
-];
-
 const products = [
   {
     title: "Manga AI",
-    tagline: "Générateur de manga par IA",
+    tagline: "Notre app phare grand public",
     description:
-      "Application web qui transforme un scénario en manga complet jusqu'à 240 pages. Trilingue FR/EN/ES. En production.",
+      "Créez un manga complet jusqu'à 240 pages à partir d'un simple synopsis. Trilingue, accessible à tous, sans savoir dessiner. Le générateur de manga par IA le plus avancé du marché.",
     href: "/produits/manga-ai/",
     external: "https://manga-ai.fr",
-    accent: "violet",
+    cta: "Découvrir Manga AI",
+    accent: "rose",
+    featured: true,
   },
   {
     title: "Apidia",
-    tagline: "Conseiller en séjour virtuel",
+    tagline: "Plateforme IA touristique",
     description:
-      "Plateforme IA déployée à l'Office de Tourisme du Pays de Manosque. 6 000+ fiches touristiques scrapées/jour. Outil métier pour agents d'accueil.",
+      "Conseiller en séjour virtuel et qualification automatique de la donnée touristique. Connecté en direct à plus de 6 000 fiches établissements actualisées chaque jour.",
     href: "/produits#apidia",
-    accent: "fuchsia",
+    cta: "Voir Apidia",
+    accent: "violet",
   },
   {
-    title: "OTO & OTO_Mail",
-    tagline: "Agents IA premier en OT français",
+    title: "OTO",
+    tagline: "Agents IA métier",
     description:
-      "Premier agent IA sur mesure déployé dans un office de tourisme français (mars 2025). Couvrent ~60 tâches métier quotidiennes.",
+      "Agents IA sur mesure qui automatisent une soixantaine de tâches métier au quotidien. Conçus pour les pôles communication, marketing et administration.",
     href: "/produits#oto",
-    accent: "rose",
+    cta: "Voir OTO",
+    accent: "fuchsia",
   },
 ];
+
+const benefits = [
+  {
+    icon: "📈",
+    title: "Du temps libéré, immédiatement",
+    body: "Nos agents IA automatisent jusqu'à 80 % des tâches répétitives. Vos équipes se concentrent sur ce qui crée vraiment de la valeur.",
+  },
+  {
+    icon: "💰",
+    title: "Des coûts maîtrisés",
+    body: "Pas d'usine à gaz, pas de licences à six chiffres. Des solutions calibrées pour livrer un ROI dès le premier trimestre.",
+  },
+  {
+    icon: "⚡",
+    title: "Déploiement rapide",
+    body: "Premier livrable opérationnel sous 2 à 4 semaines. Itérations rapides selon vos retours terrain.",
+  },
+  {
+    icon: "🛡️",
+    title: "Conformité et souveraineté",
+    body: "RGPD, EU AI Act, hébergement européen. Pour les cas sensibles, nous opérons sur infrastructure souveraine 100 % locale.",
+  },
+];
+
+const accent: Record<string, string> = {
+  violet: "#7c3aed",
+  rose: "#dc2626",
+  fuchsia: "#c026d3",
+};
 ---
 
 <Layout>
@@ -65,7 +71,6 @@ const products = [
   <main class="bg-white">
     {/* HERO */}
     <section class="relative overflow-hidden">
-      {/* grid bg */}
       <div
         aria-hidden
         class="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -73,7 +78,6 @@ const products = [
       >
       </div>
 
-      {/* soft halo */}
       <div
         aria-hidden
         class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 opacity-30"
@@ -90,15 +94,15 @@ const products = [
             <span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style="background: #ef4444;"></span>
             <span class="relative inline-flex h-1.5 w-1.5 rounded-full" style="background: #dc2626;"></span>
           </span>
-          Disponible pour de nouveaux projets
+          Cabinet d'ingénierie IA
         </div>
 
         <h1
           class="hero-fade hero-fade-2 mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
           style="color: #0a0a0a;"
         >
-          L'expertise IA<br />
-          <span class="text-gradient">qui transforme</span><br />
+          L'IA qui<br />
+          <span class="text-gradient">transforme</span><br />
           votre entreprise.
         </h1>
 
@@ -106,104 +110,34 @@ const products = [
           class="hero-fade hero-fade-3 mt-8 max-w-2xl text-xl leading-relaxed"
           style="color: #404040;"
         >
-          <strong style="color: #0a0a0a;">LOGIQ IA</strong> est un cabinet d'ingénierie
-          IA et automatisation pour entreprises et acteurs touristiques. Fondé par
-          {" "}
-          <a
-            href="https://quentin-duroy.fr"
-            target="_blank"
-            rel="noopener"
-            class="font-semibold underline decoration-from-font underline-offset-4"
-            style="color: #6d28d9;"
-          >
-            Quentin DUROY
-          </a>, pionnier de l'IA en office de tourisme français.
+          <strong style="color: #0a0a0a;">LOGIQ IA</strong> conçoit, déploie et opère des
+          produits IA qui livrent. Des solutions pensées pour le terrain, prêtes
+          à tourner dès la première semaine.
         </p>
 
         <div class="hero-fade hero-fade-3 mt-10 flex flex-col items-start gap-4 sm:flex-row">
           <a
-            href="/contact"
+            href="/produits"
             class="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
             style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(124,58,237,0.45);"
           >
-            Discuter d'un projet
+            Découvrir nos produits
             <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
               <path d="M6 3l5 5-5 5V3z" />
             </svg>
           </a>
           <a
-            href="/services"
+            href="/contact"
             class="inline-flex items-center gap-2 rounded-full border px-8 py-3.5 text-base font-semibold transition-all hover:-translate-y-0.5"
             style="border-color: #d4d4d4; color: #0a0a0a;"
           >
-            Découvrir nos services
+            Discuter d'un projet
           </a>
         </div>
-
-        <div class="mt-16 grid grid-cols-2 gap-6 border-t pt-8 sm:grid-cols-4" style="border-color: #e5e5e5;">
-          {[
-            { val: "~80 %", label: "tâches automatisées (audit OT)" },
-            { val: "60+", label: "scénarios Make actifs" },
-            { val: "19", label: "certifications IA (Anthropic, Make, Lovable)" },
-            { val: "Top 1 %", label: "Lovable France · National Treasure" },
-          ].map((s) => (
-            <div>
-              <div class="text-3xl font-bold" style="color: #0a0a0a;">{s.val}</div>
-              <div class="mt-1 text-xs" style="color: #737373;">{s.label}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
 
-    {/* 4 PILIERS SERVICES */}
-    <section class="relative bg-neutral-50 py-24 sm:py-32">
-      <div class="mx-auto max-w-6xl px-6">
-        <div class="mb-16 max-w-2xl">
-          <div
-            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-            style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
-          >
-            Nos services
-          </div>
-          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-            Quatre piliers,<br />une seule promesse : <span class="text-gradient">livrer</span>.
-          </h2>
-          <p class="mt-4 text-lg" style="color: #404040;">
-            Pas d'usine à gaz, pas de slides sans suite. Nous concevons,
-            déployons, et opérons des solutions IA qui tournent réellement en
-            production.
-          </p>
-        </div>
-
-        <div class="grid gap-5 md:grid-cols-2">
-          {services.map((s) => (
-            <a
-              href={s.href}
-              class="group flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
-              style="border-color: #e5e5e5;"
-              onmouseover="this.style.borderColor='rgba(124,58,237,0.30)'; this.style.boxShadow='0 14px 35px -15px rgba(124,58,237,0.20)'"
-              onmouseout="this.style.borderColor='#e5e5e5'; this.style.boxShadow='none'"
-            >
-              <div class="text-4xl">{s.icon}</div>
-              <h3 class="mt-4 text-xl font-bold tracking-tight" style="color: #0a0a0a;">{s.title}</h3>
-              <p class="mt-3 flex-1 text-sm leading-relaxed" style="color: #404040;">{s.body}</p>
-              <div
-                class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold"
-                style="color: #6d28d9;"
-              >
-                En savoir plus
-                <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden>
-                  <path d="M6 3l5 5-5 5V3z" />
-                </svg>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* PRODUITS */}
+    {/* PRODUITS — section star, focus promotion */}
     <section id="produits" class="relative py-24 sm:py-32">
       <div class="mx-auto max-w-6xl px-6">
         <div class="mb-16 max-w-2xl">
@@ -214,39 +148,102 @@ const products = [
             Nos produits
           </div>
           <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-            Du <span class="text-gradient">SaaS</span> au sur-mesure.
+            Des produits IA<br />
+            <span class="text-gradient">qui livrent</span>.
           </h2>
           <p class="mt-4 text-lg" style="color: #404040;">
-            Nos produits IA sont nés sur le terrain et sont aujourd'hui en
-            production chez nos clients ou commercialisés au grand public.
-            <strong style="color: #0a0a0a;"> Manga AI</strong>, notre application
-            phare grand public, transforme un scénario en{" "}
-            <a
-              href="https://manga-ai.fr"
-              target="_blank"
-              rel="noopener"
-              class="font-semibold underline decoration-from-font underline-offset-4"
-              style="color: #dc2626;"
-            >
-              manga complet jusqu'à 240 pages
-            </a>.
+            Trois solutions phares, du SaaS grand public à l'IA métier, toutes en
+            production et utilisées au quotidien par des milliers de clients.
           </p>
         </div>
 
-        <div class="grid gap-5 md:grid-cols-3">
-          {products.map((p) => (
+        {/* MANGA AI : carte large featured */}
+        <article
+          class="mb-6 overflow-hidden rounded-3xl border transition-all hover:-translate-y-1"
+          style="border-color: rgba(220,38,38,0.30); background: linear-gradient(135deg, rgba(220,38,38,0.04) 0%, rgba(255,255,255,1) 100%); box-shadow: 0 14px 35px -15px rgba(220,38,38,0.20);"
+        >
+          <div class="grid gap-8 p-8 md:grid-cols-[1.2fr_1fr] md:gap-12 md:p-12">
+            <div>
+              <div
+                class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-wider"
+                style="border-color: rgba(220,38,38,0.35); background: rgba(220,38,38,0.08); color: #b91c1c;"
+              >
+                ★ Produit phare grand public
+              </div>
+              <h3 class="mt-4 text-4xl font-bold tracking-tight md:text-5xl" style="color: #0a0a0a;">
+                Manga AI
+              </h3>
+              <p class="mt-2 text-lg" style="color: #404040;">
+                Le générateur de manga par IA.
+              </p>
+              <p class="mt-4 text-base leading-relaxed" style="color: #404040;">
+                Créez un manga complet jusqu'à 240 pages à partir d'un simple
+                synopsis. Trilingue FR/EN/ES, accessible sans savoir dessiner. La
+                solution la plus avancée du marché pour produire des mangas
+                longs avec une cohérence visuelle et narrative bluffante.
+              </p>
+              <p class="mt-3 text-base leading-relaxed" style="color: #404040;">
+                Déjà adopté par des créateurs, des éditeurs, des enseignants et
+                des agences créatives partout dans le monde. À découvrir sur{" "}
+                <a
+                  href="https://manga-ai.fr"
+                  target="_blank"
+                  rel="noopener"
+                  class="font-semibold underline decoration-from-font underline-offset-4"
+                  style="color: #dc2626;"
+                >
+                  manga-ai.fr
+                </a>.
+              </p>
+
+              <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="/produits/manga-ai/"
+                  class="inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
+                  style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.40);"
+                >
+                  Lire la fiche produit
+                </a>
+                <a
+                  href="https://manga-ai.fr"
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-base font-semibold transition-all hover:-translate-y-0.5"
+                  style="border-color: #d4d4d4; color: #0a0a0a;"
+                >
+                  Essayer gratuitement
+                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5" aria-hidden>
+                    <path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div
+              class="hidden aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border text-6xl font-bold tracking-tighter text-gradient md:flex md:text-7xl"
+              style="border-color: #e5e5e5; background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);"
+            >
+              MANGA AI
+            </div>
+          </div>
+        </article>
+
+        {/* APIDIA + OTO : grille de 2 */}
+        <div class="grid gap-5 md:grid-cols-2">
+          {products.filter((p) => !p.featured).map((p) => (
             <a
               href={p.href}
               class="group flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
               style="border-color: #e5e5e5;"
-              onmouseover="this.style.borderColor='rgba(220,38,38,0.30)'; this.style.boxShadow='0 14px 35px -15px rgba(220,38,38,0.20)'"
+              onmouseover={`this.style.borderColor='${accent[p.accent]}40'; this.style.boxShadow='0 14px 35px -15px ${accent[p.accent]}30'`}
               onmouseout="this.style.borderColor='#e5e5e5'; this.style.boxShadow='none'"
             >
-              <div class="text-xs uppercase tracking-wider" style="color: #737373;">{p.tagline}</div>
-              <h3 class="mt-2 text-xl font-bold" style="color: #0a0a0a;">{p.title}</h3>
-              <p class="mt-3 flex-1 text-sm leading-relaxed" style="color: #404040;">{p.description}</p>
+              <div class="text-xs uppercase tracking-wider" style={`color: ${accent[p.accent]};`}>
+                {p.tagline}
+              </div>
+              <h3 class="mt-2 text-2xl font-bold tracking-tight" style="color: #0a0a0a;">{p.title}</h3>
+              <p class="mt-3 flex-1 leading-relaxed" style="color: #404040;">{p.description}</p>
               <div class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold" style="color: #6d28d9;">
-                Voir la fiche
+                {p.cta}
                 <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden>
                   <path d="M6 3l5 5-5 5V3z" />
                 </svg>
@@ -257,56 +254,77 @@ const products = [
       </div>
     </section>
 
-    {/* NOTRE APPROCHE */}
-    <section id="about" class="relative bg-neutral-50 py-24 sm:py-32">
-      <div class="mx-auto max-w-3xl px-6">
-        <div
-          class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-          style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
-        >
-          Notre approche
+    {/* BENEFICES — pourquoi nous choisir */}
+    <section class="relative bg-neutral-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-16 max-w-2xl">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+            style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
+          >
+            Pourquoi LOGIQ IA
+          </div>
+          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+            Quatre raisons de<br />
+            <span class="text-gradient">nous faire confiance</span>.
+          </h2>
         </div>
-        <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-          Pionnier de l'IA<br />en <span class="text-gradient">Provence</span>.
-        </h2>
 
-        <div class="prose prose-lg mt-8 space-y-6 leading-relaxed" style="color: #404040;">
-          <p>
-            LOGIQ IA est fondé par{" "}
-            <a
-              href="https://quentin-duroy.fr"
-              target="_blank"
-              rel="noopener"
-              class="font-semibold underline decoration-from-font underline-offset-4"
-              style="color: #6d28d9;"
+        <div class="grid gap-5 md:grid-cols-2">
+          {benefits.map((b) => (
+            <article
+              class="flex gap-5 rounded-2xl border bg-white p-6"
+              style="border-color: #e5e5e5;"
             >
-              Quentin DUROY
-            </a>, Référent en Intelligence Artificielle et Chef de Projet Web à
-            l'Office de Tourisme et des Congrès du Pays de Manosque. Premier
-            poste de Référent IA créé dans un office de tourisme français.
-          </p>
-          <p>
-            En mars 2025, nous déployons <strong style="color: #0a0a0a;">OTO</strong>,
-            premier agent IA sur mesure utilisé par un OT en France. En juillet
-            2025, nous remportons un{" "}
-            <strong style="color: #0a0a0a;">concours international Make</strong> sur
-            l'outil Make Grid. En novembre 2025, nous animons le webinaire « Œil
-            de l'expert » de la Fédération Nationale des Offices de Tourisme PACA
-            avec <strong style="color: #0a0a0a;">130 spectateurs en direct, 4,8/5
-            de satisfaction</strong>, record de la chaîne YouTube FROT.
-          </p>
-          <p>
-            Notre approche : ne pas vendre de l'IA, vendre des{" "}
-            <strong style="color: #0a0a0a;">solutions qui livrent</strong>. Nous
-            intervenons en direct avec les fondateurs et dirigeants, depuis
-            Gréoux-les-Bains, partout en France.
-          </p>
+              <div class="text-4xl">{b.icon}</div>
+              <div>
+                <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">{b.title}</h3>
+                <p class="mt-2 text-base leading-relaxed" style="color: #404040;">{b.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* TRUST SIGNALS — preuve sociale sans nommer Quentin */}
+    <section class="relative py-24 sm:py-32">
+      <div class="mx-auto max-w-5xl px-6 text-center">
+        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl" style="color: #0a0a0a;">
+          Une expertise reconnue.
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg" style="color: #404040;">
+          Lauréats internationaux, statuts officiels, références publiques.
+          Notre travail est reconnu par les acteurs majeurs du secteur.
+        </p>
+
+        <div class="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-3xl">🏆</div>
+            <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">Lauréat Make Grid</div>
+            <div class="mt-1 text-xs" style="color: #737373;">Concours international 2025</div>
+          </div>
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-3xl">🇫🇷</div>
+            <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">National Treasure</div>
+            <div class="mt-1 text-xs" style="color: #737373;">Top 1 % France Lovable</div>
+          </div>
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-3xl">🎙️</div>
+            <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">Record YouTube FROT</div>
+            <div class="mt-1 text-xs" style="color: #737373;">Webinaire 4,8/5 satisfaction</div>
+          </div>
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-3xl">🎓</div>
+            <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">19 certifications IA</div>
+            <div class="mt-1 text-xs" style="color: #737373;">Anthropic · Make · Lovable</div>
+          </div>
         </div>
       </div>
     </section>
 
     {/* CTA final */}
-    <section class="relative overflow-hidden py-24 sm:py-32">
+    <section class="relative overflow-hidden bg-neutral-50 py-24 sm:py-32">
       <div
         aria-hidden
         class="pointer-events-none absolute inset-x-0 top-1/4 -z-10 h-72 opacity-25"
@@ -316,11 +334,11 @@ const products = [
 
       <div class="mx-auto max-w-3xl px-6 text-center">
         <h2 class="text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-          Prêt à passer à l'<span class="text-gradient">action</span> ?
+          Votre projet IA<br />commence ici.
         </h2>
         <p class="mx-auto mt-6 max-w-xl text-lg" style="color: #404040;">
-          Audit gratuit en 30 min pour identifier vos opportunités d'automatisation
-          et d'IA. Pas de bullshit, juste un diagnostic clair et un devis transparent.
+          Audit offert en 30 minutes. À l'issue, vous repartez avec un
+          diagnostic clair, un plan d'action concret et un devis transparent.
         </p>
         <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a

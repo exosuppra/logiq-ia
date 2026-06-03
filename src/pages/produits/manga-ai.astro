@@ -4,10 +4,28 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 
 const title =
-  "Manga AI · Le générateur de manga par IA développé par LOGIQ IA";
+  "Manga AI · Le générateur de manga par IA — Créez un manga complet jusqu'à 240 pages";
 const description =
-  "Manga AI, application web qui transforme un scénario en manga complet jusqu'à 240 pages, est développée et opérée par LOGIQ IA. Découvrez la genèse, l'architecture, les cas d'usage du projet manga-ai.fr.";
+  "Manga AI transforme un simple synopsis en manga complet de 240 pages, trilingue FR/EN/ES, sans savoir dessiner. Découvrez la solution de génération de manga par IA la plus avancée du marché.";
 const canonical = "https://logiq-ia.fr/produits/manga-ai/";
+
+const useCases = [
+  { t: "Auteurs amateurs", b: "Concrétiser une idée de manga sans dessiner, en quelques heures plutôt qu'en années." },
+  { t: "Enseignants", b: "Engager élèves de collège et lycée en cours de français ou d'arts plastiques sur une production manga collective." },
+  { t: "Créateurs de contenu", b: "Produire des séries narratives pour Instagram, TikTok et Shorts à rythme soutenu." },
+  { t: "Agences créatives", b: "Pitch decks et campagnes BtoB en format manga pour des marques jeunes et dynamiques." },
+  { t: "Éditeurs indépendants", b: "Tester un univers avant d'investir dans un illustrateur, ou compléter un catalogue à moindre coût." },
+  { t: "Communication interne", b: "Onboardings, formations RH, livrets internes gamifiés en bande dessinée." },
+];
+
+const features = [
+  { icon: "📖", title: "Jusqu'à 240 pages", body: "Le format long, c'est notre spécialité. Là où les autres outils s'arrêtent à quelques planches, Manga AI vous emmène jusqu'au manga complet." },
+  { icon: "🌍", title: "Trilingue FR/EN/ES", body: "Publiez en français, anglais ou espagnol. Le moteur narratif et les bulles fonctionnent nativement dans les trois langues." },
+  { icon: "🎨", title: "Cohérence visuelle", body: "Mêmes personnages, mêmes décors, même style sur l'ensemble du manga. C'est ce qui fait la différence avec un simple générateur d'images." },
+  { icon: "⚡", title: "Quelques minutes", body: "De l'idée à la planche finale, comptez quelques minutes seulement. Le rythme idéal pour itérer ou publier en série." },
+  { icon: "📄", title: "Export PDF HD", body: "Téléchargez votre manga en PDF haute définition prêt à imprimer ou publier." },
+  { icon: "🆓", title: "Essai gratuit", body: "Les premières pages sont offertes. Pas de carte bancaire requise. Tout dans le navigateur." },
+];
 ---
 
 <Layout title={title} description={description} canonical={canonical}>
@@ -40,15 +58,16 @@ const canonical = "https://logiq-ia.fr/produits/manga-ai/";
             <span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style="background: #ef4444;"></span>
             <span class="relative inline-flex h-1.5 w-1.5 rounded-full" style="background: #dc2626;"></span>
           </span>
-          Produit en production
+          Produit phare grand public
         </div>
 
         <h1
           class="mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
           style="color: #0a0a0a;"
         >
-          Manga AI : le<br /><span class="text-gradient">générateur de manga par IA</span><br />
-          développé par LOGIQ IA.
+          Manga AI :<br />
+          <span class="text-gradient">votre manga en quelques minutes</span>,
+          sans savoir dessiner.
         </h1>
 
         <p class="mt-6 max-w-2xl text-xl leading-relaxed" style="color: #404040;">
@@ -61,9 +80,10 @@ const canonical = "https://logiq-ia.fr/produits/manga-ai/";
           >
             Manga AI
           </a>{" "}
-          est l'application phare grand public de LOGIQ IA. Elle transforme un
-          synopsis textuel en manga complet, planches dessinées et bulles
-          incluses, jusqu'à 240 pages. Trilingue FR/EN/ES.
+          transforme votre synopsis en manga complet jusqu'à 240 pages. La
+          solution la plus avancée du marché pour publier un manga long avec
+          une cohérence visuelle et narrative bluffante. Disponible
+          aujourd'hui sur <strong style="color: #0a0a0a;">manga-ai.fr</strong>.
         </p>
 
         <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row">
@@ -74,70 +94,49 @@ const canonical = "https://logiq-ia.fr/produits/manga-ai/";
             class="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
             style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.45);"
           >
-            Visiter manga-ai.fr
+            Essayer gratuitement sur manga-ai.fr
             <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
               <path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" />
             </svg>
           </a>
           <a
-            href="/contact"
+            href="#cas-usage"
             class="inline-flex items-center gap-2 rounded-full border px-8 py-3.5 text-base font-semibold transition-all hover:-translate-y-0.5"
             style="border-color: #d4d4d4; color: #0a0a0a;"
           >
-            Travailler avec nous
+            Pour qui c'est fait ?
           </a>
         </div>
       </div>
     </section>
 
-    {/* PRÉSENTATION */}
-    <section class="relative py-24 sm:py-32">
-      <div class="mx-auto max-w-3xl px-6">
+    {/* FEATURES */}
+    <section class="relative bg-neutral-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-5xl px-6">
         <div
           class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
           style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
         >
-          Présentation
+          Ce qui vous attend
         </div>
         <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-          Genèse du projet.
+          Tout pour créer<br />votre manga.
         </h2>
 
-        <div class="prose prose-lg mt-8 space-y-6 leading-relaxed" style="color: #404040;">
-          <p>
-            <strong style="color: #0a0a0a;">Manga AI</strong> est né d'une question
-            simple : peut-on rendre la création de manga accessible à quiconque a une
-            histoire à raconter, sans imposer dix ans d'apprentissage du dessin ?
-            Notre réponse, accessible aujourd'hui sur{" "}
-            <a
-              href="https://manga-ai.fr"
-              target="_blank"
-              rel="noopener"
-              style="color: #dc2626; font-weight: 600;"
-            >
-              manga-ai.fr
-            </a>, est oui.
-          </p>
-          <p>
-            Le défi technique n'est pas la génération d'une planche isolée. C'est la
-            <strong style="color: #0a0a0a;"> cohérence sur la durée</strong> : conserver
-            les mêmes personnages, le même style graphique, les mêmes décors sur 240
-            pages. C'est ce qui sépare un outil amateur d'une plateforme manga AI de
-            production professionnelle.
-          </p>
-          <p>
-            Pour résoudre ce problème, LOGIQ IA a conçu un pipeline orchestrant
-            plusieurs modèles d'IA (OpenAI, Google Gemini, Anthropic Claude) avec un
-            système de mémoire canonique qui ré-injecte les descriptions de personnages
-            et de décors dans chaque appel d'inférence. Une partie du rendu d'images
-            tourne sur un serveur GPU dédié pour des raisons de coût et de cohérence.
-          </p>
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((f) => (
+            <article class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+              <div class="text-3xl">{f.icon}</div>
+              <h3 class="mt-3 text-lg font-bold" style="color: #0a0a0a;">{f.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">{f.body}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
 
     {/* CAS D'USAGE */}
-    <section class="relative bg-neutral-50 py-24 sm:py-32">
+    <section id="cas-usage" class="relative py-24 sm:py-32">
       <div class="mx-auto max-w-5xl px-6">
         <div
           class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
@@ -146,22 +145,24 @@ const canonical = "https://logiq-ia.fr/produits/manga-ai/";
           Cas d'usage
         </div>
         <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-          Pour qui, pour quoi.
+          Pour qui ?
         </h2>
         <p class="mt-4 max-w-2xl text-lg" style="color: #404040;">
-          L'application Manga AI s'adresse à plusieurs profils, du créateur
-          amateur à l'entreprise.
+          <a
+            href="https://manga-ai.fr"
+            target="_blank"
+            rel="noopener"
+            class="font-semibold underline decoration-from-font underline-offset-4"
+            style="color: #dc2626;"
+          >
+            Manga AI
+          </a>{" "}
+          s'adresse à toutes celles et tous ceux qui ont une histoire à
+          raconter, en B2C comme en B2B.
         </p>
 
         <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { t: "Auteurs amateurs", b: "Concrétiser une idée de manga sans dessiner, en quelques heures plutôt qu'en années." },
-            { t: "Éducation", b: "Engager élèves de collège et lycée en cours de français ou d'arts plastiques sur une production manga collective." },
-            { t: "Créateurs de contenu", b: "Produire des séries narratives pour Instagram, TikTok, Shorts, à rythme soutenu." },
-            { t: "Agences créatives", b: "Pitch decks et campagnes BtoB en format manga pour des marques jeunes." },
-            { t: "Éditeurs indépendants", b: "Tester un univers avant d'investir dans un illustrateur, ou compléter un catalogue à moindre coût." },
-            { t: "Communication interne", b: "Onboardings, formations RH, livrets internes gamifiés en bande dessinée." },
-          ].map((u) => (
+          {useCases.map((u) => (
             <article class="rounded-xl border bg-white p-5" style="border-color: #e5e5e5;">
               <h3 class="text-base font-bold" style="color: #0a0a0a;">{u.t}</h3>
               <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">{u.b}</p>
@@ -170,8 +171,7 @@ const canonical = "https://logiq-ia.fr/produits/manga-ai/";
         </div>
 
         <p class="mx-auto mt-12 max-w-3xl text-base" style="color: #404040;">
-          Vous avez une idée de manga ? Le plus simple est encore d'essayer
-          directement{" "}
+          Le plus simple est encore d'essayer directement{" "}
           <a
             href="https://manga-ai.fr"
             target="_blank"
@@ -179,78 +179,9 @@ const canonical = "https://logiq-ia.fr/produits/manga-ai/";
             style="color: #dc2626; font-weight: 600;"
           >
             manga-ai.fr
-          </a>{" "}
-          : les premières pages sont gratuites, aucun téléchargement requis.
+          </a>. Les premières pages sont gratuites, sans inscription
+          obligatoire.
         </p>
-      </div>
-    </section>
-
-    {/* STACK & CHIFFRES */}
-    <section class="relative py-24 sm:py-32">
-      <div class="mx-auto max-w-5xl px-6">
-        <div class="grid gap-12 md:grid-cols-2">
-          <div>
-            <div
-              class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-              style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
-            >
-              Architecture
-            </div>
-            <h2 class="mt-6 text-3xl font-bold tracking-tight" style="color: #0a0a0a;">
-              Sous le capot.
-            </h2>
-            <div class="mt-6 space-y-4 leading-relaxed" style="color: #404040;">
-              <p>
-                <strong style="color: #0a0a0a;">Front</strong> : Vite + React +
-                TypeScript pour une SPA réactive.
-              </p>
-              <p>
-                <strong style="color: #0a0a0a;">Back</strong> : Supabase
-                (authentification, PostgreSQL, storage) + Stripe pour les
-                paiements.
-              </p>
-              <p>
-                <strong style="color: #0a0a0a;">Infrastructure</strong> :
-                Cloudflare Pages + Workers pour le rendu edge mondial.
-              </p>
-              <p>
-                <strong style="color: #0a0a0a;">IA</strong> : pipeline
-                multi-modèles OpenAI, Google Gemini, Anthropic Claude. Inférence
-                image en hybride cloud + serveur GPU local pour maîtriser les
-                coûts et la cohérence sur la durée.
-              </p>
-            </div>
-          </div>
-          <div>
-            <div
-              class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-              style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
-            >
-              Chiffres-clés
-            </div>
-            <h2 class="mt-6 text-3xl font-bold tracking-tight" style="color: #0a0a0a;">
-              Production réelle.
-            </h2>
-            <div class="mt-6 grid grid-cols-2 gap-6">
-              <div>
-                <div class="text-3xl font-bold" style="color: #0a0a0a;">240 p.</div>
-                <div class="mt-1 text-xs" style="color: #737373;">format manga maximum</div>
-              </div>
-              <div>
-                <div class="text-3xl font-bold" style="color: #0a0a0a;">3</div>
-                <div class="mt-1 text-xs" style="color: #737373;">langues supportées (FR/EN/ES)</div>
-              </div>
-              <div>
-                <div class="text-3xl font-bold" style="color: #0a0a0a;">3+</div>
-                <div class="mt-1 text-xs" style="color: #737373;">modèles IA orchestrés en pipeline</div>
-              </div>
-              <div>
-                <div class="text-3xl font-bold" style="color: #0a0a0a;">Edge</div>
-                <div class="mt-1 text-xs" style="color: #737373;">Cloudflare global</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -265,11 +196,12 @@ const canonical = "https://logiq-ia.fr/produits/manga-ai/";
 
       <div class="mx-auto max-w-3xl px-6 text-center">
         <h2 class="text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-          Essayer <span class="text-gradient">Manga AI</span> maintenant.
+          Votre <span class="text-gradient">manga</span> vous attend.
         </h2>
         <p class="mx-auto mt-6 max-w-xl text-lg" style="color: #404040;">
-          Les premières pages sont gratuites, sans téléchargement, dans le
-          navigateur. C'est sur <strong style="color: #0a0a0a;">manga-ai.fr</strong>.
+          Lancez-vous maintenant sur <strong style="color: #0a0a0a;">manga-ai.fr</strong>.
+          Les premières pages sont offertes, l'inscription est facultative,
+          tout se passe dans votre navigateur.
         </p>
         <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
@@ -283,13 +215,6 @@ const canonical = "https://logiq-ia.fr/produits/manga-ai/";
             <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
               <path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" />
             </svg>
-          </a>
-          <a
-            href="/contact"
-            class="inline-flex items-center gap-2 rounded-full border px-8 py-3.5 text-base font-semibold transition-all hover:-translate-y-0.5"
-            style="border-color: #d4d4d4; color: #0a0a0a;"
-          >
-            Nous contacter
           </a>
         </div>
       </div>
