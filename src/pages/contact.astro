@@ -1,0 +1,93 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const email = "quentin.duroy28@gmail.com";
+const subject = encodeURIComponent("Demande LOGIQ IA via logiq-ia.fr");
+---
+
+<Layout
+  title="Contact · LOGIQ IA"
+  description="Discutons de votre projet IA. Audit gratuit en 30 min. Basé en Alpes-de-Haute-Provence, intervention partout en France."
+  canonical="https://logiq-ia.fr/contact/"
+>
+  <Header />
+
+  <main class="bg-white">
+    <section class="relative overflow-hidden pt-32 sm:pt-40">
+      <div
+        aria-hidden
+        class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 opacity-25"
+        style="background: radial-gradient(ellipse at 30% 50%, #a78bfa 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, #f87171 0%, transparent 60%); filter: blur(80px);"
+      >
+      </div>
+
+      <div class="mx-auto max-w-3xl px-6 pb-24 text-center">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+          style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
+        >
+          Contact
+        </div>
+        <h1 class="mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl" style="color: #0a0a0a;">
+          Discutons de votre <span class="text-gradient">projet IA</span>.
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed" style="color: #404040;">
+          Audit gratuit en 30 minutes. Pas de bullshit, pas de slides. On
+          regarde votre métier, votre stack, vos points de friction, et on
+          repart avec un diagnostic clair et un devis transparent.
+        </p>
+
+        <div class="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <a
+            href={`mailto:${email}?subject=${subject}`}
+            class="inline-flex min-w-[260px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
+            style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.45);"
+          >
+            Écrire un email
+          </a>
+          <a
+            href="https://fr.linkedin.com/in/quentin-duroy"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-w-[260px] items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-base font-semibold transition-all hover:-translate-y-0.5"
+            style="border-color: #d4d4d4; color: #0a0a0a;"
+          >
+            LinkedIn · Quentin DUROY
+          </a>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 gap-6 border-t pt-12 sm:grid-cols-3" style="border-color: #e5e5e5;">
+          <div>
+            <div class="text-xs uppercase tracking-[0.15em]" style="color: #737373;">Email</div>
+            <div class="mt-1 text-sm" style="color: #0a0a0a;">{email}</div>
+          </div>
+          <div>
+            <div class="text-xs uppercase tracking-[0.15em]" style="color: #737373;">Localisation</div>
+            <div class="mt-1 text-sm" style="color: #0a0a0a;">Gréoux-les-Bains (04800)<br />Alpes-de-Haute-Provence</div>
+          </div>
+          <div>
+            <div class="text-xs uppercase tracking-[0.15em]" style="color: #737373;">Zone d'intervention</div>
+            <div class="mt-1 text-sm" style="color: #0a0a0a;">Pays de Manosque<br />PACA · France · International</div>
+          </div>
+        </div>
+
+        <p class="mt-12 text-xs" style="color: #737373;">
+          Pour des projets perso ou portfolio, passez plutôt par
+          <a
+            href="https://quentin-duroy.fr"
+            target="_blank"
+            rel="noopener"
+            style="color: #6d28d9; font-weight: 500;"
+            class="underline-offset-4 hover:underline"
+          >
+            quentin-duroy.fr
+          </a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

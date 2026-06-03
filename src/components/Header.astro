@@ -1,0 +1,79 @@
+---
+const links = [
+  { href: "/services", label: "Services" },
+  { href: "/produits", label: "Produits" },
+  { href: "/#about", label: "Notre approche" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<header
+  class="fixed inset-x-0 top-0 z-50 transition-all"
+  id="site-header"
+  data-revealed="true"
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+    <a
+      href="/"
+      class="group flex items-center gap-2 font-display text-sm font-semibold tracking-tight"
+      style="color: #0a0a0a;"
+    >
+      <span
+        class="relative inline-flex h-7 w-7 items-center justify-center rounded-md text-[10px] font-bold text-white transition-transform group-hover:rotate-6"
+        style="background: linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 6px 18px -6px rgba(124,58,237,0.45);"
+      >
+        LIA
+      </span>
+      <span><span class="font-extrabold">LOGIQ</span> <span style="color: #6d28d9;">IA</span></span>
+    </a>
+
+    <nav class="hidden md:block">
+      <ul
+        class="flex items-center gap-1 rounded-full border px-2 py-1.5 backdrop-blur-md"
+        style="border-color: #e5e5e5; background: rgba(255,255,255,0.85);"
+      >
+        {links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class="block rounded-full px-4 py-1.5 text-sm transition-colors"
+              style="color: #404040;"
+              onmouseover="this.style.background='rgba(124,58,237,0.10)'; this.style.color='#0a0a0a'"
+              onmouseout="this.style.background='transparent'; this.style.color='#404040'"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a
+      href="/contact"
+      class="hidden rounded-full px-4 py-2 text-sm font-medium text-white transition-all hover:-translate-y-0.5 sm:inline-block"
+      style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 8px 20px -8px rgba(124,58,237,0.4);"
+    >
+      Discuter d'un projet
+    </a>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  if (header) {
+    const onScroll = () => {
+      if (window.scrollY > 16) header.classList.add("scrolled");
+      else header.classList.remove("scrolled");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+</script>
+
+<style is:global>
+  #site-header.scrolled {
+    backdrop-filter: blur(16px);
+    background-color: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid #e5e5e5;
+  }
+</style>

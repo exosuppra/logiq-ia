@@ -1,0 +1,93 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  keywords?: string;
+}
+
+const {
+  title = "LOGIQ IA · Cabinet d'ingénierie IA & automatisation | Provence",
+  description = "LOGIQ IA accompagne les entreprises et les acteurs touristiques dans leur transformation IA : agents IA sur mesure, automatisation Make/n8n, Lovable, Claude, MCP. Basé en Alpes-de-Haute-Provence, intervention en PACA et France.",
+  canonical = "https://logiq-ia.fr/",
+  keywords = "LOGIQ IA, agent IA, automatisation IA, Make.com, Lovable, Claude, MCP, intelligence artificielle entreprise, consultant IA, expert IA, Gréoux-les-Bains, Alpes-de-Haute-Provence, PACA, transformation digitale, Quentin DUROY",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Quentin DUROY · LOGIQ IA" />
+    <meta name="geo.region" content="FR-04" />
+    <meta name="geo.placename" content="Gréoux-les-Bains, Alpes-de-Haute-Provence" />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="LOGIQ IA" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "LOGIQ IA",
+        url: "https://logiq-ia.fr",
+        logo: "https://logiq-ia.fr/logo.png",
+        founder: {
+          "@type": "Person",
+          name: "Quentin DUROY",
+          url: "https://quentin-duroy.fr",
+        },
+        description:
+          "Cabinet d'ingénierie IA et automatisation pour entreprises et acteurs touristiques.",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Gréoux-les-Bains",
+          addressRegion: "Provence-Alpes-Côte d'Azur",
+          postalCode: "04800",
+          addressCountry: "FR",
+        },
+        areaServed: [
+          { "@type": "AdministrativeArea", name: "Pays de Manosque" },
+          { "@type": "AdministrativeArea", name: "Alpes-de-Haute-Provence" },
+          { "@type": "AdministrativeArea", name: "Provence-Alpes-Côte d'Azur" },
+          { "@type": "Country", name: "France" },
+        ],
+        sameAs: [
+          "https://www.linkedin.com/company/logiq-ia",
+          "https://quentin-duroy.fr",
+          "https://manga-ai.fr",
+          "https://github.com/exosuppra",
+        ],
+        owns: [
+          {
+            "@type": "SoftwareApplication",
+            name: "Manga AI",
+            url: "https://manga-ai.fr",
+          },
+        ],
+      })}
+    />
+  </head>
+  <body class="min-h-screen overflow-x-hidden antialiased">
+    <slot />
+  </body>
+</html>

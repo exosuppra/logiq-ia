@@ -1,0 +1,180 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const services = [
+  {
+    id: "agents",
+    icon: "🤖",
+    title: "Agents IA sur mesure",
+    accent: "violet",
+    lead: "Nous concevons et déployons des agents IA adaptés à votre métier.",
+    points: [
+      "Architecture multi-modèles : Claude, GPT, Gemini selon la tâche",
+      "Intégration MCP (Model Context Protocol) pour outils et données métier",
+      "Mémoire long terme et persistance dans Supabase / PostgreSQL",
+      "Tool use et orchestration de workflows complexes",
+      "Pionniers du déploiement : premier agent IA en OT français (OTO, mars 2025)",
+    ],
+  },
+  {
+    id: "automation",
+    icon: "⚙️",
+    title: "Automatisation Make / n8n / Zapier",
+    accent: "red",
+    lead: "Orchestration de scénarios à grande échelle, monitoring, robustesse.",
+    points: [
+      "Make.com, n8n, Zapier, Microsoft Power Automate",
+      "Audits d'opportunités d'automatisation (jusqu'à 215h hebdo identifiées en organisation type OT)",
+      "60+ scénarios actifs supervisés sur tableau de bord unifié",
+      "Lauréat international concours Make Grid (juillet 2025)",
+      "Plan de continuité, error handling, alerting",
+    ],
+  },
+  {
+    id: "conseil",
+    icon: "🧠",
+    title: "Conseil & stratégie IA",
+    accent: "fuchsia",
+    lead: "Cadrer une stratégie IA pragmatique qui livre dans le trimestre.",
+    points: [
+      "Charte IA et gouvernance interne",
+      "COPIL IA, feuille de route 2025-2027",
+      "Audit IA par pôle métier (accueil, marketing, dev, com, RH...)",
+      "Formation des équipes : webinaire FROT 130 spectateurs, 4,8/5",
+      "Cadre RGPD, EU AI Act, conformité",
+    ],
+  },
+  {
+    id: "dev",
+    icon: "🏗️",
+    title: "Développement web IA-assisté",
+    accent: "violet",
+    lead: "Sites web, ERP, CRM, plateformes métier via Lovable et Claude Code.",
+    points: [
+      "Lovable : top 1 % France National Treasure (2025)",
+      "Claude Code et Claude Cowork pour les projets complexes",
+      "Astro, React, Vite, Tailwind, TypeScript",
+      "Edge sur Cloudflare Pages + Workers",
+      "Refonte de 5+ sites web (économies annuelles ~7 600 €)",
+    ],
+  },
+];
+
+const accent: Record<string, string> = {
+  violet: "#7c3aed",
+  red: "#dc2626",
+  fuchsia: "#c026d3",
+};
+const accentBg: Record<string, string> = {
+  violet: "rgba(124,58,237,0.06)",
+  red: "rgba(220,38,38,0.05)",
+  fuchsia: "rgba(192,38,211,0.06)",
+};
+const accentBorder: Record<string, string> = {
+  violet: "rgba(124,58,237,0.30)",
+  red: "rgba(220,38,38,0.30)",
+  fuchsia: "rgba(192,38,211,0.28)",
+};
+---
+
+<Layout
+  title="Services LOGIQ IA · Agents IA, automatisation, conseil, développement"
+  description="Nos services : agents IA sur mesure, automatisation Make/n8n, conseil stratégique IA, développement web IA-assisté avec Lovable et Claude. Devis et audit gratuit."
+  canonical="https://logiq-ia.fr/services/"
+>
+  <Header />
+
+  <main class="bg-white">
+    {/* HERO */}
+    <section class="relative overflow-hidden pt-32 sm:pt-40">
+      <div
+        aria-hidden
+        class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 opacity-25"
+        style="background: radial-gradient(ellipse at 30% 50%, #a78bfa 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, #f87171 0%, transparent 60%); filter: blur(80px);"
+      >
+      </div>
+
+      <div class="mx-auto max-w-5xl px-6 pb-16">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+          style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
+        >
+          Services
+        </div>
+        <h1 class="mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl" style="color: #0a0a0a;">
+          Quatre piliers,<br />
+          une seule promesse :<br />
+          <span class="text-gradient">livrer</span>.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg" style="color: #404040;">
+          Nous intervenons là où ça compte : produire des solutions IA qui
+          tournent en production, sans usine à gaz ni vapeur de slides.
+        </p>
+      </div>
+    </section>
+
+    {/* 4 SECTIONS */}
+    <section class="mx-auto max-w-5xl space-y-16 px-6 py-16 sm:space-y-24 sm:py-24">
+      {services.map((s) => (
+        <article id={s.id} class="grid gap-8 md:grid-cols-[200px_1fr]">
+          <div>
+            <div
+              class="inline-flex h-16 w-16 items-center justify-center rounded-2xl text-3xl"
+              style={`background: ${accentBg[s.accent]}; border: 1px solid ${accentBorder[s.accent]};`}
+            >
+              {s.icon}
+            </div>
+          </div>
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight sm:text-4xl" style="color: #0a0a0a;">
+              {s.title}
+            </h2>
+            <p class="mt-3 text-lg" style="color: #404040;">
+              {s.lead}
+            </p>
+            <ul class="mt-6 space-y-2.5" style="color: #404040;">
+              {s.points.map((p) => (
+                <li class="flex gap-3">
+                  <span
+                    aria-hidden
+                    class="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full"
+                    style={`background: ${accent[s.accent]};`}
+                  ></span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    {/* CTA */}
+    <section class="relative overflow-hidden bg-neutral-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-3xl px-6 text-center">
+        <h2 class="text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+          Audit gratuit en <span class="text-gradient">30 minutes</span>.
+        </h2>
+        <p class="mx-auto mt-6 max-w-xl text-lg" style="color: #404040;">
+          On regarde votre stack, votre métier, vos points de friction. À l'issue
+          de l'audit, vous avez un diagnostic clair et un devis transparent. Pas
+          de bullshit.
+        </p>
+        <a
+          href="/contact"
+          class="mt-10 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
+          style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.45);"
+        >
+          Prendre rendez-vous
+          <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
+            <path d="M6 3l5 5-5 5V3z" />
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
