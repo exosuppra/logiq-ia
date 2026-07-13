@@ -1,0 +1,374 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+type Project = {
+  name: string;
+  monogram: string;
+  category: string;
+  concept: string;
+  description: string;
+  tags: string[];
+  href: string;
+  internal?: boolean;
+  ownDomain?: boolean;
+  featured?: boolean;
+  accent: string;
+};
+
+const categories = [
+  "Tous",
+  "Tourisme & Territoire",
+  "Loisir & Expérience",
+  "Services locaux",
+  "Hôtellerie & Restauration",
+  "Commerce & Boutique",
+  "Application & SaaS",
+  "Produit IA",
+];
+
+const projects: Project[] = [
+  {
+    name: "Manga AI",
+    monogram: "MA",
+    category: "Produit IA",
+    concept: "Générateur de manga par IA",
+    description:
+      "Notre produit phare grand public. Transforme un simple synopsis en manga complet jusqu'à 240 pages, trilingue, sans savoir dessiner. Édition case par case.",
+    tags: ["SaaS grand public", "IA générative", "Trilingue"],
+    href: "https://manga-ai.fr",
+    ownDomain: true,
+    featured: true,
+    accent: "#dc2626",
+  },
+  {
+    name: "Apidia",
+    monogram: "AP",
+    category: "Produit IA",
+    concept: "Plateforme IA de données touristiques",
+    description:
+      "Notre plateforme métier : auto-qualification de la donnée touristique et conseiller en séjour virtuel. Elle met à jour ses bases toute seule en allant chercher l'info sur le web. Connectée à 6 000+ fiches établissements. Valeur marché estimée 50 k€.",
+    tags: ["Plateforme métier", "Données touristiques", "React + Supabase"],
+    href: "/produits#apidia",
+    internal: true,
+    accent: "#6d28d9",
+  },
+  {
+    name: "LoveLink",
+    monogram: "LL",
+    category: "Produit IA",
+    concept: "Compagnons IA conversationnels",
+    description:
+      "Une plateforme sociale de personnages IA : chat naturel, appels vocaux ultra-réalistes, génération d'images et mémoire des interactions passées.",
+    tags: ["Produit IA", "Voix & image", "Temps réel"],
+    href: "https://lovelink-ai.lovable.app",
+    accent: "#c026d3",
+  },
+  {
+    name: "Le Jardin de Célina",
+    monogram: "JC",
+    category: "Hôtellerie & Restauration",
+    concept: "Maison d'hôtes & restaurant premium",
+    description:
+      "Site vitrine haut de gamme d'un lieu d'hébergement et de gastronomie à Valensole : chambres, chalets, table signature et événementiel. En ligne sur son propre domaine.",
+    tags: ["Hôtellerie", "Restaurant", "Événementiel"],
+    href: "https://lejardindecelina.com",
+    ownDomain: true,
+    accent: "#b91c1c",
+  },
+  {
+    name: "L'Oustaù de Greù",
+    monogram: "OG",
+    category: "Commerce & Boutique",
+    concept: "Épicerie & cave à vins de Provence",
+    description:
+      "Boutique en ligne d'une épicerie fine et cave à vins de Gréoux-les-Bains : produits régionaux, spiritueux et coffrets apéritif, avec comptes clients et livraison Chronopost à domicile ou en point relais.",
+    tags: ["E-commerce", "Produits régionaux", "Livraison"],
+    href: "https://loustaudegreu.fr",
+    ownDomain: true,
+    accent: "#7c3aed",
+  },
+  {
+    name: "Esparron-de-Verdon",
+    monogram: "EV",
+    category: "Tourisme & Territoire",
+    concept: "Guide touristique officiel",
+    description:
+      "Le site vitrine complet d'une destination du Parc naturel régional du Verdon : activités, agenda, hébergements, restaurants, éco-gestes et patrimoine réunis en un guide clair.",
+    tags: ["Tourisme institutionnel", "Multi-rubriques", "SEO destination"],
+    href: "https://esparron-de-verdon.lovable.app",
+    accent: "#7c3aed",
+  },
+  {
+    name: "Verdon Mystères",
+    monogram: "VM",
+    category: "Loisir & Expérience",
+    concept: "Jeu d'énigmes grandeur nature",
+    description:
+      "La landing d'une expérience outdoor sur le lac d'Esparron : présentation du jeu, règles, partenaires loueurs, offre groupes B2B et carrousel d'avis clients.",
+    tags: ["Landing produit", "Avis clients", "Offre B2B"],
+    href: "https://verdon-mysteres.lovable.app",
+    accent: "#c026d3",
+  },
+  {
+    name: "RENOVXPERTS",
+    monogram: "RX",
+    category: "Services locaux",
+    concept: "Artisan rénovation multi-métiers",
+    description:
+      "Site de génération de leads pour un artisan local : catalogue de 12 corps de métier, arguments de réassurance et formulaire de devis avec consentement RGPD.",
+    tags: ["SEO local", "Devis en ligne", "Lead generation"],
+    href: "https://renovxperts-geo-engine.lovable.app",
+    accent: "#dc2626",
+  },
+  {
+    name: "Meal&Move",
+    monogram: "MM",
+    category: "Application & SaaS",
+    concept: "Tracker nutrition & fitness",
+    description:
+      "Une application web avec espace membre : suivi des repas et de l'activité, coaching personnalisé et statistiques de progression au fil du temps.",
+    tags: ["Web app", "Espace membre", "Dashboard"],
+    href: "https://mealandmove.lovable.app",
+    accent: "#6d28d9",
+  },
+  {
+    name: "Intense Verdon",
+    monogram: "IV",
+    category: "Application & SaaS",
+    concept: "Plateforme de comité éditorial",
+    description:
+      "Un outil métier collaboratif avec authentification : gestion, planification et validation de la ligne éditoriale d'un média local, à plusieurs mains.",
+    tags: ["Outil métier", "Authentification", "Collaboratif"],
+    href: "https://intense-verdon-edito.lovable.app",
+    accent: "#7c3aed",
+  },
+];
+---
+
+<Layout
+  title="Réalisations LOGIQ IA · Sites, applications et produits IA"
+  description="Découvrez les réalisations LOGIQ IA : sites vitrines, applications web, plateformes métier et produits IA. Du guide touristique au SaaS, en passant par l'artisan local et l'hôtellerie premium."
+  canonical="https://logiq-ia.fr/realisations/"
+>
+  <Header />
+
+  <main class="bg-white">
+    {/* HERO */}
+    <section class="relative overflow-hidden pt-32 sm:pt-40">
+      <div
+        aria-hidden
+        class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 opacity-25"
+        style="background: radial-gradient(ellipse at 30% 50%, #a78bfa 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, #f87171 0%, transparent 60%); filter: blur(80px);"
+      >
+      </div>
+
+      <div class="mx-auto max-w-5xl px-6 pb-10">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+          style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.05); color: #6d28d9;"
+        >
+          Réalisations
+        </div>
+        <h1 class="mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl" style="color: #0a0a0a;">
+          Ce que nous<br />
+          <span class="text-gradient">construisons</span>.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg" style="color: #404040;">
+          Du site vitrine au produit IA, en passant par l'application métier :
+          une sélection de projets qui montrent l'étendue de ce que nous savons
+          concevoir, déployer et opérer.
+        </p>
+
+        {/* Stats */}
+        <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+          <div>
+            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">10</div>
+            <div class="text-sm" style="color: #737373;">projets en ligne</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">7</div>
+            <div class="text-sm" style="color: #737373;">secteurs couverts</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold tracking-tight text-gradient">∞</div>
+            <div class="text-sm" style="color: #737373;">du statique au SaaS</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* FILTERS */}
+    <section class="mx-auto max-w-5xl px-6 pt-6">
+      <div class="flex flex-wrap gap-2" id="filter-bar">
+        {categories.map((cat, i) => (
+          <button
+            type="button"
+            class="filter-btn rounded-full border px-4 py-1.5 text-sm font-medium transition-all"
+            data-filter={cat}
+            data-active={i === 0 ? "true" : "false"}
+            style={
+              i === 0
+                ? "border-color: #0a0a0a; background: #0a0a0a; color: #ffffff;"
+                : "border-color: #e5e5e5; background: #ffffff; color: #404040;"
+            }
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </section>
+
+    {/* GRID */}
+    <section class="mx-auto max-w-5xl px-6 py-12">
+      <div class="grid gap-6 sm:grid-cols-2" id="project-grid">
+        {projects.map((p) => (
+          <article
+            class="project-card group flex flex-col overflow-hidden rounded-2xl border bg-white transition-all hover:-translate-y-1"
+            data-category={p.category}
+            style={`border-color: ${p.featured ? "rgba(220,38,38,0.30)" : "#e5e5e5"}; box-shadow: 0 10px 30px -18px ${p.accent}55;`}
+          >
+            {/* Visual tile */}
+            <div
+              class="relative flex aspect-[16/9] items-center justify-center overflow-hidden border-b"
+              style={`border-color: #efefef; background: linear-gradient(135deg, ${p.accent}0d 0%, #ffffff 70%);`}
+            >
+              <span
+                aria-hidden
+                class="pointer-events-none absolute -right-6 -top-8 h-32 w-32 rounded-full opacity-40"
+                style={`background: radial-gradient(circle, ${p.accent}40 0%, transparent 70%); filter: blur(24px);`}
+              ></span>
+              <span
+                class="text-5xl font-black tracking-tighter"
+                style={`background: linear-gradient(135deg, ${p.accent} 0%, #0a0a0a 130%); -webkit-background-clip: text; background-clip: text; color: transparent;`}
+              >
+                {p.monogram}
+              </span>
+              {p.featured && (
+                <span
+                  class="absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
+                  style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%);"
+                >
+                  ★ Produit phare
+                </span>
+              )}
+              {p.ownDomain && !p.featured && (
+                <span
+                  class="absolute left-3 top-3 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider"
+                  style="border-color: #d4d4d4; background: rgba(255,255,255,0.9); color: #404040;"
+                >
+                  Domaine propre
+                </span>
+              )}
+            </div>
+
+            {/* Body */}
+            <div class="flex flex-1 flex-col p-6">
+              <div
+                class="inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide"
+                style={`background: ${p.accent}12; color: ${p.accent};`}
+              >
+                {p.category}
+              </div>
+              <h2 class="mt-3 text-xl font-bold tracking-tight" style="color: #0a0a0a;">
+                {p.name}
+              </h2>
+              <p class="mt-1 text-sm font-medium" style={`color: ${p.accent};`}>
+                {p.concept}
+              </p>
+              <p class="mt-3 text-sm leading-relaxed" style="color: #404040;">
+                {p.description}
+              </p>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                {p.tags.map((t) => (
+                  <span
+                    class="rounded-md border px-2 py-0.5 text-[11px] font-medium"
+                    style="border-color: #e5e5e5; background: #fafafa; color: #525252;"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <a
+                href={p.href}
+                target={p.internal ? undefined : "_blank"}
+                rel={p.internal ? undefined : "noopener"}
+                class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
+                style={`color: ${p.accent};`}
+              >
+                {p.internal ? "Voir la fiche" : "Voir le site"}
+                <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3" aria-hidden>
+                  <path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p id="empty-state" class="hidden py-16 text-center text-sm" style="color: #737373;">
+        Aucun projet dans cette catégorie pour le moment.
+      </p>
+    </section>
+
+    {/* CTA */}
+    <section class="relative overflow-hidden bg-neutral-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-3xl px-6 text-center">
+        <h2 class="text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+          Votre projet<br />
+          sera le <span class="text-gradient">prochain</span> ?
+        </h2>
+        <p class="mx-auto mt-6 max-w-xl text-lg" style="color: #404040;">
+          Site vitrine, application métier, produit IA sur mesure : on part de
+          votre besoin réel et on livre vite. Audit offert en 30 minutes.
+        </p>
+        <a
+          href="/contact"
+          class="mt-10 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
+          style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.45);"
+        >
+          Discuter d'un projet
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const buttons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>(".filter-btn"),
+  );
+  const cards = Array.from(
+    document.querySelectorAll<HTMLElement>(".project-card"),
+  );
+  const emptyState = document.getElementById("empty-state");
+
+  function setActive(btn: HTMLButtonElement) {
+    buttons.forEach((b) => {
+      const active = b === btn;
+      b.dataset.active = active ? "true" : "false";
+      b.style.borderColor = active ? "#0a0a0a" : "#e5e5e5";
+      b.style.background = active ? "#0a0a0a" : "#ffffff";
+      b.style.color = active ? "#ffffff" : "#404040";
+    });
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter;
+      setActive(btn);
+      let visible = 0;
+      cards.forEach((card) => {
+        const show = filter === "Tous" || card.dataset.category === filter;
+        card.style.display = show ? "" : "none";
+        if (show) visible++;
+      });
+      if (emptyState) emptyState.classList.toggle("hidden", visible !== 0);
+    });
+  });
+</script>
