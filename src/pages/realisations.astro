@@ -14,18 +14,20 @@ type Project = {
   internal?: boolean;
   ownDomain?: boolean;
   featured?: boolean;
+  private?: boolean;
   accent: string;
 };
 
 const categories = [
   "Tous",
+  "Agent IA",
+  "Produit IA",
+  "Application & SaaS",
   "Tourisme & Territoire",
-  "Loisir & Expérience",
-  "Services locaux",
   "Hôtellerie & Restauration",
   "Commerce & Boutique",
-  "Application & SaaS",
-  "Produit IA",
+  "Loisir & Expérience",
+  "Services locaux",
 ];
 
 const projects: Project[] = [
@@ -41,6 +43,18 @@ const projects: Project[] = [
     ownDomain: true,
     featured: true,
     accent: "#dc2626",
+  },
+  {
+    name: "Agent SDR autonome",
+    monogram: "SDR",
+    category: "Agent IA",
+    concept: "Agent commercial IA 100 % autonome",
+    description:
+      "Un agent commercial entièrement autonome : on lui confie un profil de client idéal, et il identifie, qualifie et engage des prospects sur LinkedIn, décroche un rendez-vous et journalise tout dans un CRM — en décidant seul de l'ordre de ses actions. Le cerveau (Claude) planifie, les outils exécutent. Mémoire persistante, supervision proactive, conformité Do-Not-Contact.",
+    tags: ["Python", "Agent autonome", "Claude · Tool use"],
+    href: "",
+    private: true,
+    accent: "#7c3aed",
   },
   {
     name: "Apidia",
@@ -184,11 +198,11 @@ const projects: Project[] = [
         {/* Stats */}
         <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
           <div>
-            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">10</div>
-            <div class="text-sm" style="color: #737373;">projets en ligne</div>
+            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">11</div>
+            <div class="text-sm" style="color: #737373;">projets réalisés</div>
           </div>
           <div>
-            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">7</div>
+            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">8</div>
             <div class="text-sm" style="color: #737373;">secteurs couverts</div>
           </div>
           <div>
@@ -292,18 +306,30 @@ const projects: Project[] = [
                 ))}
               </div>
 
-              <a
-                href={p.href}
-                target={p.internal ? undefined : "_blank"}
-                rel={p.internal ? undefined : "noopener"}
-                class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
-                style={`color: ${p.accent};`}
-              >
-                {p.internal ? "Voir la fiche" : "Voir le site"}
-                <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3" aria-hidden>
-                  <path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" />
-                </svg>
-              </a>
+              {p.private ? (
+                <span
+                  class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold"
+                  style={`color: ${p.accent};`}
+                >
+                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3" aria-hidden>
+                    <path d="M4 7V5a4 4 0 118 0v2h.5A1.5 1.5 0 0114 8.5v5A1.5 1.5 0 0112.5 15h-9A1.5 1.5 0 012 13.5v-5A1.5 1.5 0 013.5 7H4zm2 0h4V5a2 2 0 10-4 0v2z" />
+                  </svg>
+                  Projet privé · sur devis
+                </span>
+              ) : (
+                <a
+                  href={p.href}
+                  target={p.internal ? undefined : "_blank"}
+                  rel={p.internal ? undefined : "noopener"}
+                  class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
+                  style={`color: ${p.accent};`}
+                >
+                  {p.internal ? "Voir la fiche" : "Voir le site"}
+                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3" aria-hidden>
+                    <path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" />
+                  </svg>
+                </a>
+              )}
             </div>
           </article>
         ))}
@@ -312,6 +338,200 @@ const projects: Project[] = [
       <p id="empty-state" class="hidden py-16 text-center text-sm" style="color: #737373;">
         Aucun projet dans cette catégorie pour le moment.
       </p>
+    </section>
+
+    {/* ÉTUDES DE CAS */}
+    <section class="relative bg-neutral-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-5xl px-6">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+          style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
+        >
+          Études de cas
+        </div>
+        <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+          Des résultats <span class="text-gradient">mesurables</span>.
+        </h2>
+        <p class="mt-6 max-w-2xl text-lg" style="color: #404040;">
+          Trois projets, trois contextes, une même exigence : des chiffres
+          concrets plutôt que des promesses.
+        </p>
+
+        <div class="mt-12 space-y-6">
+          {/* Étude de cas 1 — Apidia */}
+          <article class="rounded-2xl border bg-white p-8" style="border-color: #e5e5e5;">
+            <h3 class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">
+              Apidia
+            </h3>
+            <p class="mt-1 text-sm font-medium" style="color: #7c3aed;">
+              Plateforme IA de données touristiques
+            </p>
+
+            <div class="mt-6 grid gap-6 sm:grid-cols-3">
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider" style="color: #737373;">
+                  Contexte
+                </div>
+                <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+                  L'Office de Tourisme et des Congrès du Pays de Manosque gère
+                  une base de plus de 6 000 fiches établissements à maintenir
+                  à jour.
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider" style="color: #737373;">
+                  Défi
+                </div>
+                <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+                  La qualification manuelle de la donnée touristique est
+                  chronophage et les informations deviennent vite obsolètes.
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider" style="color: #737373;">
+                  Solution
+                </div>
+                <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+                  Une plateforme IA d'auto-qualification qui va chercher
+                  l'information sur le web et met à jour les bases
+                  automatiquement, doublée d'un conseiller en séjour virtuel
+                  pour le public et d'outils métier (planification éditoriale,
+                  KPI, RH).
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 grid gap-6 border-t pt-4 sm:grid-cols-3" style="border-color: #e5e5e5;">
+              <div>
+                <div class="text-2xl font-bold tracking-tight" style="color: #7c3aed;">6 000+</div>
+                <div class="mt-1 text-xs" style="color: #737373;">fiches actualisées chaque jour</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold tracking-tight" style="color: #7c3aed;">24 h</div>
+                <div class="mt-1 text-xs" style="color: #737373;">cycle complet de mise à jour</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold tracking-tight" style="color: #7c3aed;">50 k€</div>
+                <div class="mt-1 text-xs" style="color: #737373;">valeur marché estimée</div>
+              </div>
+            </div>
+          </article>
+
+          {/* Étude de cas 2 — OTO & OTO_Mail */}
+          <article class="rounded-2xl border bg-white p-8" style="border-color: #e5e5e5;">
+            <h3 class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">
+              OTO &amp; OTO_Mail
+            </h3>
+            <p class="mt-1 text-sm font-medium" style="color: #c026d3;">
+              Agents IA métier
+            </p>
+
+            <div class="mt-6 grid gap-6 sm:grid-cols-3">
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider" style="color: #737373;">
+                  Contexte
+                </div>
+                <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+                  Les pôles communication, marketing et administration d'un
+                  office de tourisme.
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider" style="color: #737373;">
+                  Défi
+                </div>
+                <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+                  Des dizaines de tâches répétitives quotidiennes (emails,
+                  ordres de mission, publications) qui mobilisent les équipes.
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider" style="color: #737373;">
+                  Solution
+                </div>
+                <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+                  Le premier agent IA sur mesure déployé dans un OT français
+                  (mars 2025), couplé à un assistant email — architecture
+                  agent + mémoire + outils connectés (Make, MCP).
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 grid gap-6 border-t pt-4 sm:grid-cols-3" style="border-color: #e5e5e5;">
+              <div>
+                <div class="text-2xl font-bold tracking-tight" style="color: #c026d3;">~60</div>
+                <div class="mt-1 text-xs" style="color: #737373;">tâches métier prises en charge chaque jour</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold tracking-tight" style="color: #c026d3;">~80 %</div>
+                <div class="mt-1 text-xs" style="color: #737373;">des tâches du chef de projet web automatisées</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold tracking-tight" style="color: #c026d3;">215 h/sem.</div>
+                <div class="mt-1 text-xs" style="color: #737373;">automatisables identifiées (audit de 16 agents)</div>
+              </div>
+            </div>
+          </article>
+
+          {/* Étude de cas 3 — Agent SDR autonome */}
+          <article class="rounded-2xl border bg-white p-8" style="border-color: #e5e5e5;">
+            <h3 class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">
+              Agent SDR autonome
+            </h3>
+            <p class="mt-1 text-sm font-medium" style="color: #dc2626;">
+              Prospection commerciale
+            </p>
+
+            <div class="mt-6 grid gap-6 sm:grid-cols-3">
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider" style="color: #737373;">
+                  Contexte
+                </div>
+                <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+                  Un client confidentiel souhaitant industrialiser sa
+                  prospection B2B sur LinkedIn.
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider" style="color: #737373;">
+                  Défi
+                </div>
+                <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+                  La prospection manuelle est chronophage et difficile à
+                  maintenir dans la durée.
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wider" style="color: #737373;">
+                  Solution
+                </div>
+                <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+                  Un agent commercial 100 % autonome : on lui confie un profil
+                  de client idéal, il identifie et qualifie les prospects, mène
+                  la conversation, décroche le rendez-vous et journalise tout
+                  dans le CRM. Cerveau Claude + outils, mémoire persistante,
+                  superviseur proactif.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 grid gap-6 border-t pt-4 sm:grid-cols-3" style="border-color: #e5e5e5;">
+              <div>
+                <div class="text-2xl font-bold tracking-tight" style="color: #dc2626;">100 %</div>
+                <div class="mt-1 text-xs" style="color: #737373;">autonome de l'ICP au rendez-vous</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold tracking-tight" style="color: #dc2626;">24/7</div>
+                <div class="mt-1 text-xs" style="color: #737373;">supervision proactive des pannes</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold tracking-tight" style="color: #dc2626;">DNC</div>
+                <div class="mt-1 text-xs" style="color: #737373;">conformité et consentement intégrés</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
     {/* CTA */}

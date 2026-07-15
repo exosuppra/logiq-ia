@@ -1,0 +1,319 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import NeuralBg from "../components/NeuralBg.astro";
+
+const reconnaissances = [
+  {
+    icon: "🏆",
+    title: "Lauréat Make Grid",
+    body: "Concours international Make Grid (juillet 2025). Reconnaissance officielle de Make.",
+  },
+  {
+    icon: "🇫🇷",
+    title: "National Treasure Lovable",
+    body: "Top 1 % France par trafic sur Lovable (2025).",
+  },
+  {
+    icon: "🎙️",
+    title: "Webinaire FROT PACA",
+    body: "« Œil de l'expert » (13 nov. 2025) : 130 spectateurs en direct, 4,8/5 de satisfaction, record de la chaîne YouTube FROT.",
+  },
+  {
+    icon: "🎓",
+    title: "23 certifications IA",
+    body: "18 Anthropic, 4 Make Academy (cursus complet), 1 Lovable (Vibe Coding L5 Diamond).",
+  },
+];
+
+const certifications = [
+  { count: "18", label: "Anthropic" },
+  { count: "4", label: "Make Academy — cursus complet" },
+  { count: "1", label: "Lovable — Vibe Coding L5 Diamond" },
+];
+
+const diplomes = [
+  {
+    title: "Master 360° Digital",
+    school: "SUPDEWEB",
+    years: "2020 – 2022",
+  },
+  {
+    title: "Licence Gestion de Projet Digital",
+    school: "Aix-Marseille Université",
+    years: "2019 – 2020",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Quentin Duroy",
+  jobTitle: "Fondateur de LOGIQ IA",
+  url: "https://quentin-duroy.fr",
+  sameAs: [
+    "https://fr.linkedin.com/in/quentin-duroy",
+    "https://github.com/exosuppra",
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "LOGIQ IA",
+    url: "https://logiq-ia.fr",
+  },
+};
+---
+
+<Layout
+  title="À propos · LOGIQ IA — Le cabinet et son fondateur"
+  description="LOGIQ IA, cabinet d'ingénierie IA & automatisation basé à Gréoux-les-Bains. Plus de 100 automatisations en production, 3 produits édités. Découvrez le cabinet et son fondateur, Quentin Duroy."
+  canonical="https://logiq-ia.fr/a-propos/"
+>
+  <Header />
+
+  <main class="bg-white">
+    {/* HERO */}
+    <section class="relative overflow-hidden">
+      <NeuralBg />
+      <div
+        aria-hidden
+        class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-96 opacity-25"
+        style="background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.85) 0%, transparent 70%);"
+      >
+      </div>
+
+      <div class="relative z-[2] mx-auto max-w-5xl px-6 pb-16 pt-32 sm:pt-40">
+        <div
+          class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+          style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
+        >
+          À propos
+        </div>
+        <h1 class="mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl" style="color: #0a0a0a;">
+          L'IA utile,<br />
+          <span class="text-gradient">pas l'IA gadget</span>.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg" style="color: #404040;">
+          LOGIQ IA est un cabinet d'ingénierie IA &amp; automatisation basé à
+          Gréoux-les-Bains, au cœur des Alpes-de-Haute-Provence. Nous
+          intervenons en région PACA, partout en France et à distance.
+        </p>
+      </div>
+    </section>
+
+    {/* LE CABINET */}
+    <section class="relative py-24 sm:py-32">
+      <div class="mx-auto max-w-5xl px-6">
+        <div class="mb-12 max-w-2xl">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+            style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
+          >
+            Le cabinet
+          </div>
+          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+            Une mission :<br />
+            des solutions IA <span class="text-gradient">qui livrent</span>.
+          </h2>
+          <p class="mt-4 text-lg" style="color: #404040;">
+            Concevoir, déployer et opérer des solutions IA utiles, calibrées
+            pour les PME et les acteurs du tourisme. Pas d'usines à gaz : des
+            outils qui tournent en production et rendent service dès la
+            première semaine.
+          </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-3">
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-4xl font-bold tracking-tight" style="color: #7c3aed;">+100</div>
+            <div class="mt-2 text-sm font-bold" style="color: #0a0a0a;">Automatisations</div>
+            <div class="mt-1 text-sm" style="color: #737373;">Conçues et opérées en production</div>
+          </div>
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-4xl font-bold tracking-tight" style="color: #c026d3;">3</div>
+            <div class="mt-2 text-sm font-bold" style="color: #0a0a0a;">Produits édités</div>
+            <div class="mt-1 text-sm" style="color: #737373;">
+              <a href="https://manga-ai.fr" target="_blank" rel="noopener" class="underline decoration-from-font underline-offset-4">Manga AI</a>, Apidia, OTO
+            </div>
+          </div>
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-4xl font-bold tracking-tight" style="color: #dc2626;">PACA</div>
+            <div class="mt-2 text-sm font-bold" style="color: #0a0a0a;">Zone d'intervention</div>
+            <div class="mt-1 text-sm" style="color: #737373;">PACA, France entière et à distance</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* LE FONDATEUR */}
+    <section class="relative bg-neutral-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-5xl px-6">
+        <div class="mb-12 max-w-2xl">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+            style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
+          >
+            Le fondateur
+          </div>
+          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+            Quentin Duroy,<br />
+            <span class="text-gradient">pionnier de l'IA</span> en office de tourisme.
+          </h2>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2">
+          <div class="space-y-4 text-base leading-relaxed" style="color: #404040;">
+            <p>
+              Référent IA &amp; Chef de Projet Web à l'Office de Tourisme et des
+              Congrès du Pays de Manosque, Quentin Duroy fait partie des
+              pionniers de l'IA appliquée au tourisme institutionnel.
+            </p>
+            <p>
+              En mars 2025, il crée <strong style="color: #0a0a0a;">OTO</strong>,
+              le premier agent IA sur mesure déployé dans un office de tourisme
+              français. Depuis février 2025, environ 80&nbsp;% de ses tâches de
+              chef de projet web sont automatisées ou assistées par l'IA.
+            </p>
+            <p>
+              En septembre 2025, il livre
+              <strong style="color: #0a0a0a;">Apidia</strong>, plateforme IA
+              d'auto-qualification de la donnée touristique, dont la valeur
+              marché est estimée à 50&nbsp;k€.
+            </p>
+            <p class="text-sm" style="color: #737373;">
+              Pour en savoir plus :
+              <a
+                href="https://quentin-duroy.fr"
+                target="_blank"
+                rel="noopener"
+                class="font-semibold underline decoration-from-font underline-offset-4"
+                style="color: #6d28d9;"
+              >
+                le portfolio de Quentin Duroy
+              </a>.
+            </p>
+          </div>
+
+          <div class="space-y-5">
+            <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+              <div class="text-xs uppercase tracking-wider" style="color: #7c3aed;">Mars 2025</div>
+              <div class="mt-2 text-lg font-bold tracking-tight" style="color: #0a0a0a;">Création d'OTO</div>
+              <p class="mt-1 text-sm leading-relaxed" style="color: #404040;">
+                Premier agent IA sur mesure déployé dans un office de tourisme français.
+              </p>
+            </div>
+            <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+              <div class="text-xs uppercase tracking-wider" style="color: #c026d3;">Depuis février 2025</div>
+              <div class="mt-2 text-lg font-bold tracking-tight" style="color: #0a0a0a;">≈ 80 % des tâches automatisées</div>
+              <p class="mt-1 text-sm leading-relaxed" style="color: #404040;">
+                Ses tâches de chef de projet web sont automatisées ou assistées par l'IA.
+              </p>
+            </div>
+            <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+              <div class="text-xs uppercase tracking-wider" style="color: #dc2626;">Septembre 2025</div>
+              <div class="mt-2 text-lg font-bold tracking-tight" style="color: #0a0a0a;">Livraison d'Apidia</div>
+              <p class="mt-1 text-sm leading-relaxed" style="color: #404040;">
+                Plateforme IA d'auto-qualification de la donnée touristique. Valeur marché estimée : 50 k€.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* RECONNAISSANCES */}
+    <section class="relative py-24 sm:py-32">
+      <div class="mx-auto max-w-5xl px-6 text-center">
+        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl" style="color: #0a0a0a;">
+          Une expertise <span class="text-gradient">reconnue</span>.
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg" style="color: #404040;">
+          Lauréats internationaux, statuts officiels, références publiques.
+        </p>
+
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {reconnaissances.map((r) => (
+            <div class="rounded-2xl border bg-white p-6 text-left" style="border-color: #e5e5e5;">
+              <div class="text-3xl">{r.icon}</div>
+              <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">{r.title}</div>
+              <div class="mt-1 text-xs leading-relaxed" style="color: #737373;">{r.body}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* CERTIFICATIONS — bandeau chiffré */}
+    <section class="relative bg-neutral-50 py-16 sm:py-20">
+      <div class="mx-auto max-w-5xl px-6">
+        <div class="flex flex-col items-center gap-2 text-center">
+          <div class="text-5xl font-bold tracking-tight text-gradient sm:text-6xl">23</div>
+          <div class="text-lg font-bold" style="color: #0a0a0a;">certifications IA</div>
+        </div>
+        <div class="mx-auto mt-8 grid max-w-3xl gap-5 sm:grid-cols-3">
+          {certifications.map((c) => (
+            <div class="rounded-2xl border bg-white p-6 text-center" style="border-color: #e5e5e5;">
+              <div class="text-3xl font-bold tracking-tight" style="color: #7c3aed;">{c.count}</div>
+              <div class="mt-2 text-sm" style="color: #404040;">{c.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* DIPLÔMES */}
+    <section class="relative py-24 sm:py-32">
+      <div class="mx-auto max-w-5xl px-6">
+        <div class="mb-12 max-w-2xl">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+            style="border-color: rgba(192,38,211,0.28); background: rgba(192,38,211,0.06); color: #c026d3;"
+          >
+            Formation
+          </div>
+          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+            Des bases <span class="text-gradient">solides</span>.
+          </h2>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          {diplomes.map((d) => (
+            <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+              <div class="text-xs uppercase tracking-wider" style="color: #737373;">{d.years}</div>
+              <div class="mt-2 text-lg font-bold tracking-tight" style="color: #0a0a0a;">{d.title}</div>
+              <div class="mt-1 text-sm" style="color: #404040;">{d.school}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* CTA final */}
+    <section class="relative overflow-hidden bg-neutral-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-3xl px-6 text-center">
+        <h2 class="text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+          Discutons de <span class="text-gradient">votre projet</span>.
+        </h2>
+        <p class="mx-auto mt-6 max-w-xl text-lg" style="color: #404040;">
+          Un échange direct avec le fondateur, sans intermédiaire. Vous
+          repartez avec une vision claire de ce que l'IA peut apporter à votre
+          activité.
+        </p>
+        <a
+          href="/contact"
+          class="mt-10 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
+          style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.45);"
+        >
+          Discutons de votre projet
+          <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
+            <path d="M6 3l5 5-5 5V3z" />
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</Layout>

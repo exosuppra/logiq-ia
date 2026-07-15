@@ -2,28 +2,39 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import NeuralBg from "../components/NeuralBg.astro";
 
 const email = "contact@logiq-ia.fr";
 const subject = encodeURIComponent("Demande LOGIQ IA via logiq-ia.fr");
+
+const besoins = [
+  "Agents IA sur mesure",
+  "Automatisation de workflows",
+  "Site web ou plateforme métier",
+  "Conseil stratégique IA / formation",
+  "Autre demande",
+];
 ---
 
 <Layout
-  title="Contact · LOGIQ IA"
-  description="Discutons de votre projet IA. Audit gratuit en 30 min. Basé en Alpes-de-Haute-Provence, intervention partout en France."
+  title="Contact · LOGIQ IA — Audit offert en 30 minutes"
+  description="Discutons de votre projet IA. Audit gratuit en 30 min : diagnostic clair, plan d'action concret, devis transparent. Basé en Alpes-de-Haute-Provence, intervention partout en France."
   canonical="https://logiq-ia.fr/contact/"
 >
   <Header />
 
   <main class="bg-white">
-    <section class="relative overflow-hidden pt-32 sm:pt-40">
+    {/* HERO */}
+    <section class="relative overflow-hidden">
+      <NeuralBg />
       <div
         aria-hidden
-        class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 opacity-25"
-        style="background: radial-gradient(ellipse at 30% 50%, #a78bfa 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, #f87171 0%, transparent 60%); filter: blur(80px);"
+        class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-96 opacity-25"
+        style="background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.85) 0%, transparent 70%);"
       >
       </div>
 
-      <div class="mx-auto max-w-3xl px-6 pb-24 text-center">
+      <div class="relative z-[2] mx-auto max-w-3xl px-6 pb-12 pt-32 text-center sm:pt-40">
         <div
           class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
           style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
@@ -34,43 +45,145 @@ const subject = encodeURIComponent("Demande LOGIQ IA via logiq-ia.fr");
           Discutons de votre <span class="text-gradient">projet IA</span>.
         </h1>
         <p class="mt-6 text-lg leading-relaxed" style="color: #404040;">
-          Audit gratuit en 30 minutes. Pas de bullshit, pas de slides. On
-          regarde votre métier, votre stack, vos points de friction, et on
-          repart avec un diagnostic clair et un devis transparent.
+          Audit offert en 30 minutes. On regarde votre métier, vos outils, vos
+          points de friction — vous repartez avec un diagnostic clair, un plan
+          d'action concret et un devis transparent.
         </p>
+      </div>
+    </section>
 
-        <div class="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <a
-            href={`mailto:${email}?subject=${subject}`}
-            class="inline-flex min-w-[260px] items-center justify-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
+    {/* FORM + COORDONNÉES */}
+    <section class="mx-auto max-w-5xl px-6 pb-24 pt-4">
+      <div class="grid gap-10 md:grid-cols-[1.4fr_1fr]">
+        {/* FORM */}
+        <form
+          action={`https://formsubmit.co/${email}`}
+          method="POST"
+          class="rounded-2xl border bg-white p-6 sm:p-8"
+          style="border-color: #e5e5e5; box-shadow: 0 14px 35px -20px rgba(124,58,237,0.25);"
+        >
+          <input type="hidden" name="_subject" value="Nouveau contact via logiq-ia.fr" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <h2 class="text-xl font-bold tracking-tight" style="color: #0a0a0a;">
+            Demander un audit gratuit
+          </h2>
+          <p class="mt-1 text-sm" style="color: #737373;">
+            Réponse sous 24 h ouvrées.
+          </p>
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="nom" class="text-sm font-medium" style="color: #0a0a0a;">Nom *</label>
+              <input
+                id="nom" name="Nom" type="text" required
+                class="mt-1.5 w-full rounded-lg border px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-violet-500"
+                style="border-color: #d4d4d4; color: #0a0a0a;"
+                placeholder="Votre nom"
+              />
+            </div>
+            <div>
+              <label for="societe" class="text-sm font-medium" style="color: #0a0a0a;">Société</label>
+              <input
+                id="societe" name="Société" type="text"
+                class="mt-1.5 w-full rounded-lg border px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-violet-500"
+                style="border-color: #d4d4d4; color: #0a0a0a;"
+                placeholder="Votre entreprise (facultatif)"
+              />
+            </div>
+            <div>
+              <label for="email" class="text-sm font-medium" style="color: #0a0a0a;">Email *</label>
+              <input
+                id="email" name="Email" type="email" required
+                class="mt-1.5 w-full rounded-lg border px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-violet-500"
+                style="border-color: #d4d4d4; color: #0a0a0a;"
+                placeholder="vous@entreprise.fr"
+              />
+            </div>
+            <div>
+              <label for="tel" class="text-sm font-medium" style="color: #0a0a0a;">Téléphone</label>
+              <input
+                id="tel" name="Téléphone" type="tel"
+                class="mt-1.5 w-full rounded-lg border px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-violet-500"
+                style="border-color: #d4d4d4; color: #0a0a0a;"
+                placeholder="06 .. .. .. .. (facultatif)"
+              />
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <label for="besoin" class="text-sm font-medium" style="color: #0a0a0a;">Votre besoin *</label>
+            <select
+              id="besoin" name="Besoin" required
+              class="mt-1.5 w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-violet-500"
+              style="border-color: #d4d4d4; color: #0a0a0a;"
+            >
+              <option value="" disabled selected>Sélectionnez un sujet…</option>
+              {besoins.map((b) => <option value={b}>{b}</option>)}
+            </select>
+          </div>
+
+          <div class="mt-4">
+            <label for="message" class="text-sm font-medium" style="color: #0a0a0a;">Votre projet *</label>
+            <textarea
+              id="message" name="Message" required rows="5"
+              class="mt-1.5 w-full rounded-lg border px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-violet-500"
+              style="border-color: #d4d4d4; color: #0a0a0a;"
+              placeholder="Décrivez votre contexte, vos outils actuels et ce que vous aimeriez automatiser ou construire…"></textarea>
+          </div>
+
+          <label class="mt-4 flex items-start gap-2.5 text-xs leading-relaxed" style="color: #737373;">
+            <input type="checkbox" name="Consentement RGPD" value="Oui" required class="mt-0.5" />
+            J'accepte que mes données soient utilisées uniquement pour me
+            recontacter au sujet de ma demande. Aucune newsletter, aucune
+            revente. *
+          </label>
+
+          <button
+            type="submit"
+            class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5 sm:w-auto"
             style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.45);"
           >
-            Écrire un email
-          </a>
-          <a
-            href="/produits"
-            class="inline-flex min-w-[260px] items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-base font-semibold transition-all hover:-translate-y-0.5"
-            style="border-color: #d4d4d4; color: #0a0a0a;"
-          >
-            Voir nos produits d'abord
-          </a>
-        </div>
+            Envoyer ma demande
+            <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
+              <path d="M6 3l5 5-5 5V3z" />
+            </svg>
+          </button>
+        </form>
 
-        <div class="mt-16 grid grid-cols-1 gap-6 border-t pt-12 sm:grid-cols-3" style="border-color: #e5e5e5;">
-          <div>
-            <div class="text-xs uppercase tracking-[0.15em]" style="color: #737373;">Email</div>
-            <div class="mt-1 text-sm" style="color: #0a0a0a;">{email}</div>
+        {/* COORDONNÉES */}
+        <aside class="space-y-4">
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-xs uppercase tracking-[0.15em]" style="color: #737373;">Email direct</div>
+            <a href={`mailto:${email}?subject=${subject}`} class="mt-1 block text-sm font-semibold hover:underline" style="color: #6d28d9;">
+              {email}
+            </a>
           </div>
-          <div>
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
             <div class="text-xs uppercase tracking-[0.15em]" style="color: #737373;">Localisation</div>
-            <div class="mt-1 text-sm" style="color: #0a0a0a;">Gréoux-les-Bains (04800)<br />Alpes-de-Haute-Provence</div>
+            <div class="mt-1 text-sm" style="color: #0a0a0a;">
+              Gréoux-les-Bains (04800)<br />Alpes-de-Haute-Provence
+            </div>
           </div>
-          <div>
+          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
             <div class="text-xs uppercase tracking-[0.15em]" style="color: #737373;">Zone d'intervention</div>
-            <div class="mt-1 text-sm" style="color: #0a0a0a;">Pays de Manosque<br />PACA · France · International</div>
+            <div class="mt-1 text-sm" style="color: #0a0a0a;">
+              Pays de Manosque · PACA<br />France · À distance
+            </div>
           </div>
-        </div>
-
+          <div
+            class="rounded-2xl border p-6"
+            style="border-color: rgba(124,58,237,0.30); background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(255,255,255,1) 100%);"
+          >
+            <div class="text-sm font-bold" style="color: #0a0a0a;">⏱️ Audit de 30 minutes offert</div>
+            <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">
+              Sans engagement. À l'issue : un diagnostic clair, des quick wins
+              identifiés et un devis transparent.
+            </p>
+          </div>
+        </aside>
       </div>
     </section>
   </main>

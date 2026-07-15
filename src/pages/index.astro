@@ -2,66 +2,155 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import NeuralBg from "../components/NeuralBg.astro";
+
+const services = [
+  {
+    id: "agents",
+    icon: "🤖",
+    title: "Agents IA sur mesure",
+    body: "Des assistants IA dédiés à votre métier, qui travaillent 24/7 : emails, planning, ordres de mission, relation client.",
+    accent: "#7c3aed",
+  },
+  {
+    id: "automation",
+    icon: "⚙️",
+    title: "Automatisation des workflows",
+    body: "On débranche vos équipes du copier-coller. Données synchronisées, reporting automatique, jusqu'à 80 % des tâches manuelles en moins.",
+    accent: "#dc2626",
+  },
+  {
+    id: "conseil",
+    icon: "🧠",
+    title: "Conseil stratégique IA",
+    body: "Audit, feuille de route 12-24 mois, conformité RGPD / EU AI Act, formation de vos équipes. L'IA comme levier, pas comme gadget.",
+    accent: "#c026d3",
+  },
+  {
+    id: "dev",
+    icon: "🏗️",
+    title: "Sites web & plateformes métier",
+    body: "Sites vitrine, e-commerce, plateformes SaaS, ERP/CRM sur mesure. Livrés vite, performants, SEO optimisé en standard.",
+    accent: "#6d28d9",
+  },
+];
+
+const cases = [
+  {
+    title: "Plateforme de données touristiques",
+    result: "6 000+ fiches actualisées automatiquement chaque jour",
+    detail: "Auto-qualification de la donnée par IA pour un office de tourisme. Valeur marché estimée : 50 k€.",
+    accent: "#7c3aed",
+  },
+  {
+    title: "Agents IA métier",
+    result: "~60 tâches prises en charge chaque jour",
+    detail: "Premier agent IA sur mesure déployé dans un OT français. ~80 % des tâches du chef de projet web automatisées.",
+    accent: "#c026d3",
+  },
+  {
+    title: "Agent commercial autonome",
+    result: "Prospection 100 % autonome, de l'ICP au rendez-vous",
+    detail: "Identification, qualification, conversation et prise de RDV sur LinkedIn — l'agent décide seul de ses actions.",
+    accent: "#dc2626",
+  },
+];
+
+const steps = [
+  {
+    n: "01",
+    title: "Audit — 30 min offertes",
+    body: "On regarde votre métier, vos outils, vos points de friction. Vous repartez avec un diagnostic clair et un devis transparent.",
+  },
+  {
+    n: "02",
+    title: "Conception",
+    body: "Une solution calibrée sur votre réalité : vos processus, vos outils existants, votre budget. Pas d'usine à gaz.",
+  },
+  {
+    n: "03",
+    title: "Déploiement",
+    body: "Premier livrable opérationnel sous 2 à 4 semaines. Itérations rapides selon vos retours terrain.",
+  },
+  {
+    n: "04",
+    title: "Opération",
+    body: "On ne disparaît pas après la livraison : supervision, maintenance et amélioration continue dans la durée.",
+  },
+];
 
 const products = [
   {
     title: "Manga AI",
-    tagline: "Notre app phare grand public",
+    tagline: "Produit phare grand public",
     description:
-      "Créez un manga complet jusqu'à 240 pages à partir d'un simple synopsis. Trilingue, accessible à tous, sans savoir dessiner. Le générateur de manga par IA le plus avancé du marché.",
+      "Créez un manga complet jusqu'à 240 pages à partir d'un simple synopsis. Trilingue FR/EN/ES, accessible sans savoir dessiner.",
     href: "/produits/manga-ai/",
-    external: "https://manga-ai.fr",
     cta: "Découvrir Manga AI",
-    accent: "rose",
-    featured: true,
+    accent: "#dc2626",
   },
   {
     title: "Apidia",
     tagline: "Plateforme IA touristique",
     description:
-      "Conseiller en séjour virtuel et qualification automatique de la donnée touristique. Connecté en direct à plus de 6 000 fiches établissements actualisées chaque jour.",
+      "Conseiller en séjour virtuel et qualification automatique de la donnée touristique. 6 000+ fiches actualisées chaque jour.",
     href: "/produits#apidia",
     cta: "Voir Apidia",
-    accent: "violet",
+    accent: "#7c3aed",
   },
   {
     title: "OTO",
     tagline: "Agents IA métier",
     description:
-      "Agents IA sur mesure qui automatisent une soixantaine de tâches métier au quotidien. Conçus pour les pôles communication, marketing et administration.",
+      "Agents IA sur mesure qui automatisent une soixantaine de tâches métier au quotidien, pour la communication et l'administration.",
     href: "/produits#oto",
     cta: "Voir OTO",
-    accent: "fuchsia",
+    accent: "#c026d3",
   },
 ];
 
-const benefits = [
+const clients = [
+  "Office de Tourisme du Pays de Manosque",
+  "Le Jardin de Célina",
+  "L'Oustaù de Greù",
+  "RENOVXPERTS",
+];
+
+const faqs = [
   {
-    icon: "📈",
-    title: "Du temps libéré, immédiatement",
-    body: "Nos agents IA automatisent jusqu'à 80 % des tâches répétitives. Vos équipes se concentrent sur ce qui crée vraiment de la valeur.",
+    q: "Combien coûte un projet IA avec LOGIQ IA ?",
+    a: "Chaque projet démarre par un audit offert de 30 minutes, à l'issue duquel vous recevez un devis transparent. Nos solutions sont calibrées pour les PME : pas de licences à six chiffres, un ROI visé dès le premier trimestre.",
   },
   {
-    icon: "💰",
-    title: "Des coûts maîtrisés",
-    body: "Pas d'usine à gaz, pas de licences à six chiffres. Des solutions calibrées pour livrer un ROI dès le premier trimestre.",
+    q: "En combien de temps voit-on des résultats ?",
+    a: "Le premier livrable opérationnel arrive sous 2 à 4 semaines. Les quick wins sont identifiés dès l'audit, et certaines automatisations produisent des gains dès la première semaine.",
   },
   {
-    icon: "⚡",
-    title: "Déploiement rapide",
-    body: "Premier livrable opérationnel sous 2 à 4 semaines. Itérations rapides selon vos retours terrain.",
+    q: "Êtes-vous conformes au RGPD et à l'EU AI Act ?",
+    a: "Oui. Conformité RGPD et EU AI Act native, hébergement européen. Pour les cas sensibles, nous savons opérer sur une infrastructure souveraine 100 % locale, sans API cloud.",
   },
   {
-    icon: "🛡️",
-    title: "Conformité et souveraineté",
-    body: "RGPD, EU AI Act, hébergement européen. Pour les cas sensibles, nous opérons sur infrastructure souveraine 100 % locale.",
+    q: "Faut-il des compétences techniques en interne ?",
+    a: "Non. Nous concevons, déployons et opérons la solution pour vous, et nous formons vos équipes à son utilisation. Vous gardez la main sans avoir besoin d'un service informatique.",
+  },
+  {
+    q: "Travaillez-vous uniquement avec le secteur du tourisme ?",
+    a: "Non. Le tourisme est notre terrain d'origine, mais nous travaillons aussi avec des commerces, des artisans, de l'hôtellerie-restauration et des éditeurs de SaaS — voir nos réalisations.",
+  },
+  {
+    q: "Que se passe-t-il après la mise en production ?",
+    a: "Nous opérons la solution dans la durée : supervision, alertes en cas d'incident, maintenance et évolutions au fil de vos besoins. Vous n'êtes jamais seul avec la technologie.",
   },
 ];
 
-const accent: Record<string, string> = {
-  violet: "#7c3aed",
-  rose: "#dc2626",
-  fuchsia: "#c026d3",
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
 ---
 
@@ -71,21 +160,15 @@ const accent: Record<string, string> = {
   <main class="bg-white">
     {/* HERO */}
     <section class="relative overflow-hidden">
+      <NeuralBg />
       <div
         aria-hidden
-        class="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style="background-image: linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px); background-size: 80px 80px;"
+        class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-96 opacity-25"
+        style="background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.85) 0%, transparent 70%);"
       >
       </div>
 
-      <div
-        aria-hidden
-        class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 opacity-30"
-        style="background: radial-gradient(ellipse at 30% 50%, #a78bfa 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, #f87171 0%, transparent 60%); filter: blur(80px);"
-      >
-      </div>
-
-      <div class="mx-auto max-w-6xl px-6 pb-24 pt-32 sm:pt-40">
+      <div class="relative z-[2] mx-auto max-w-6xl px-6 pb-24 pt-32 sm:pt-40">
         <div
           class="hero-fade hero-fade-1 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
           style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
@@ -111,33 +194,243 @@ const accent: Record<string, string> = {
           style="color: #404040;"
         >
           <strong style="color: #0a0a0a;">LOGIQ IA</strong> conçoit, déploie et opère des
-          produits IA qui livrent. Des solutions pensées pour le terrain, prêtes
-          à tourner dès la première semaine.
+          agents IA, automatisations et plateformes qui livrent. Des solutions
+          pensées pour le terrain, prêtes à tourner dès la première semaine.
         </p>
 
         <div class="hero-fade hero-fade-3 mt-10 flex flex-col items-start gap-4 sm:flex-row">
           <a
-            href="/produits"
+            href="/contact"
             class="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
             style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(124,58,237,0.45);"
           >
-            Découvrir nos produits
+            Réserver un audit gratuit
             <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
               <path d="M6 3l5 5-5 5V3z" />
             </svg>
           </a>
           <a
-            href="/contact"
-            class="inline-flex items-center gap-2 rounded-full border px-8 py-3.5 text-base font-semibold transition-all hover:-translate-y-0.5"
+            href="/realisations"
+            class="inline-flex items-center gap-2 rounded-full border bg-white/70 px-8 py-3.5 text-base font-semibold backdrop-blur transition-all hover:-translate-y-0.5"
             style="border-color: #d4d4d4; color: #0a0a0a;"
           >
-            Discuter d'un projet
+            Voir nos réalisations
           </a>
         </div>
       </div>
     </section>
 
-    {/* PRODUITS — section star, focus promotion */}
+    {/* BANDEAU CONFIANCE */}
+    <section class="border-y" style="border-color: #efefef; background: #fafafa;">
+      <div class="mx-auto max-w-6xl px-6 py-10">
+        <div class="flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
+          <div class="text-center lg:text-left">
+            <div class="text-xs font-medium uppercase tracking-[0.2em]" style="color: #737373;">
+              Ils travaillent avec nous
+            </div>
+            <div class="mt-3 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 lg:justify-start">
+              {clients.map((c) => (
+                <span class="text-sm font-semibold" style="color: #525252;">{c}</span>
+              ))}
+            </div>
+          </div>
+          <div class="flex shrink-0 flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <div class="text-center">
+              <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">100+</div>
+              <div class="text-xs" style="color: #737373;">automatisations en production</div>
+            </div>
+            <div class="hidden h-8 w-px bg-neutral-200 sm:block"></div>
+            <div class="text-center">
+              <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">4,8/5</div>
+              <div class="text-xs" style="color: #737373;">satisfaction webinaire FROT</div>
+            </div>
+            <div class="hidden h-8 w-px bg-neutral-200 sm:block"></div>
+            <div class="text-center">
+              <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">23</div>
+              <div class="text-xs" style="color: #737373;">certifications IA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* BÉNÉFICES */}
+    <section class="relative py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-16 max-w-2xl">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+            style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
+          >
+            Le constat
+          </div>
+          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+            Vos équipes méritent mieux<br />
+            que le <span class="text-gradient">copier-coller</span>.
+          </h2>
+          <p class="mt-4 text-lg" style="color: #404040;">
+            Saisies en double, emails répétitifs, reporting à la main : autant
+            d'heures perdues chaque semaine. Voici ce que l'IA bien conçue
+            change, concrètement.
+          </p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-4xl">📈</div>
+            <div>
+              <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Du temps libéré, immédiatement</h3>
+              <p class="mt-2 text-base leading-relaxed" style="color: #404040;">Nos agents IA automatisent jusqu'à 80 % des tâches répétitives. Vos équipes se concentrent sur ce qui crée vraiment de la valeur.</p>
+            </div>
+          </article>
+          <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-4xl">💰</div>
+            <div>
+              <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Des coûts maîtrisés</h3>
+              <p class="mt-2 text-base leading-relaxed" style="color: #404040;">Pas d'usine à gaz, pas de licences à six chiffres. Des solutions calibrées pour livrer un ROI dès le premier trimestre.</p>
+            </div>
+          </article>
+          <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-4xl">⚡</div>
+            <div>
+              <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Déploiement rapide</h3>
+              <p class="mt-2 text-base leading-relaxed" style="color: #404040;">Premier livrable opérationnel sous 2 à 4 semaines. Itérations rapides selon vos retours terrain.</p>
+            </div>
+          </article>
+          <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+            <div class="text-4xl">🛡️</div>
+            <div>
+              <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Conformité et souveraineté</h3>
+              <p class="mt-2 text-base leading-relaxed" style="color: #404040;">RGPD, EU AI Act, hébergement européen. Pour les cas sensibles, nous opérons sur infrastructure souveraine 100 % locale.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    {/* SERVICES */}
+    <section class="relative bg-neutral-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-16 max-w-2xl">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+            style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
+          >
+            Nos services
+          </div>
+          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+            Ce que nous faisons<br />
+            pour <span class="text-gradient">vous</span>.
+          </h2>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+          {services.map((s) => (
+            <a
+              href={`/services#${s.id}`}
+              class="group flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
+              style="border-color: #e5e5e5;"
+              onmouseover={`this.style.borderColor='${s.accent}40'; this.style.boxShadow='0 14px 35px -15px ${s.accent}30'`}
+              onmouseout="this.style.borderColor='#e5e5e5'; this.style.boxShadow='none'"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="inline-flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
+                  style={`background: ${s.accent}0d; border: 1px solid ${s.accent}30;`}
+                >
+                  {s.icon}
+                </div>
+                <h3 class="text-xl font-bold tracking-tight" style="color: #0a0a0a;">{s.title}</h3>
+              </div>
+              <p class="mt-4 flex-1 leading-relaxed" style="color: #404040;">{s.body}</p>
+              <div class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold" style={`color: ${s.accent};`}>
+                En savoir plus
+                <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden>
+                  <path d="M6 3l5 5-5 5V3z" />
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* RÉALISATIONS + CAS CHIFFRÉS */}
+    <section class="relative py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div class="max-w-2xl">
+            <div
+              class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+              style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
+            >
+              Réalisations
+            </div>
+            <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+              Des résultats<br />
+              <span class="text-gradient">mesurables</span>.
+            </h2>
+          </div>
+          <a
+            href="/realisations"
+            class="inline-flex shrink-0 items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition-all hover:-translate-y-0.5"
+            style="border-color: #d4d4d4; color: #0a0a0a;"
+          >
+            11 projets — tout voir
+            <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5" aria-hidden>
+              <path d="M6 3l5 5-5 5V3z" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-3">
+          {cases.map((c) => (
+            <article
+              class="flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
+              style={`border-color: ${c.accent}30; box-shadow: 0 10px 30px -20px ${c.accent}40;`}
+            >
+              <div class="text-xs font-semibold uppercase tracking-wider" style={`color: ${c.accent};`}>
+                {c.title}
+              </div>
+              <div class="mt-3 text-xl font-bold leading-snug tracking-tight" style="color: #0a0a0a;">
+                {c.result}
+              </div>
+              <p class="mt-3 flex-1 text-sm leading-relaxed" style="color: #404040;">{c.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* MÉTHODE */}
+    <section class="relative bg-neutral-50 py-24 sm:py-32">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-16 max-w-2xl">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+            style="border-color: rgba(192,38,211,0.28); background: rgba(192,38,211,0.06); color: #a21caf;"
+          >
+            Notre méthode
+          </div>
+          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+            Concevoir. Déployer.<br />
+            <span class="text-gradient">Opérer</span>.
+          </h2>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s) => (
+            <article class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
+              <div class="text-3xl font-bold text-gradient">{s.n}</div>
+              <h3 class="mt-3 text-lg font-bold tracking-tight" style="color: #0a0a0a;">{s.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">{s.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* PRODUITS — preuve de savoir-faire */}
     <section id="produits" class="relative py-24 sm:py-32">
       <div class="mx-auto max-w-6xl px-6">
         <div class="mb-16 max-w-2xl">
@@ -148,101 +441,30 @@ const accent: Record<string, string> = {
             Nos produits
           </div>
           <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-            Des produits IA<br />
-            <span class="text-gradient">qui livrent</span>.
+            Nous éditons nos<br />
+            propres <span class="text-gradient">produits IA</span>.
           </h2>
           <p class="mt-4 text-lg" style="color: #404040;">
-            Trois solutions phares, du SaaS grand public à l'IA métier, toutes en
-            production et utilisées au quotidien par des milliers de clients.
+            La meilleure preuve de notre savoir-faire : trois produits que nous
+            avons conçus, déployés et que nous opérons en production.
           </p>
         </div>
 
-        {/* MANGA AI : carte large featured */}
-        <article
-          class="mb-6 overflow-hidden rounded-3xl border transition-all hover:-translate-y-1"
-          style="border-color: rgba(220,38,38,0.30); background: linear-gradient(135deg, rgba(220,38,38,0.04) 0%, rgba(255,255,255,1) 100%); box-shadow: 0 14px 35px -15px rgba(220,38,38,0.20);"
-        >
-          <div class="grid gap-8 p-8 md:grid-cols-[1.2fr_1fr] md:gap-12 md:p-12">
-            <div>
-              <div
-                class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-wider"
-                style="border-color: rgba(220,38,38,0.35); background: rgba(220,38,38,0.08); color: #b91c1c;"
-              >
-                ★ Produit phare grand public
-              </div>
-              <h3 class="mt-4 text-4xl font-bold tracking-tight md:text-5xl" style="color: #0a0a0a;">
-                Manga AI
-              </h3>
-              <p class="mt-2 text-lg" style="color: #404040;">
-                Le générateur de manga par IA.
-              </p>
-              <p class="mt-4 text-base leading-relaxed" style="color: #404040;">
-                Créez un manga complet jusqu'à 240 pages à partir d'un simple
-                synopsis. Trilingue FR/EN/ES, accessible sans savoir dessiner. La
-                solution la plus avancée du marché pour produire des mangas
-                longs avec une cohérence visuelle et narrative bluffante.
-              </p>
-              <p class="mt-3 text-base leading-relaxed" style="color: #404040;">
-                Déjà adopté par des créateurs, des éditeurs, des enseignants et
-                des agences créatives partout dans le monde. À découvrir sur{" "}
-                <a
-                  href="https://manga-ai.fr"
-                  target="_blank"
-                  rel="noopener"
-                  class="font-semibold underline decoration-from-font underline-offset-4"
-                  style="color: #dc2626;"
-                >
-                  manga-ai.fr
-                </a>.
-              </p>
-
-              <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="/produits/manga-ai/"
-                  class="inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
-                  style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.40);"
-                >
-                  Lire la fiche produit
-                </a>
-                <a
-                  href="https://manga-ai.fr"
-                  target="_blank"
-                  rel="noopener"
-                  class="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-base font-semibold transition-all hover:-translate-y-0.5"
-                  style="border-color: #d4d4d4; color: #0a0a0a;"
-                >
-                  Essayer gratuitement
-                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5" aria-hidden>
-                    <path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div
-              class="hidden aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border text-6xl font-bold tracking-tighter text-gradient md:flex md:text-7xl"
-              style="border-color: #e5e5e5; background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);"
-            >
-              MANGA AI
-            </div>
-          </div>
-        </article>
-
-        {/* APIDIA + OTO : grille de 2 */}
-        <div class="grid gap-5 md:grid-cols-2">
-          {products.filter((p) => !p.featured).map((p) => (
+        <div class="grid gap-5 md:grid-cols-3">
+          {products.map((p) => (
             <a
               href={p.href}
               class="group flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
               style="border-color: #e5e5e5;"
-              onmouseover={`this.style.borderColor='${accent[p.accent]}40'; this.style.boxShadow='0 14px 35px -15px ${accent[p.accent]}30'`}
+              onmouseover={`this.style.borderColor='${p.accent}40'; this.style.boxShadow='0 14px 35px -15px ${p.accent}30'`}
               onmouseout="this.style.borderColor='#e5e5e5'; this.style.boxShadow='none'"
             >
-              <div class="text-xs uppercase tracking-wider" style={`color: ${accent[p.accent]};`}>
+              <div class="text-xs uppercase tracking-wider" style={`color: ${p.accent};`}>
                 {p.tagline}
               </div>
               <h3 class="mt-2 text-2xl font-bold tracking-tight" style="color: #0a0a0a;">{p.title}</h3>
               <p class="mt-3 flex-1 leading-relaxed" style="color: #404040;">{p.description}</p>
-              <div class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold" style="color: #6d28d9;">
+              <div class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold" style={`color: ${p.accent};`}>
                 {p.cta}
                 <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden>
                   <path d="M6 3l5 5-5 5V3z" />
@@ -254,41 +476,8 @@ const accent: Record<string, string> = {
       </div>
     </section>
 
-    {/* BENEFICES — pourquoi nous choisir */}
+    {/* CRÉDIBILITÉ */}
     <section class="relative bg-neutral-50 py-24 sm:py-32">
-      <div class="mx-auto max-w-6xl px-6">
-        <div class="mb-16 max-w-2xl">
-          <div
-            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-            style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
-          >
-            Pourquoi LOGIQ IA
-          </div>
-          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-            Quatre raisons de<br />
-            <span class="text-gradient">nous faire confiance</span>.
-          </h2>
-        </div>
-
-        <div class="grid gap-5 md:grid-cols-2">
-          {benefits.map((b) => (
-            <article
-              class="flex gap-5 rounded-2xl border bg-white p-6"
-              style="border-color: #e5e5e5;"
-            >
-              <div class="text-4xl">{b.icon}</div>
-              <div>
-                <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">{b.title}</h3>
-                <p class="mt-2 text-base leading-relaxed" style="color: #404040;">{b.body}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* TRUST SIGNALS — preuve sociale sans nommer Quentin */}
-    <section class="relative py-24 sm:py-32">
       <div class="mx-auto max-w-5xl px-6 text-center">
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl" style="color: #0a0a0a;">
           Une expertise reconnue.
@@ -319,6 +508,54 @@ const accent: Record<string, string> = {
             <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">23 certifications IA</div>
             <div class="mt-1 text-xs" style="color: #737373;">Anthropic · Make · Lovable</div>
           </div>
+        </div>
+
+        <a
+          href="/a-propos"
+          class="mt-10 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors hover:underline"
+          style="color: #6d28d9;"
+        >
+          Découvrir le cabinet et son fondateur
+          <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3" aria-hidden>
+            <path d="M6 3l5 5-5 5V3z" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    {/* FAQ */}
+    <section class="relative py-24 sm:py-32">
+      <div class="mx-auto max-w-3xl px-6">
+        <div class="mb-12 text-center">
+          <div
+            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+            style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
+          >
+            Questions fréquentes
+          </div>
+          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
+            Vous vous demandez<br />sûrement…
+          </h2>
+        </div>
+
+        <div class="space-y-3">
+          {faqs.map((f) => (
+            <details class="group rounded-2xl border bg-white px-6 py-4" style="border-color: #e5e5e5;">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold" style="color: #0a0a0a;">
+                {f.q}
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90"
+                  style="color: #6d28d9;"
+                  aria-hidden
+                >
+                  <path d="M6 3l5 5-5 5V3z" />
+                </svg>
+              </summary>
+              <p class="mt-3 text-sm leading-relaxed" style="color: #404040;">{f.a}</p>
+            </details>
+          ))}
         </div>
       </div>
     </section>
@@ -357,4 +594,6 @@ const accent: Record<string, string> = {
   </main>
 
   <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 </Layout>
