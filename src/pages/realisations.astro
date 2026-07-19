@@ -16,6 +16,7 @@ type Project = {
   ownDomain?: boolean;
   featured?: boolean;
   private?: boolean;
+  status?: string;
   accent: string;
 };
 
@@ -28,6 +29,7 @@ const categories = [
   "Hôtellerie & Restauration",
   "Commerce & Boutique",
   "Loisir & Expérience",
+  "Jeu vidéo",
   "Services locaux",
 ];
 
@@ -146,12 +148,24 @@ const projects: Project[] = [
     name: "Verdon Mystères",
     monogram: "VM",
     category: "Loisir & Expérience",
-    concept: "Jeu d'énigmes grandeur nature",
+    concept: "Jeu d'énigmes grandeur nature + mini-jeu en ligne",
     description:
-      "La landing d'une expérience outdoor sur le lac d'Esparron : présentation du jeu, règles, partenaires loueurs, offre groupes B2B et carrousel d'avis clients.",
-    tags: ["Landing produit", "Avis clients", "Offre B2B"],
+      "Une expérience outdoor sur le lac d'Esparron, prolongée par un mini-jeu vidéo jouable en ligne : conçu sous forme de formulaire interactif, il fait vivre les énigmes directement depuis le navigateur. Le site présente le jeu, les règles, les partenaires loueurs, l'offre groupes B2B et un carrousel d'avis clients.",
+    tags: ["Mini-jeu en ligne", "Formulaire interactif", "Offre B2B"],
     href: "https://verdon-mysteres.lovable.app",
     accent: "#c026d3",
+  },
+  {
+    name: "La Pièce Qui Attend",
+    monogram: "LPQA",
+    category: "Jeu vidéo",
+    concept: "Jeu d'horreur psychologique 3D",
+    description:
+      "Notre projet le plus ambitieux côté création : un jeu d'horreur narratif à la première personne (~30-45 min), construit avec Three.js et WebGL, packagé en .exe Windows hors-ligne via Electron. Audio spatialisé HRTF, miroirs reflétés en temps réel, assets PBR libres (CC0). Des énigmes scénarisées — radio, dessins, frigo — s'enchaînent jusqu'à une révélation finale en plein jour. Une V2 est prévue sur Unreal Engine 5, avec une sortie commerciale envisagée sur Steam.",
+    tags: ["Three.js · WebGL", "Electron", "Audio spatialisé HRTF"],
+    href: "",
+    status: "En développement · sortie Steam envisagée",
+    accent: "#b91c1c",
   },
   {
     name: "RENOVXPERTS",
@@ -226,11 +240,11 @@ const projects: Project[] = [
         {/* Stats */}
         <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
           <div>
-            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">13</div>
+            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">14</div>
             <div class="text-sm" style="color: #737373;">projets réalisés</div>
           </div>
           <div>
-            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">8</div>
+            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">9</div>
             <div class="text-sm" style="color: #737373;">secteurs couverts</div>
           </div>
           <div>
@@ -376,15 +390,17 @@ const projects: Project[] = [
                 ))}
               </div>
 
-              {p.private ? (
+              {!p.href ? (
                 <span
-                  class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold"
-                  style={`color: ${p.accent};`}
+                  class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold"
+                  style={`border-color: ${p.accent}40; background: ${p.accent}0d; color: ${p.accent};`}
                 >
-                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3" aria-hidden>
-                    <path d="M4 7V5a4 4 0 118 0v2h.5A1.5 1.5 0 0114 8.5v5A1.5 1.5 0 0112.5 15h-9A1.5 1.5 0 012 13.5v-5A1.5 1.5 0 013.5 7H4zm2 0h4V5a2 2 0 10-4 0v2z" />
-                  </svg>
-                  Projet privé · sur devis
+                  {p.private && (
+                    <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5 shrink-0" aria-hidden>
+                      <path d="M4 7V5a4 4 0 118 0v2h.5A1.5 1.5 0 0114 8.5v5A1.5 1.5 0 0112.5 15h-9A1.5 1.5 0 012 13.5v-5A1.5 1.5 0 013.5 7H4zm2 0h4V5a2 2 0 10-4 0v2z" />
+                    </svg>
+                  )}
+                  {p.status ?? "Projet privé · sur devis"}
                 </span>
               ) : (
                 <a
