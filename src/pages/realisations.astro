@@ -8,6 +8,7 @@ type Project = {
   monogram: string;
   category: string;
   concept: string;
+  client?: string;
   description: string;
   tags: string[];
   href: string;
@@ -59,14 +60,41 @@ const projects: Project[] = [
   {
     name: "Apidia",
     monogram: "AP",
-    category: "Produit IA",
-    concept: "Plateforme IA de données touristiques",
+    category: "Agent IA",
+    concept: "Conseiller en séjour virtuel autonome",
+    client: "Office de Tourisme & des Congrès du Pays de Manosque",
     description:
-      "Notre plateforme métier : auto-qualification de la donnée touristique et conseiller en séjour virtuel. Elle met à jour ses bases toute seule en allant chercher l'info sur le web. Connectée à 6 000+ fiches établissements. Valeur marché estimée 50 k€.",
-    tags: ["Plateforme métier", "Données touristiques", "React + Supabase"],
+      "Un agent qui consulte l'intégralité des fiches établissements et recommande, comme le ferait un conseiller en séjour humain, les meilleurs renseignements touristiques selon la demande du visiteur. Surtout, il entretient sa propre base : il va chercher les informations manquantes sur internet, puis contacte les propriétaires de chaque fiche établissement ou événement pour leur faire confirmer ce qu'il a relevé. Connecté à 6 000+ fiches.",
+    tags: ["Agent autonome", "Auto-qualification", "6 000+ fiches"],
     href: "/produits#apidia",
     internal: true,
     accent: "#6d28d9",
+  },
+  {
+    name: "OTO",
+    monogram: "OTO",
+    category: "Agent IA",
+    concept: "Agent IA chargé de projet web",
+    client: "Office de Tourisme & des Congrès du Pays de Manosque",
+    description:
+      "Un agent IA qui pilote lui-même des solutions d'automatisation et prend en charge une grande partie des missions d'un chargé de projet web au quotidien : communication digitale, marketing, production de contenu et coordination. Construit sur une orchestration Make qu'il déclenche et enchaîne de façon autonome.",
+    tags: ["Agent autonome", "Make", "Automatisation métier"],
+    href: "/produits#oto",
+    internal: true,
+    accent: "#c026d3",
+  },
+  {
+    name: "OTO_Mail",
+    monogram: "MAIL",
+    category: "Agent IA",
+    concept: "Agent IA e-mail, agenda & GRC",
+    client: "Office de Tourisme & des Congrès du Pays de Manosque",
+    description:
+      "Le binôme d'OTO, sur le même principe d'autonomie, appliqué à la relation : traitement et rédaction des e-mails, alimentation de la base de données agenda et gestion de la relation client (GRC). Il trie, répond, enregistre et tient les bases à jour sans supervision permanente.",
+    tags: ["Agent autonome", "E-mail & GRC", "Base agenda"],
+    href: "/produits#oto",
+    internal: true,
+    accent: "#7c3aed",
   },
   {
     name: "LoveLink",
@@ -198,7 +226,7 @@ const projects: Project[] = [
         {/* Stats */}
         <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
           <div>
-            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">11</div>
+            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">13</div>
             <div class="text-sm" style="color: #737373;">projets réalisés</div>
           </div>
           <div>
@@ -213,8 +241,39 @@ const projects: Project[] = [
       </div>
     </section>
 
+    {/* ILS NOUS FONT CONFIANCE */}
+    <section class="mx-auto max-w-5xl px-6 pt-4">
+      <div
+        class="rounded-2xl border p-6 sm:p-8"
+        style="border-color: #e5e5e5; background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(255,255,255,1) 60%);"
+      >
+        <div class="text-xs font-semibold uppercase tracking-[0.2em]" style="color: #6d28d9;">
+          Ils nous font confiance
+        </div>
+        <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-3">
+          {[
+            "Office de Tourisme & des Congrès du Pays de Manosque",
+            "Le Jardin de Célina",
+            "L'Oustaù de Greù",
+            "RENOVXPERTS",
+          ].map((c) => (
+            <span
+              class="rounded-full border px-4 py-2 text-sm font-semibold"
+              style="border-color: #e5e5e5; background: #ffffff; color: #0a0a0a;"
+            >
+              {c}
+            </span>
+          ))}
+        </div>
+        <p class="mt-4 text-sm" style="color: #737373;">
+          Offices de tourisme, commerces, artisans et éditeurs : nous livrons
+          aussi bien des sites vitrines que des agents IA en production.
+        </p>
+      </div>
+    </section>
+
     {/* FILTERS */}
-    <section class="mx-auto max-w-5xl px-6 pt-6">
+    <section class="mx-auto max-w-5xl px-6 pt-8">
       <div class="flex flex-wrap gap-2" id="filter-bar">
         {categories.map((cat, i) => (
           <button
@@ -291,6 +350,17 @@ const projects: Project[] = [
               <p class="mt-1 text-sm font-medium" style={`color: ${p.accent};`}>
                 {p.concept}
               </p>
+              {p.client && (
+                <div
+                  class="mt-3 inline-flex w-fit items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-semibold leading-snug"
+                  style={`border-color: ${p.accent}33; background: ${p.accent}0a; color: #404040;`}
+                >
+                  <svg viewBox="0 0 16 16" fill="currentColor" class="mt-px h-3 w-3 shrink-0" style={`color: ${p.accent};`} aria-hidden>
+                    <path d="M2 15V5.5A1.5 1.5 0 013.5 4H6V2.5A1.5 1.5 0 017.5 1h5A1.5 1.5 0 0114 2.5V15h-4v-3H6v3H2zm2-2h2v-2H4v2zm0-3h2V8H4v2zm4 3h2v-2H8v2zm0-3h2V8H8v2zm0-3h2V5H8v2z" />
+                  </svg>
+                  <span>Client&nbsp;: {p.client}</span>
+                </div>
+              )}
               <p class="mt-3 text-sm leading-relaxed" style="color: #404040;">
                 {p.description}
               </p>
@@ -321,11 +391,11 @@ const projects: Project[] = [
                   href={p.href}
                   target={p.internal ? undefined : "_blank"}
                   rel={p.internal ? undefined : "noopener"}
-                  class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5"
-                  style={`color: ${p.accent};`}
+                  class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5"
+                  style={`background: ${p.accent}; box-shadow: 0 12px 26px -12px ${p.accent};`}
                 >
-                  {p.internal ? "Voir la fiche" : "Voir le site"}
-                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3" aria-hidden>
+                  {p.internal ? "Voir la fiche produit" : "Visiter le site"}
+                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden>
                     <path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" />
                   </svg>
                 </a>
