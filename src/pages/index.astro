@@ -2,33 +2,34 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
 import NeuralBg from "../components/NeuralBg.astro";
 
 const services = [
   {
     id: "agents",
-    icon: "🤖",
+    icon: "bot",
     title: "Agents IA sur mesure",
     body: "Des assistants IA dédiés à votre métier, qui travaillent 24/7 : emails, planning, ordres de mission, relation client.",
     accent: "#7c3aed",
   },
   {
     id: "automation",
-    icon: "⚙️",
+    icon: "workflow",
     title: "Automatisation des workflows",
     body: "On débranche vos équipes du copier-coller. Données synchronisées, reporting automatique, jusqu'à 80 % des tâches manuelles en moins.",
     accent: "#dc2626",
   },
   {
     id: "conseil",
-    icon: "🧠",
+    icon: "compass",
     title: "Conseil stratégique IA",
     body: "Audit, feuille de route 12-24 mois, conformité RGPD / EU AI Act, formation de vos équipes. L'IA comme levier, pas comme gadget.",
     accent: "#c026d3",
   },
   {
     id: "dev",
-    icon: "🏗️",
+    icon: "code",
     title: "Sites web & plateformes métier",
     body: "Sites vitrine, e-commerce, plateformes SaaS, ERP/CRM sur mesure. Livrés vite, performants, SEO optimisé en standard.",
     accent: "#6d28d9",
@@ -277,28 +278,48 @@ const faqSchema = {
 
         <div class="grid gap-5 md:grid-cols-2">
           <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="text-4xl">📈</div>
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+              style="background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.22); color: #7c3aed;"
+            >
+              <Icon name="trending" size={22} />
+            </div>
             <div>
               <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Du temps libéré, immédiatement</h3>
               <p class="mt-2 text-base leading-relaxed" style="color: #404040;">Nos agents IA automatisent jusqu'à 80 % des tâches répétitives. Vos équipes se concentrent sur ce qui crée vraiment de la valeur.</p>
             </div>
           </article>
           <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="text-4xl">💰</div>
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+              style="background: rgba(220,38,38,0.07); border: 1px solid rgba(220,38,38,0.22); color: #dc2626;"
+            >
+              <Icon name="coins" size={22} />
+            </div>
             <div>
               <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Des coûts maîtrisés</h3>
               <p class="mt-2 text-base leading-relaxed" style="color: #404040;">Pas d'usine à gaz, pas de licences à six chiffres. Des solutions calibrées pour livrer un ROI dès le premier trimestre.</p>
             </div>
           </article>
           <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="text-4xl">⚡</div>
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+              style="background: rgba(192,38,211,0.07); border: 1px solid rgba(192,38,211,0.22); color: #c026d3;"
+            >
+              <Icon name="zap" size={22} />
+            </div>
             <div>
               <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Déploiement rapide</h3>
               <p class="mt-2 text-base leading-relaxed" style="color: #404040;">Premier livrable opérationnel sous 2 à 4 semaines. Itérations rapides selon vos retours terrain.</p>
             </div>
           </article>
           <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="text-4xl">🛡️</div>
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+              style="background: rgba(109,40,217,0.07); border: 1px solid rgba(109,40,217,0.22); color: #6d28d9;"
+            >
+              <Icon name="shield" size={22} />
+            </div>
             <div>
               <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Conformité et souveraineté</h3>
               <p class="mt-2 text-base leading-relaxed" style="color: #404040;">RGPD, EU AI Act, hébergement européen. Pour les cas sensibles, nous opérons sur infrastructure souveraine 100 % locale.</p>
@@ -338,7 +359,7 @@ const faqSchema = {
                   class="inline-flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
                   style={`background: ${s.accent}0d; border: 1px solid ${s.accent}30;`}
                 >
-                  {s.icon}
+                  <Icon name={s.icon} size={24} />
                 </div>
                 <h3 class="text-xl font-bold tracking-tight" style="color: #0a0a0a;">{s.title}</h3>
               </div>
@@ -489,22 +510,22 @@ const faqSchema = {
 
         <div class="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
           <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="text-3xl">🏆</div>
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style="background: #dc262612; border: 1px solid #dc26262e; color: #dc2626;"><Icon name="trophy" size={24} /></div>
             <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">Lauréat Make Grid</div>
             <div class="mt-1 text-xs" style="color: #737373;">Concours international 2025</div>
           </div>
           <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="text-3xl">🇫🇷</div>
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style="background: #7c3aed12; border: 1px solid #7c3aed2e; color: #7c3aed;"><Icon name="flag" size={24} /></div>
             <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">National Treasure</div>
             <div class="mt-1 text-xs" style="color: #737373;">Top 1 % France Lovable</div>
           </div>
           <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="text-3xl">🎙️</div>
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style="background: #c026d312; border: 1px solid #c026d32e; color: #c026d3;"><Icon name="mic" size={24} /></div>
             <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">Record YouTube FROT</div>
             <div class="mt-1 text-xs" style="color: #737373;">Webinaire 4,8/5 satisfaction</div>
           </div>
           <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="text-3xl">🎓</div>
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style="background: #6d28d912; border: 1px solid #6d28d92e; color: #6d28d9;"><Icon name="graduation" size={24} /></div>
             <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">23 certifications IA</div>
             <div class="mt-1 text-xs" style="color: #737373;">Anthropic · Make · Lovable</div>
           </div>

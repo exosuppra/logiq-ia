@@ -2,26 +2,27 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
 import NeuralBg from "../components/NeuralBg.astro";
 
 const reconnaissances = [
   {
-    icon: "🏆",
+    icon: "trophy",
     title: "Lauréat Make Grid",
     body: "Concours international Make Grid (juillet 2025). Reconnaissance officielle de Make.",
   },
   {
-    icon: "🇫🇷",
+    icon: "flag",
     title: "National Treasure Lovable",
     body: "Top 1 % France par trafic sur Lovable (2025).",
   },
   {
-    icon: "🎙️",
+    icon: "mic",
     title: "Webinaire FROT PACA",
     body: "« Œil de l'expert » (13 nov. 2025) : 130 spectateurs en direct, 4,8/5 de satisfaction, record de la chaîne YouTube FROT.",
   },
   {
-    icon: "🎓",
+    icon: "graduation",
     title: "23 certifications IA",
     body: "18 Anthropic, 4 Make Academy (cursus complet), 1 Lovable (Vibe Coding L5 Diamond).",
   },
@@ -234,7 +235,7 @@ const jsonLd = {
         <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {reconnaissances.map((r) => (
             <div class="rounded-2xl border bg-white p-6 text-left" style="border-color: #e5e5e5;">
-              <div class="text-3xl">{r.icon}</div>
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl" style="background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.22); color: #6d28d9;"><Icon name={r.icon} size={24} /></div>
               <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">{r.title}</div>
               <div class="mt-1 text-xs leading-relaxed" style="color: #737373;">{r.body}</div>
             </div>

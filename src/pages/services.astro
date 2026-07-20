@@ -2,11 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
 
 const services = [
   {
     id: "agents",
-    icon: "🤖",
+    icon: "bot",
     title: "Agents IA sur mesure",
     accent: "violet",
     lead: "Des assistants IA dédiés à votre métier, qui travaillent pour vous 24/7.",
@@ -20,7 +21,7 @@ const services = [
   },
   {
     id: "automation",
-    icon: "⚙️",
+    icon: "workflow",
     title: "Automatisation des workflows",
     accent: "red",
     lead: "On débranche vos équipes du copier-coller et de la double saisie.",
@@ -34,7 +35,7 @@ const services = [
   },
   {
     id: "conseil",
-    icon: "🧠",
+    icon: "compass",
     title: "Conseil stratégique IA",
     accent: "fuchsia",
     lead: "Un cadre clair pour faire de l'IA un levier de croissance, pas un gadget.",
@@ -48,7 +49,7 @@ const services = [
   },
   {
     id: "dev",
-    icon: "🏗️",
+    icon: "code",
     title: "Sites web & plateformes métier",
     accent: "violet",
     lead: "Des outils web livrés vite, qui marchent, qui durent.",
@@ -119,10 +120,10 @@ const accentBorder: Record<string, string> = {
         <article id={s.id} class="grid gap-8 md:grid-cols-[200px_1fr]">
           <div>
             <div
-              class="inline-flex h-16 w-16 items-center justify-center rounded-2xl text-3xl"
+              class="inline-flex h-16 w-16 items-center justify-center rounded-2xl"
               style={`background: ${accentBg[s.accent]}; border: 1px solid ${accentBorder[s.accent]};`}
             >
-              {s.icon}
+              <Icon name={s.icon} size={30} />
             </div>
           </div>
           <div>
