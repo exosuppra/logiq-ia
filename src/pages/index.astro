@@ -224,32 +224,40 @@ const faqSchema = {
     {/* BANDEAU CONFIANCE */}
     <section class="border-y" style="border-color: #efefef; background: #fafafa;">
       <div class="mx-auto max-w-6xl px-6 py-10">
-        <div class="flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
-          <div class="text-center lg:text-left">
-            <div class="text-xs font-medium uppercase tracking-[0.2em]" style="color: #737373;">
-              Ils travaillent avec nous
-            </div>
-            <div class="mt-3 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 lg:justify-start">
-              {clients.map((c) => (
-                <span class="text-sm font-semibold" style="color: #525252;">{c}</span>
-              ))}
-            </div>
+        <div class="text-center text-xs font-medium uppercase tracking-[0.2em]" style="color: #737373;">
+          Ils travaillent avec nous
+        </div>
+
+        {/* défilement continu des clients */}
+        <div class="marquee mt-5">
+          <div class="marquee-track">
+            {[...clients, ...clients].map((c) => (
+              <span class="marquee-item">{c}</span>
+            ))}
           </div>
-          <div class="flex shrink-0 flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            <div class="text-center">
-              <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">100+</div>
-              <div class="text-xs" style="color: #737373;">automatisations en production</div>
+        </div>
+
+        {/* compteurs animés */}
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+          <div class="text-center">
+            <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">
+              <span class="count" data-to="100">0</span>+
             </div>
-            <div class="hidden h-8 w-px bg-neutral-200 sm:block"></div>
-            <div class="text-center">
-              <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">4,8/5</div>
-              <div class="text-xs" style="color: #737373;">satisfaction webinaire FROT</div>
+            <div class="text-xs" style="color: #737373;">automatisations en production</div>
+          </div>
+          <div class="hidden h-8 w-px bg-neutral-200 sm:block"></div>
+          <div class="text-center">
+            <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">
+              <span class="count" data-to="4.8" data-dec="1">0</span>/5
             </div>
-            <div class="hidden h-8 w-px bg-neutral-200 sm:block"></div>
-            <div class="text-center">
-              <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">23</div>
-              <div class="text-xs" style="color: #737373;">certifications IA</div>
+            <div class="text-xs" style="color: #737373;">satisfaction webinaire FROT</div>
+          </div>
+          <div class="hidden h-8 w-px bg-neutral-200 sm:block"></div>
+          <div class="text-center">
+            <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">
+              <span class="count" data-to="23">0</span>
             </div>
+            <div class="text-xs" style="color: #737373;">certifications IA</div>
           </div>
         </div>
       </div>
@@ -345,16 +353,18 @@ const faqSchema = {
           </h2>
         </div>
 
-        <div class="grid gap-5 md:grid-cols-2">
-          {services.map((s) => (
+        <div class="grid gap-5 md:grid-cols-3">
+          {services.map((s, i) => (
             <a
               href={`/services#${s.id}`}
-              class="group flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
-              style="border-color: #e5e5e5;"
-              onmouseover={`this.style.borderColor='${s.accent}40'; this.style.boxShadow='0 14px 35px -15px ${s.accent}30'`}
-              onmouseout="this.style.borderColor='#e5e5e5'; this.style.boxShadow='none'"
+              class:list={[
+                "bento-card group relative flex flex-col overflow-hidden rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1",
+                i % 3 === 0 ? "md:col-span-2" : "md:col-span-1",
+              ]}
+              style={`border-color: #e5e5e5; --accent: ${s.accent};`}
             >
-              <div class="flex items-center gap-4">
+              <span aria-hidden class="bento-glow"></span>
+              <div class="relative flex items-center gap-4">
                 <div
                   class="inline-flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
                   style={`background: ${s.accent}0d; border: 1px solid ${s.accent}30;`}
@@ -363,8 +373,8 @@ const faqSchema = {
                 </div>
                 <h3 class="text-xl font-bold tracking-tight" style="color: #0a0a0a;">{s.title}</h3>
               </div>
-              <p class="mt-4 flex-1 leading-relaxed" style="color: #404040;">{s.body}</p>
-              <div class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold" style={`color: ${s.accent};`}>
+              <p class="relative mt-4 flex-1 leading-relaxed" style="color: #404040;">{s.body}</p>
+              <div class="relative mt-5 inline-flex items-center gap-1.5 text-sm font-semibold" style={`color: ${s.accent};`}>
                 En savoir plus
                 <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden>
                   <path d="M6 3l5 5-5 5V3z" />
@@ -439,12 +449,19 @@ const faqSchema = {
           </h2>
         </div>
 
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <article class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-              <div class="text-3xl font-bold text-gradient">{s.n}</div>
-              <h3 class="mt-3 text-lg font-bold tracking-tight" style="color: #0a0a0a;">{s.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed" style="color: #404040;">{s.body}</p>
+        <div class="steps-stack">
+          {steps.map((s, i) => (
+            <article
+              class="step-card rounded-2xl border bg-white p-8 sm:p-10"
+              style={`border-color: #e5e5e5; top: ${96 + i * 14}px; z-index: ${i + 1};`}
+            >
+              <div class="flex items-start gap-6">
+                <div class="text-4xl font-bold text-gradient sm:text-5xl">{s.n}</div>
+                <div>
+                  <h3 class="text-xl font-bold tracking-tight sm:text-2xl" style="color: #0a0a0a;">{s.title}</h3>
+                  <p class="mt-2 leading-relaxed" style="color: #404040;">{s.body}</p>
+                </div>
+              </div>
             </article>
           ))}
         </div>
@@ -618,3 +635,92 @@ const faqSchema = {
 
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 </Layout>
+
+<style>
+  /* ---- Marquee clients (100% CSS, transform GPU) ---- */
+  .marquee {
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 3rem;
+    animation: marquee 32s linear infinite;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-item {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #525252;
+    white-space: nowrap;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---- Bento : halo au survol ---- */
+  .bento-glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    background: radial-gradient(420px circle at 50% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+  }
+  .bento-card:hover .bento-glow { opacity: 1; }
+  .bento-card { transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+  .bento-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, #e5e5e5) !important;
+    box-shadow: 0 16px 38px -18px color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+
+  /* ---- Méthode : cartes empilées au scroll ---- */
+  .steps-stack { display: flex; flex-direction: column; gap: 1.25rem; }
+  .step-card { position: sticky; }
+  @media (prefers-reduced-motion: reduce) {
+    .step-card { position: static; }
+    .marquee-track { animation: none; }
+  }
+</style>
+
+<script>
+  // Compteurs animés — démarrent quand la section entre dans le viewport
+  const counters = document.querySelectorAll<HTMLElement>(".count");
+  if (counters.length) {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fmt = (v: number, dec: number) =>
+      dec ? v.toFixed(dec).replace(".", ",") : Math.round(v).toString();
+
+    const run = (el: HTMLElement) => {
+      const to = parseFloat(el.dataset.to || "0");
+      const dec = parseInt(el.dataset.dec || "0", 10);
+      if (reduce) { el.textContent = fmt(to, dec); return; }
+      const dur = 1400;
+      const t0 = performance.now();
+      const tick = (t: number) => {
+        const p = Math.min((t - t0) / dur, 1);
+        // easeOutCubic
+        el.textContent = fmt(to * (1 - Math.pow(1 - p, 3)), dec);
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            run(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.6 },
+    );
+    counters.forEach((c) => io.observe(c));
+  }
+</script>
