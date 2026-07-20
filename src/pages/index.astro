@@ -9,6 +9,7 @@ const services = [
   {
     id: "agents",
     icon: "bot",
+    img: "agents",
     title: "Agents IA sur mesure",
     body: "Des assistants IA dédiés à votre métier, qui travaillent 24/7 : emails, planning, ordres de mission, relation client.",
     accent: "#7c3aed",
@@ -30,6 +31,7 @@ const services = [
   {
     id: "dev",
     icon: "code",
+    img: "web",
     title: "Sites web & plateformes métier",
     body: "Sites vitrine, e-commerce, plateformes SaaS, ERP/CRM sur mesure. Livrés vite, performants, SEO optimisé en standard.",
     accent: "#6d28d9",
@@ -364,7 +366,18 @@ const faqSchema = {
               style={`border-color: #e5e5e5; --accent: ${s.accent};`}
             >
               <span aria-hidden class="bento-glow"></span>
-              <div class="relative flex items-center gap-4">
+              {s.img && (
+                <img
+                  src={`/mascotte/${s.img}.webp`}
+                  alt=""
+                  width="220"
+                  height="220"
+                  loading="lazy"
+                  decoding="async"
+                  class="pointer-events-none absolute -bottom-3 right-1 hidden w-40 select-none lg:block xl:w-48"
+                />
+              )}
+              <div class:list={["relative flex items-center gap-4", s.img && "lg:pr-44"]}>
                 <div
                   class="inline-flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
                   style={`background: ${s.accent}0d; border: 1px solid ${s.accent}30;`}
@@ -373,7 +386,7 @@ const faqSchema = {
                 </div>
                 <h3 class="text-xl font-bold tracking-tight" style="color: #0a0a0a;">{s.title}</h3>
               </div>
-              <p class="relative mt-4 flex-1 leading-relaxed" style="color: #404040;">{s.body}</p>
+              <p class:list={["relative mt-4 flex-1 leading-relaxed", s.img && "lg:pr-44"]} style="color: #404040;">{s.body}</p>
               <div class="relative mt-5 inline-flex items-center gap-1.5 text-sm font-semibold" style={`color: ${s.accent};`}>
                 En savoir plus
                 <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden>
