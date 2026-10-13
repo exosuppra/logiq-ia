@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Accueil : objets 3D (karts three.js, livre manga en CSS 3D) et galeries de
+   vraies captures. Complète home.css.
+   ========================================================================== */
+
+/* Canvas WebGL posé sur une scène ; l'image 2D reste le repli tant que la 3D n'est pas prête */
+.gl { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; }
+.is-3d > .gl, .is-3d .race__pin > .gl { opacity: 1; }
+.is-3d .kwrap { visibility: hidden; }
+
+/* ----------------------------------------------------------------- Manga AI */
+.manga__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.09;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 70%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 70%, transparent);
+}
+.manga__logo { width: clamp(170px, 20vw, 250px); height: auto; margin-left: -8px; }
+
+/* étagère de couvertures */
+.shelf { display: flex; gap: 10px; align-items: flex-end; }
+.shelf button {
+  flex: none;
+  width: clamp(48px, 7.2vw, 78px);
+  padding: 0;
+  border: 2px solid #0a0a0a;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #0a0a0a;
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+}
+.shelf button img { display: block; width: 100%; height: auto; }
+.shelf button:nth-child(odd) { transform: rotate(-3deg); }
+.shelf button:nth-child(even) { transform: rotate(2.5deg) translateY(-4px); }
+.shelf button:hover { transform: translateY(-10px) rotate(0deg); }
+.shelf button[aria-pressed="true"] { transform: translateY(-14px) rotate(0deg) scale(1.08); box-shadow: 5px 5px 0 #dc2626; }
+
+/* le livre : couverture qui pivote autour de la reliure */
+.book-stage { position: relative; justify-self: center; width: min(100%, 520px); aspect-ratio: 1 / 1; perspective: 1700px; }
+.book {
+  --open: 0; /* 0 fermé … 1 ouvert, piloté au scroll */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44%;
+  aspect-ratio: 520 / 775;
+  transform-style: preserve-3d;
+  transform:
+    translate(calc(-50% + var(--open) * 50%), -50%)
+    rotateX(calc(16deg - var(--open) * 8deg))
+    rotateY(calc(-32deg + var(--open) * 32deg))
+    rotateZ(calc(4deg - var(--open) * 4deg));
+  will-change: transform;
+}
+.book__block {
+  /* tranche et dos : l'épaisseur du volume */
+  position: absolute;
+  inset: 1.2% 0.8% 1.2% 0;
+  background: repeating-linear-gradient(90deg, #f3ede0 0 2px, #ddd4c2 2px 3px);
+  transform: translateZ(-22px);
+  box-shadow: 0 0 0 2px #0a0a0a;
+}
+.book__block::before {
+  /* reliure */
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 22px;
+  background: #0a0a0a;
+  transform-origin: 0 50%;
+  transform: rotateY(90deg);
+}
+.book__right, .book__cover { position: absolute; inset: 0; }
+.book__right { background: #fff; box-shadow: 0 0 0 2px #0a0a0a; transform: translateZ(-1px); overflow: hidden; }
+.book__right img, .book__face img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.book__cover {
+  transform-style: preserve-3d;
+  transform-origin: 0 50%;
+  transform: rotateY(calc(var(--open) * -178deg));
+  will-change: transform;
+}
+.book__face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; background: #fff; box-shadow: 0 0 0 2px #0a0a0a; }
+.book__face--front::after {
+  /* reflet glacé de la jaquette */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.32) 48%, transparent 58%);
+  transform: translateX(calc(-60% + var(--open) * 220%));
+}
+.book__face--back { transform: rotateY(180deg); }
+.book-stage::after {
+  /* ombre au sol */
+  content: "";
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: 4%;
+  height: 9%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(10, 10, 10, 0.3), transparent);
+  filter: blur(6px);
+}
+.book-stage .manga__stamp { right: 0; top: 4%; }
+.book-stage .manga__burst { inset: -6% -14%; }
+
+.manga__lab { position: relative; display: grid; gap: 28px; margin-top: clamp(56px, 9vh, 96px); align-items: end; }
+@media (min-width: 860px) { .manga__lab { grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr); gap: 48px; } }
+.manga__lab figcaption { margin-top: 12px; color: #525252; }
+.manga__app .plate__frame { border: 2px solid #0a0a0a; box-shadow: 10px 10px 0 #0a0a0a; border-radius: 14px; }
+.manga__app img { display: block; width: 100%; height: auto; }
+
+/* comparateur crayonné / couleur */
+.cmp__box {
+  position: relative;
+  max-width: 300px;
+  aspect-ratio: 2 / 3;
+  border: 2px solid #0a0a0a;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 10px 10px 0 #dc2626;
+  touch-action: pan-y;
+  cursor: ew-resize;
+  user-select: none;
+}
+.cmp__box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.cmp__top { clip-path: inset(0 calc(100% - var(--x)) 0 0); background: #fff; }
+.cmp__handle { position: absolute; top: 0; bottom: 0; left: var(--x); width: 3px; margin-left: -1.5px; background: #0a0a0a; }
+.cmp__handle::after {
+  content: "↔";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* ------------------------------------------------- Kartoche : présentoir 3D */
+.kshow { display: grid; gap: 28px; align-items: center; }
+@media (min-width: 960px) { .kshow { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; } }
+.kshow__stage {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  border-radius: 28px;
+  overflow: hidden;
+  /* fond de l'écran-titre du jeu : sarcelle à pois */
+  background:
+    radial-gradient(circle, rgba(255, 243, 220, 0.2) 5px, transparent 5.5px) 0 0 / 44px 44px,
+    radial-gradient(120% 90% at 50% 20%, #27b3ae, #167a77 70%);
+  box-shadow: inset 0 0 0 3px #fff3dc, 0 40px 80px -40px rgba(31, 158, 154, 0.7);
+}
+.kshow__gl { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease; }
+.kshow__fallback { position: absolute; left: 50%; top: 52%; width: 56%; height: auto; transform: translate(-50%, -50%); filter: drop-shadow(0 22px 18px rgba(0, 0, 0, 0.3)); transition: opacity 0.4s ease; }
+.kshow__stage.is-3d .kshow__gl { opacity: 1; }
+.kshow__stage.is-3d .kshow__fallback { opacity: 0; }
+.kshow__hint, .kshow__tag { position: absolute; bottom: 16px; padding: 6px 12px; border-radius: 999px; background: rgba(34, 25, 46, 0.72); color: #fff3dc; pointer-events: none; }
+.kshow__hint { left: 16px; }
+@media (max-width: 640px) { .kshow__tag { bottom: auto; top: 16px; } }
+.kshow__tag { right: 16px; }
+.kshow__logo { width: clamp(200px, 26vw, 330px); height: auto; margin-left: -6px; }
+.pilots { display: flex; flex-wrap: wrap; gap: 10px; }
+.pilots button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 6px 6px;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.4s var(--ease);
+}
+.pilots button:hover { transform: translateY(-3px) rotate(-1.5deg); }
+.pilots button[aria-pressed="true"] { background: #f2b632; border-color: #fff3dc; color: #22192e; }
+.pilots img { width: 42px; height: 42px; border-radius: 50%; background: #fff3dc; object-fit: cover; }
+.pilots b { display: block; font-family: var(--font-display); font-size: 0.95rem; line-height: 1.1; }
+.pilots small { display: block; font-size: 0.7rem; opacity: 0.75; }
+
+/* bandeau de captures en jeu */
+.kcaps .mq__group { gap: 18px; padding-right: 18px; }
+.kcap { position: relative; flex: none; width: clamp(280px, 38vw, 560px); margin: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14); }
+.kcap:nth-child(odd) { transform: rotate(-0.8deg); }
+.kcap:nth-child(even) { transform: rotate(0.7deg) translateY(-8px); }
+.kcap img { display: block; width: 100%; height: auto; aspect-ratio: 1280 / 584; object-fit: cover; }
+.kcap figcaption { position: absolute; left: 10px; top: 10px; padding: 4px 10px; border-radius: 999px; background: rgba(13, 7, 24, 0.72); backdrop-filter: blur(6px); font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; }
+
+/* cartes de jeu : diaporama de captures */
+.game { border: 1px solid rgba(255, 255, 255, 0.1); }
+.game__shots { position: relative; aspect-ratio: 16 / 9; overflow: hidden; }
+.game--wide .game__shots { aspect-ratio: 21 / 9; }
+@media (max-width: 767px) { .game--wide .game__shots, .game--torch .game__dark { aspect-ratio: 16 / 9; } }
+.game__shots .game__img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+.game__shots .game__img.is-on { clip-path: none; z-index: 1; }
+.game__shots .game__img.is-in { z-index: 2; }
+.game__dots { display: flex; gap: 5px; margin-top: 10px; }
+.game__dots i { width: 16px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.3); transition: background-color 0.3s ease, width 0.4s var(--ease); }
+.game__dots i.is-on { width: 30px; background: #f0abfc; }
+
+.no-js .book { --open: 1; }

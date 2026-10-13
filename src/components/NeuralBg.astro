@@ -26,7 +26,7 @@ const { class: cls = "" } = Astro.props;
       const r = cv.getBoundingClientRect();
       W = cv.width = Math.max(1, Math.floor(r.width * dpr));
       H = cv.height = Math.max(1, Math.floor(r.height * dpr));
-      const n = Math.min(110, Math.max(28, Math.floor((r.width * r.height) / 13000)));
+      const n = Math.min(72, Math.max(26, Math.floor((r.width * r.height) / 15000)));
       pts = Array.from({ length: n }, () => ({
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.22 * dpr, vy: (Math.random() - 0.5) * 0.22 * dpr,
@@ -34,7 +34,11 @@ const { class: cls = "" } = Astro.props;
     }
 
     const D = 130;
+    let odd = false;
     function frame() {
+      raf = requestAnimationFrame(frame);
+      // une image sur deux : le mouvement est lent, 30 images/s suffisent
+      if ((odd = !odd)) return;
       const dd = D * dpr;
       ctx.clearRect(0, 0, W, H);
       for (const p of pts) {
@@ -65,7 +69,6 @@ const { class: cls = "" } = Astro.props;
         ctx.fillStyle = near ? `rgb(${HOT})` : `rgba(${LINE},0.85)`;
         ctx.beginPath(); ctx.arc(p.x, p.y, (near ? 3 : 2) * dpr, 0, 7); ctx.fill();
       }
-      raf = requestAnimationFrame(frame);
     }
 
     let raf = 0;
@@ -74,12 +77,17 @@ const { class: cls = "" } = Astro.props;
       mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
     });
     window.addEventListener("pointerleave", () => { mouse.x = -9999; mouse.y = -9999; });
+    // la taille arrive par l'observateur : aucune mesure forcée au chargement
     const ro = new ResizeObserver(() => size());
     ro.observe(cv);
-    size();
-    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) raf = requestAnimationFrame(frame);
-    else frame();
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { size(); odd = true; frame(); cancelAnimationFrame(raf); return; }
+    // ne dessine que lorsque le fond est à l'écran
+    new IntersectionObserver(([e]) => {
+      cancelAnimationFrame(raf);
+      if (e.isIntersecting) raf = requestAnimationFrame(frame);
+    }).observe(cv);
   }
 
-  document.querySelectorAll<HTMLCanvasElement>("canvas[data-neural]").forEach(initNeural);
+  // décoratif : démarre après le premier rendu
+  requestAnimationFrame(() => setTimeout(() => document.querySelectorAll<HTMLCanvasElement>("canvas[data-neural]").forEach(initNeural), 0));
 </script>

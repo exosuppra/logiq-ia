@@ -1,4 +1,6 @@
 ---
+import "../styles/home.css";
+import "../styles/home-3d.css";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -38,86 +40,143 @@ const services = [
   },
 ];
 
-const cases = [
+const benefits = [
+  { icon: "trending", color: "#7c3aed", title: "Du temps libéré, immédiatement", body: "Nos agents IA automatisent jusqu'à 80 % des tâches répétitives. Vos équipes se concentrent sur ce qui crée vraiment de la valeur." },
+  { icon: "coins", color: "#dc2626", title: "Des coûts maîtrisés", body: "Pas d'usine à gaz, pas de licences à six chiffres. Des solutions calibrées pour livrer un ROI dès le premier trimestre." },
+  { icon: "zap", color: "#c026d3", title: "Déploiement rapide", body: "Premier livrable opérationnel sous 2 à 4 semaines. Itérations rapides selon vos retours terrain." },
+  { icon: "shield", color: "#6d28d9", title: "Conformité et souveraineté", body: "RGPD, EU AI Act, hébergement européen. Pour les cas sensibles, nous opérons sur infrastructure souveraine 100 % locale." },
+];
+
+const agents = [
   {
-    title: "Plateforme de données touristiques",
-    result: "6 000+ fiches actualisées automatiquement chaque jour",
-    detail: "Auto-qualification de la donnée par IA pour un office de tourisme. Valeur marché estimée : 50 k€.",
-    accent: "#7c3aed",
+    name: "Apidia",
+    role: "Conseiller en séjour virtuel",
+    body: "Il consulte l'intégralité des fiches établissements, recommande comme un conseiller humain, puis entretient sa propre base : il cherche l'information manquante et la fait confirmer par les propriétaires.",
+    fig: "6 000+",
+    figlab: "fiches actualisées chaque jour",
+    href: "/produits#apidia",
   },
   {
-    title: "Agents IA métier",
-    result: "~60 tâches prises en charge chaque jour",
-    detail: "Premier agent IA sur mesure déployé dans un OT français. ~80 % des tâches du chef de projet web automatisées.",
-    accent: "#c026d3",
+    name: "OTO",
+    role: "Agent chargé de projet web",
+    body: "Il pilote lui-même ses automatisations et prend en charge une grande partie du quotidien d'un chargé de projet web : communication, contenus, coordination.",
+    fig: "~60",
+    figlab: "tâches prises en charge chaque jour",
+    href: "/produits#oto",
   },
   {
-    title: "Agent commercial autonome",
-    result: "Prospection 100 % autonome, de l'ICP au rendez-vous",
-    detail: "Identification, qualification, conversation et prise de RDV sur LinkedIn — l'agent décide seul de ses actions.",
-    accent: "#dc2626",
+    name: "OTO_Mail",
+    role: "Agent e-mail, agenda & GRC",
+    body: "Le binôme d'OTO pour la relation : il trie, rédige, enregistre et tient les bases agenda et GRC à jour sans supervision permanente.",
+    fig: "24/7",
+    figlab: "sans supervision permanente",
+    href: "/produits#oto",
   },
+  {
+    name: "Agent SDR autonome",
+    role: "Prospection commerciale",
+    body: "On lui confie un profil de client idéal : il identifie, qualifie, mène la conversation sur LinkedIn et décroche le rendez-vous — en décidant seul de ses actions.",
+    fig: "100 %",
+    figlab: "autonome, de l'ICP au rendez-vous",
+    href: "/realisations",
+  },
+];
+
+// Journée type reconstituée à titre d'illustration (voir la mention sous le terminal).
+const log = [
+  ["06:00", "apidia", "a1", "revue quotidienne des 6 000+ fiches"],
+  ["06:04", "apidia", "a1", "horaires introuvables · recherche sur le web"],
+  ["06:05", "apidia", "a1", "e-mail au propriétaire pour confirmation"],
+  ["08:30", "oto", "a2", "publication du jour rédigée et programmée"],
+  ["09:12", "oto_mail", "a4", "boîte triée · réponses préparées"],
+  ["10:40", "oto", "a2", "ordre de mission généré"],
+  ["11:02", "sdr", "a3", "prospects qualifiés selon le profil cible"],
+  ["14:20", "sdr", "a3", "rendez-vous décroché · inscrit au CRM"],
+  ["17:45", "oto_mail", "a4", "agenda et GRC à jour"],
+  ["23:59", "logiq", "a1", "tout tourne. Bonne nuit."],
+];
+
+const mangaCovers = [
+  { id: "dragon", title: "L'Éclat du Dragon Céleste" },
+  { id: "sakura", title: "Les Murmures des Sakura" },
+  { id: "crepuscule", title: "Le Crépuscule du Sanctuaire" },
+  { id: "glace", title: "Le Sourire de Glace" },
+  { id: "mon-coloc", title: "Mon coloc est un ninja en burn-out" },
+];
+
+type Site = { name: string; kind: string; tag: string; tagKind?: "new" | "concept"; img: string; href: string; url: string; note: string };
+const sites: Site[] = [
+  { name: "Cas'Design", kind: "Dessinateur · infographiste", tag: "Nouveau", tagKind: "new", img: "site-casdesign-2", href: "https://casdesign.fr", url: "casdesign.fr", note: "La maison se construit au scroll : le plan, le volume, puis la matière." },
+  { name: "Madame Monsieur", kind: "Salon de coiffure · Gréoux-les-Bains", tag: "Nouveau", tagKind: "new", img: "site-madamemonsieur", href: "https://madamemonsieur-greoux.fr", url: "madamemonsieur-greoux.fr", note: "Un site vitrine chaleureux, relié à la prise de rendez-vous en ligne." },
+  { name: "La Brasserie du Soleil", kind: "Brasserie · pizzeria · Gréoux-les-Bains", tag: "Nouveau", tagKind: "new", img: "site-brasserie", href: "https://www.labrasseriedusoleil.fr", url: "labrasseriedusoleil.fr", note: "La carte, la terrasse, les horaires : la table du village, en ligne." },
+  { name: "Manoztralia", kind: "Agence d'éducation · Australie", tag: "Concept de refonte", tagKind: "concept", img: "site-manoztralia", href: "https://exosuppra.github.io/manoztralia-refonte/", url: "concept · non officiel", note: "Proposition de refonte non officielle : on scrolle de Paris à Sydney." },
+  { name: "Le Jardin de Célina", kind: "Maison d'hôtes & restaurant · Valensole", tag: "Client", img: "site-celina", href: "https://lejardindecelina.com", url: "lejardindecelina.com", note: "Chambres, chalets, table signature et événementiel sur un même site." },
+  { name: "L'Oustaù de Greù", kind: "Épicerie fine & cave · Gréoux-les-Bains", tag: "Client", img: "site-oustau", href: "https://loustaudegreu.fr", url: "loustaudegreu.fr", note: "Boutique en ligne de produits régionaux, comptes clients et livraison." },
+  { name: "Esparron-de-Verdon", kind: "Guide touristique de destination", tag: "Tourisme", img: "site-esparron", href: "https://esparron-de-verdon.lovable.app", url: "esparron-de-verdon", note: "Activités, agenda, hébergements et patrimoine réunis en un guide clair." },
+  { name: "Verdon Mystères", kind: "Jeu d'énigmes grandeur nature", tag: "Loisir", img: "site-verdonmysteres", href: "https://verdon-mysteres.lovable.app", url: "verdon-mysteres", note: "Le site du jeu, prolongé par un mini-jeu jouable dans le navigateur." },
+  { name: "RENOVXPERTS", kind: "Artisan rénovation multi-métiers", tag: "Client", img: "site-renovxperts", href: "https://renovxperts-geo-engine.lovable.app", url: "renovxperts", note: "Génération de demandes de devis pour un artisan local." },
+  { name: "La Pièce qui attend", kind: "Site officiel du jeu", tag: "Jeu vidéo", img: "site-lpqa", href: "https://exosuppra.github.io/la-piece-qui-attend-site/", url: "la-piece-qui-attend", note: "Le dossier d'enquête du jeu : bande-annonce, guides et kit presse." },
+];
+
+// Captures réelles, prises dans les jeux (dossiers des projets).
+const games = [
+  { name: "La Pièce qui attend", kind: "Horreur psychologique · enquête à la première personne", status: "Jeu complet · bientôt sur Steam", shots: ["lpqa-2", "lpqa-1", "lpqa-3", "lpqa-4"], href: "https://exosuppra.github.io/la-piece-qui-attend-site/", torch: true, wide: true },
+  { name: "Aubelune", kind: "Aventure narrative · JRPG et romance · Unreal Engine 5", status: "Refonte 3D en cours", shots: ["aubelune-1", "aubelune-2", "aubelune-3"] },
+  { name: "Escale", kind: "Farming RPG en pixel art · titre de travail", status: "Prototype jouable", shots: ["escale-2", "escale-1", "escale-3"] },
+  { name: "La Dernière Tournée", kind: "Jeu narratif low-poly · la dernière tournée d'un facteur", status: "Prototype jouable", shots: ["tournee-1", "tournee-2", "tournee-3"] },
+  { name: "Chœur de Sel", kind: "FPS narratif stylisé · artworks du jeu", status: "Build jouable", shots: ["choeur-1", "choeur-2"] },
+];
+
+// Les trois karts jouables en 3D sur la page (modèles du jeu).
+const pilots = [
+  { id: "boulon", name: "Boulon", kart: "La Fusée" },
+  { id: "picante", name: "El Picante", kart: "La Flamme" },
+  { id: "marina", name: "Marina", kart: "Le Buggy" },
+];
+
+// Cinématiques d'ouverture des circuits, capturées en jeu.
+const circuits = [
+  ["paris-grisou", "Toits de Paris"],
+  ["nice", "Corso de Nice"],
+  ["station", "Station Croissant"],
+  ["depart", "Volcan Tiki · départ"],
+  ["phare", "Phare de la Marée"],
+  ["potager", "Potager Géant"],
+  ["labo", "Labo de la Pr Bécher"],
+  ["noel", "Marché de Noël"],
+  ["pyramide", "Pyramide Pharaonique"],
+  ["zazie", "Forêt de Zazie"],
+  ["grenier", "Grenier aux Jouets"],
+  ["poulpe", "Épave du Poulpe"],
+  ["marmottes", "Col des Marmottes"],
+  ["fromages", "Caverne aux Fromages"],
+  ["versailles", "Jardins de Versailles"],
 ];
 
 const steps = [
-  {
-    n: "01",
-    title: "Audit — 30 min offertes",
-    body: "On regarde votre métier, vos outils, vos points de friction. Vous repartez avec un diagnostic clair et un devis transparent.",
-  },
-  {
-    n: "02",
-    title: "Conception",
-    body: "Une solution calibrée sur votre réalité : vos processus, vos outils existants, votre budget. Pas d'usine à gaz.",
-  },
-  {
-    n: "03",
-    title: "Déploiement",
-    body: "Premier livrable opérationnel sous 2 à 4 semaines. Itérations rapides selon vos retours terrain.",
-  },
-  {
-    n: "04",
-    title: "Opération",
-    body: "On ne disparaît pas après la livraison : supervision, maintenance et amélioration continue dans la durée.",
-  },
-];
-
-const products = [
-  {
-    title: "Manga AI",
-    tagline: "Produit phare grand public",
-    description:
-      "Créez un manga complet jusqu'à 240 pages à partir d'un simple synopsis. Trilingue FR/EN/ES, accessible sans savoir dessiner.",
-    href: "/produits/manga-ai/",
-    cta: "Découvrir Manga AI",
-    accent: "#dc2626",
-  },
-  {
-    title: "Apidia",
-    tagline: "Plateforme IA touristique",
-    description:
-      "Conseiller en séjour virtuel et qualification automatique de la donnée touristique. 6 000+ fiches actualisées chaque jour.",
-    href: "/produits#apidia",
-    cta: "Voir Apidia",
-    accent: "#7c3aed",
-  },
-  {
-    title: "OTO",
-    tagline: "Agents IA métier",
-    description:
-      "Agents IA sur mesure qui automatisent une soixantaine de tâches métier au quotidien, pour la communication et l'administration.",
-    href: "/produits#oto",
-    cta: "Voir OTO",
-    accent: "#c026d3",
-  },
+  { n: "01", title: "Audit — 30 min offertes", body: "On regarde votre métier, vos outils, vos points de friction. Vous repartez avec un diagnostic clair et un devis transparent." },
+  { n: "02", title: "Conception", body: "Une solution calibrée sur votre réalité : vos processus, vos outils existants, votre budget. Pas d'usine à gaz." },
+  { n: "03", title: "Déploiement", body: "Premier livrable opérationnel sous 2 à 4 semaines. Itérations rapides selon vos retours terrain." },
+  { n: "04", title: "Opération", body: "On ne disparaît pas après la livraison : supervision, maintenance et amélioration continue dans la durée." },
 ];
 
 const clients = [
   "Office de Tourisme du Pays de Manosque",
   "Le Jardin de Célina",
   "L'Oustaù de Greù",
+  "Madame Monsieur",
+  "La Brasserie du Soleil",
+  "Cas'Design",
   "RENOVXPERTS",
 ];
+
+const mosaic = [
+  ["site-casdesign", "k-paris-grisou", "site-manoztralia", "mg-cover", "site-madamemonsieur", "lpqa-2", "site-celina"],
+  ["site-brasserie", "k-nice", "site-oustau", "aubelune-1", "site-casdesign-2", "k-station", "site-esparron"],
+  ["site-verdonmysteres", "escale-1", "site-renovxperts", "k-depart", "site-manoztralia-1", "tournee-1", "site-lpqa"],
+];
+
+const bandWords = ["Agents IA", "Automatisation", "Sites web", "Produits IA", "Jeux vidéo", "Conseil"];
 
 const faqs = [
   {
@@ -146,6 +205,37 @@ const faqs = [
   },
 ];
 
+// Les deux jeux publiquement présentés, décrits pour les moteurs de recherche.
+const gamesSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "LOGIQ IA",
+      url: "https://logiq-ia.fr",
+      inLanguage: "fr-FR",
+      publisher: { "@type": "Organization", name: "LOGIQ IA", url: "https://logiq-ia.fr" },
+    },
+    {
+      "@type": "VideoGame",
+      name: "Kartoche",
+      genre: "Course de karts arcade",
+      gamePlatform: "PC",
+      description: "Jeu de course de karts arcade à l'humour français : 28 pilotes, 24 karts, 23 circuits. Développé en C++ sur Unreal Engine 5.",
+      author: { "@type": "Organization", name: "LOGIQ IA", url: "https://logiq-ia.fr" },
+    },
+    {
+      "@type": "VideoGame",
+      name: "La Pièce qui attend",
+      genre: "Horreur psychologique",
+      gamePlatform: "PC",
+      url: "https://exosuppra.github.io/la-piece-qui-attend-site/",
+      description: "Jeu d'horreur psychologique et d'enquête à la première personne.",
+      author: { "@type": "Organization", name: "LOGIQ IA", url: "https://logiq-ia.fr" },
+    },
+  ],
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -157,130 +247,167 @@ const faqSchema = {
 };
 ---
 
-<Layout>
+<Layout page="home">
   <Header />
 
   <main class="bg-white">
-    {/* HERO */}
-    <section class="relative overflow-hidden">
-      <NeuralBg />
-      <div
-        aria-hidden
-        class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-96 opacity-25"
-        style="background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.85) 0%, transparent 70%);"
-      >
-      </div>
+    {/* ================================================================ HERO */}
+    <section class="hero" data-section="Accueil" data-intro>
+      <div class="hero__pin">
+        <NeuralBg />
 
-      <div class="relative z-[2] mx-auto max-w-6xl px-6 pb-24 pt-32 sm:pt-40">
-        <div
-          class="hero-fade hero-fade-1 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-          style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
-        >
-          <span class="relative flex h-1.5 w-1.5">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style="background: #ef4444;"></span>
-            <span class="relative inline-flex h-1.5 w-1.5 rounded-full" style="background: #dc2626;"></span>
-          </span>
-          Cabinet d'ingénierie IA
+        {/* Fenêtre sur les créations : s'ouvre en plein écran au scroll.
+            Ses vignettes sont chargées par le script, après le premier affichage. */}
+        <div class="hero__stage" aria-hidden="true">
+          <div class="hero__mover">
+            <div class="hero__drift">
+              {mosaic.map((row) => (
+                <div class="mosaic-row">
+                  {[...row, ...row].map((n) => (
+                    <img data-src={`/show/m-${n}.webp`} alt="" width="320" height="200" decoding="async" />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="hero__veil"></div>
+          <div class="hero__shade"></div>
+        </div>
+        <div class="hero__ring" aria-hidden="true"></div>
+        <div class="hero__slot" aria-hidden="true"></div>
+
+        <div class="hero__badge" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <defs><path id="badge-arc" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" /></defs>
+            <text><textPath href="#badge-arc">sites · agents ia · produits · jeux vidéo ·</textPath></text>
+          </svg>
+          <img src="/logo-mark-128.webp" alt="" width="56" height="56" />
         </div>
 
-        <h1
-          class="hero-fade hero-fade-2 mt-6 text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
-          style="color: #0a0a0a;"
-        >
-          L'IA qui<br />
-          <span class="text-gradient">transforme</span><br />
-          votre entreprise.
-        </h1>
+        <div class="hero__a">
+          <div class="hero__a-in">
+            <div class="hero__col">
+              <div
+                class="hero__kicker inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
+                style="border-color: rgba(220,38,38,0.30); background: rgba(255,255,255,0.7); color: #b91c1c;"
+              >
+                <span class="relative flex h-1.5 w-1.5">
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style="background: #ef4444;"></span>
+                  <span class="relative inline-flex h-1.5 w-1.5 rounded-full" style="background: #dc2626;"></span>
+                </span>
+                Cabinet d'ingénierie IA
+              </div>
 
-        <p
-          class="hero-fade hero-fade-3 mt-8 max-w-2xl text-xl leading-relaxed"
-          style="color: #404040;"
-        >
-          <strong style="color: #0a0a0a;">LOGIQ IA</strong> conçoit, déploie et opère des
-          agents IA, automatisations et plateformes qui livrent. Des solutions
-          pensées pour le terrain, prêtes à tourner dès la première semaine.
+              <h1 class="hero__title">
+                L'IA qui <span class="text-gradient">transforme</span> votre entreprise.
+              </h1>
+
+              <p class="hero__lead">
+                <strong style="color: #0a0a0a;">LOGIQ IA</strong> conçoit, déploie et opère des
+                agents IA, automatisations et plateformes qui livrent. Des solutions
+                pensées pour le terrain, prêtes à tourner dès la première semaine.
+              </p>
+
+              <div class="hero__ctas mt-8 flex flex-col items-start gap-4 sm:flex-row">
+                <a
+                  href="/contact"
+                  data-magnet
+                  class="btn-x inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold text-white"
+                  style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(124,58,237,0.45);"
+                >
+                  Réserver un audit gratuit
+                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+                    <path d="M6 3l5 5-5 5V3z" />
+                  </svg>
+                </a>
+                <a
+                  href="/realisations"
+                  class="hero__cta2 inline-flex items-center gap-2 rounded-full border bg-white/70 px-8 py-3.5 text-base font-semibold backdrop-blur transition-all hover:-translate-y-0.5"
+                  style="border-color: #d4d4d4; color: #0a0a0a;"
+                >
+                  Voir nos réalisations
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__b" aria-hidden="true">
+          <span class="hero__b-kicker">Tout sort du même atelier</span>
+          <p class="hero__b-title">Sites. Agents IA.<br />Produits. <em>Jeux.</em></p>
+          <ul class="hero__chips">
+            <li>Agents IA autonomes</li>
+            <li>Automatisations Make &amp; n8n</li>
+            <li>Sites &amp; plateformes</li>
+            <li>Produits IA</li>
+            <li>Jeux vidéo</li>
+          </ul>
+        </div>
+
+        <span class="hero__scroll mono" aria-hidden="true">Scrollez pour ouvrir ↓</span>
+      </div>
+    </section>
+
+    {/* ===================================================== BANDEAU INCLINÉ */}
+    <div class="band mq" data-speed="90" aria-hidden="true">
+      <div class="mq__track">
+        <div class="mq__group">
+          {bandWords.map((w) => (<span>{w} <i>✺</i></span>))}
+        </div>
+      </div>
+    </div>
+
+    {/* =========================================================== MANIFESTE */}
+    <section class="manifesto" data-section="Manifeste">
+      <div class="mx-auto max-w-6xl px-6">
+        <span class="sec-label" data-reveal="fade">Ce qu'on fabrique</span>
+        <p class="manifesto__text mt-8" data-manifesto>
+          LOGIQ IA est un cabinet d'ingénierie IA. On y conçoit des agents
+          <span class="pill-img pill-img--fit nosplit"><img loading="lazy" src="/show/p-agents.webp" alt="" width="160" height="160" /></span>
+          autonomes, des automatisations
+          <span class="pill-img pill-img--fit nosplit"><img loading="lazy" src="/show/p-automatisation.webp" alt="" width="160" height="160" /></span>
+          qui tournent pendant que vous dormez, des sites
+          <span class="pill-img nosplit"><img loading="lazy" src="/show/m-site-casdesign-2.webp" alt="" width="320" height="200" /></span>
+          qui se remarquent — et même des jeux vidéo
+          <span class="pill-img nosplit"><img loading="lazy" src="/show/m-k-nice.webp" alt="" width="320" height="200" /></span>.
+          Puis on les opère, en production, dans la durée.
         </p>
 
-        <div class="hero-fade hero-fade-3 mt-10 flex flex-col items-start gap-4 sm:flex-row">
-          <a
-            href="/contact"
-            class="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
-            style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(124,58,237,0.45);"
-          >
-            Réserver un audit gratuit
-            <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
-              <path d="M6 3l5 5-5 5V3z" />
-            </svg>
-          </a>
-          <a
-            href="/realisations"
-            class="inline-flex items-center gap-2 rounded-full border bg-white/70 px-8 py-3.5 text-base font-semibold backdrop-blur transition-all hover:-translate-y-0.5"
-            style="border-color: #d4d4d4; color: #0a0a0a;"
-          >
-            Voir nos réalisations
-          </a>
-        </div>
-      </div>
-    </section>
-
-    {/* BANDEAU CONFIANCE */}
-    <section class="border-y" style="border-color: #efefef; background: #fafafa;">
-      <div class="mx-auto max-w-6xl px-6 py-10">
-        <div class="text-center text-xs font-medium uppercase tracking-[0.2em]" style="color: #737373;">
-          Ils travaillent avec nous
-        </div>
-
-        {/* défilement continu des clients */}
-        <div class="marquee mt-5">
-          <div class="marquee-track">
-            {[...clients, ...clients].map((c) => (
-              <span class="marquee-item">{c}</span>
-            ))}
+        <div class="stats">
+          <div class="stat">
+            <span class="stat__line" data-line></span>
+            <div class="stat__num"><span data-count="100">100</span>+</div>
+            <div class="stat__lab">automatisations en production</div>
           </div>
-        </div>
-
-        {/* compteurs animés */}
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-          <div class="text-center">
-            <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">
-              <span class="count" data-to="100">0</span>+
-            </div>
-            <div class="text-xs" style="color: #737373;">automatisations en production</div>
+          <div class="stat">
+            <span class="stat__line" data-line></span>
+            <div class="stat__num"><span data-count="6000">6 000</span>+</div>
+            <div class="stat__lab">fiches actualisées chaque jour par Apidia</div>
           </div>
-          <div class="hidden h-8 w-px bg-neutral-200 sm:block"></div>
-          <div class="text-center">
-            <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">
-              <span class="count" data-to="4.8" data-dec="1">0</span>/5
-            </div>
-            <div class="text-xs" style="color: #737373;">satisfaction webinaire FROT</div>
+          <div class="stat">
+            <span class="stat__line" data-line></span>
+            <div class="stat__num"><span data-count="23">23</span></div>
+            <div class="stat__lab">certifications IA · Anthropic, Make, Lovable</div>
           </div>
-          <div class="hidden h-8 w-px bg-neutral-200 sm:block"></div>
-          <div class="text-center">
-            <div class="text-2xl font-bold tracking-tight" style="color: #0a0a0a;">
-              <span class="count" data-to="23">0</span>
-            </div>
-            <div class="text-xs" style="color: #737373;">certifications IA</div>
+          <div class="stat">
+            <span class="stat__line" data-line></span>
+            <div class="stat__num"><span data-count="4.8" data-dec="1">4,8</span>/5</div>
+            <div class="stat__lab">satisfaction webinaire FROT</div>
           </div>
         </div>
       </div>
     </section>
 
-    {/* BÉNÉFICES */}
-    <section class="relative py-24 sm:py-32">
+    {/* ============================================================ BÉNÉFICES */}
+    <section class="cv sheet relative bg-neutral-50 py-24 sm:py-32" data-section="Le constat">
       <div class="mx-auto max-w-6xl px-6">
         <div class="mb-16 grid items-center gap-10 lg:grid-cols-[1.5fr_1fr]">
           <div class="max-w-2xl">
-            <div
-              class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-              style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
-            >
-              Le constat
-            </div>
-            <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-              Vos équipes méritent mieux<br />
-              que le <span class="text-gradient">copier-coller</span>.
+            <span class="sec-label" data-reveal="fade">Le constat</span>
+            <h2 class="h-xl mt-6" style="color: #0a0a0a;">
+              Vos équipes méritent mieux que le <em class="text-gradient">copier-coller</em>.
             </h2>
-            <p class="mt-4 text-lg" style="color: #404040;">
+            <p class="mt-5 text-lg" style="color: #404040;" data-reveal="fade">
               Saisies en double, emails répétitifs, reporting à la main : autant
               d'heures perdues chaque semaine. Voici ce que l'IA bien conçue
               change, concrètement.
@@ -293,76 +420,38 @@ const faqSchema = {
             height="300"
             loading="lazy"
             decoding="async"
+            data-reveal="pop"
+            data-float="26"
             class="mx-auto hidden w-64 select-none lg:block xl:w-72"
           />
         </div>
 
         <div class="grid gap-5 md:grid-cols-2">
-          <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div
-              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-              style="background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.22); color: #7c3aed;"
-            >
-              <Icon name="trending" size={22} />
-            </div>
-            <div>
-              <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Du temps libéré, immédiatement</h3>
-              <p class="mt-2 text-base leading-relaxed" style="color: #404040;">Nos agents IA automatisent jusqu'à 80 % des tâches répétitives. Vos équipes se concentrent sur ce qui crée vraiment de la valeur.</p>
-            </div>
-          </article>
-          <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div
-              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-              style="background: rgba(220,38,38,0.07); border: 1px solid rgba(220,38,38,0.22); color: #dc2626;"
-            >
-              <Icon name="coins" size={22} />
-            </div>
-            <div>
-              <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Des coûts maîtrisés</h3>
-              <p class="mt-2 text-base leading-relaxed" style="color: #404040;">Pas d'usine à gaz, pas de licences à six chiffres. Des solutions calibrées pour livrer un ROI dès le premier trimestre.</p>
-            </div>
-          </article>
-          <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div
-              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-              style="background: rgba(192,38,211,0.07); border: 1px solid rgba(192,38,211,0.22); color: #c026d3;"
-            >
-              <Icon name="zap" size={22} />
-            </div>
-            <div>
-              <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Déploiement rapide</h3>
-              <p class="mt-2 text-base leading-relaxed" style="color: #404040;">Premier livrable opérationnel sous 2 à 4 semaines. Itérations rapides selon vos retours terrain.</p>
-            </div>
-          </article>
-          <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div
-              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-              style="background: rgba(109,40,217,0.07); border: 1px solid rgba(109,40,217,0.22); color: #6d28d9;"
-            >
-              <Icon name="shield" size={22} />
-            </div>
-            <div>
-              <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">Conformité et souveraineté</h3>
-              <p class="mt-2 text-base leading-relaxed" style="color: #404040;">RGPD, EU AI Act, hébergement européen. Pour les cas sensibles, nous opérons sur infrastructure souveraine 100 % locale.</p>
-            </div>
-          </article>
+          {benefits.map((b) => (
+            <article class="flex gap-5 rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;" data-reveal="tilt">
+              <div
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                style={`background: ${b.color}14; border: 1px solid ${b.color}38; color: ${b.color};`}
+              >
+                <Icon name={b.icon} size={22} />
+              </div>
+              <div>
+                <h3 class="text-lg font-bold tracking-tight" style="color: #0a0a0a;">{b.title}</h3>
+                <p class="mt-2 text-base leading-relaxed" style="color: #404040;">{b.body}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
 
-    {/* SERVICES */}
-    <section class="relative bg-neutral-50 py-24 sm:py-32">
+    {/* ============================================================= SERVICES */}
+    <section class="cv sheet relative bg-white py-24 sm:py-32" data-section="Services">
       <div class="mx-auto max-w-6xl px-6">
-        <div class="mb-16 max-w-2xl">
-          <div
-            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-            style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
-          >
-            Nos services
-          </div>
-          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-            Ce que nous faisons<br />
-            pour <span class="text-gradient">vous</span>.
+        <div class="mb-16 max-w-3xl">
+          <span class="sec-label" data-reveal="fade">Nos services</span>
+          <h2 class="h-xl mt-6" style="color: #0a0a0a;">
+            Ce que nous faisons pour <em class="text-gradient">vous</em>.
           </h2>
         </div>
 
@@ -370,13 +459,12 @@ const faqSchema = {
           {services.map((s, i) => (
             <a
               href={`/services#${s.id}`}
+              data-reveal="tilt"
               class:list={[
-                "bento-card group relative flex flex-col overflow-hidden rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1",
+                "svc fillcard group relative flex min-h-[230px] flex-col rounded-2xl bg-white p-7",
                 i % 3 === 0 ? "md:col-span-2" : "md:col-span-1",
               ]}
-              style={`border-color: #e5e5e5; --accent: ${s.accent};`}
             >
-              <span aria-hidden class="bento-glow"></span>
               {s.img && (
                 <img
                   src={`/mascotte/${s.img}.webp`}
@@ -385,22 +473,22 @@ const faqSchema = {
                   height="220"
                   loading="lazy"
                   decoding="async"
-                  class="pointer-events-none absolute -bottom-3 right-1 hidden w-40 select-none lg:block xl:w-48"
+                  class="svc__mascot pointer-events-none absolute -bottom-3 right-1 hidden w-40 select-none lg:block xl:w-48"
                 />
               )}
               <div class:list={["relative flex items-center gap-4", s.img && "lg:pr-44"]}>
                 <div
-                  class="inline-flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
-                  style={`background: ${s.accent}0d; border: 1px solid ${s.accent}30;`}
+                  class="svc__icon inline-flex h-12 w-12 items-center justify-center rounded-xl"
+                  style={`background: ${s.accent}0d; border: 1px solid ${s.accent}30; color: ${s.accent};`}
                 >
                   <Icon name={s.icon} size={24} />
                 </div>
-                <h3 class="text-xl font-bold tracking-tight" style="color: #0a0a0a;">{s.title}</h3>
+                <h3 class="fc-fg text-xl font-bold tracking-tight" style="color: #0a0a0a;">{s.title}</h3>
               </div>
-              <p class:list={["relative mt-4 flex-1 leading-relaxed", s.img && "lg:pr-44"]} style="color: #404040;">{s.body}</p>
-              <div class="relative mt-5 inline-flex items-center gap-1.5 text-sm font-semibold" style={`color: ${s.accent};`}>
+              <p class:list={["fc-muted relative mt-4 flex-1 leading-relaxed", s.img && "lg:pr-44"]} style="color: #404040;">{s.body}</p>
+              <div class="svc__more fc-fg relative mt-5 inline-flex items-center gap-1.5 text-sm font-semibold" style={`color: ${s.accent};`}>
                 En savoir plus
-                <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden>
+                <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden="true">
                   <path d="M6 3l5 5-5 5V3z" />
                 </svg>
               </div>
@@ -410,166 +498,413 @@ const faqSchema = {
       </div>
     </section>
 
-    {/* RÉALISATIONS + CAS CHIFFRÉS */}
-    <section class="relative py-24 sm:py-32">
-      <div class="mx-auto max-w-6xl px-6">
-        <div class="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div class="max-w-2xl">
-            <div
-              class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-              style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
-            >
-              Réalisations
-            </div>
-            <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-              Des résultats<br />
-              <span class="text-gradient">mesurables</span>.
-            </h2>
-          </div>
-          <a
-            href="/realisations"
-            class="inline-flex shrink-0 items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition-all hover:-translate-y-0.5"
-            style="border-color: #d4d4d4; color: #0a0a0a;"
-          >
-            11 projets — tout voir
-            <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5" aria-hidden>
-              <path d="M6 3l5 5-5 5V3z" />
-            </svg>
-          </a>
+    {/* =============================== COUTURE : Boulon traverse, la nuit tombe */}
+    <div class="kseam" data-kseam style="--from: #ffffff; --to: #0d0718;" aria-hidden="true">
+      <div class="kseam__clip">
+        <div class="kseam__road"></div>
+        <span class="kseam__txt mono">Pendant ce temps, côté agents…</span>
+        <div class="kseam__to"></div>
+        <div class="kseam__flag"></div>
+      </div>
+      <canvas class="gl" data-gl></canvas>
+      <div class="kwrap kseam__kart">
+        <img src="/show/kart-boulon.webp" alt="" width="560" height="477" loading="lazy" decoding="async" />
+        <span class="speed"></span>
+      </div>
+    </div>
+
+    {/* ============================================================ AGENTS IA */}
+    <section class="cv agents relative" data-section="Agents IA">
+      <div class="relative mx-auto max-w-6xl px-6">
+        <div class="mb-14 max-w-4xl">
+          <span class="sec-label sec-label--light" data-reveal="fade">Agents IA en production</span>
+          <h2 class="h-xl mt-6">
+            Ils travaillent pendant que vous <em style="color: #f0abfc;">dormez</em>.
+          </h2>
         </div>
 
-        <div class="grid gap-5 md:grid-cols-3">
-          {cases.map((c) => (
-            <article
-              class="flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
-              style={`border-color: ${c.accent}30; box-shadow: 0 10px 30px -20px ${c.accent}40;`}
-            >
-              <div class="text-xs font-semibold uppercase tracking-wider" style={`color: ${c.accent};`}>
-                {c.title}
-              </div>
-              <div class="mt-3 text-xl font-bold leading-snug tracking-tight" style="color: #0a0a0a;">
-                {c.result}
-              </div>
-              <p class="mt-3 flex-1 text-sm leading-relaxed" style="color: #404040;">{c.detail}</p>
-            </article>
-          ))}
+        <div class="agents__grid">
+          <div class="term" data-term>
+            <div class="term__bar"><i></i><i></i><i></i><span class="mono">journal · agents</span></div>
+            <div class="term__body">
+              {log.map(([t, who, cls, msg]) => (
+                <div class="term__line">
+                  <time>{t}</time>
+                  <b class={cls}>{who}</b>
+                  <span>▸ {msg}</span>
+                </div>
+              ))}
+            </div>
+            <p class="term__foot mono">Journée type, reconstituée à titre d'illustration</p>
+          </div>
+
+          <div>
+            {agents.map((a) => (
+              <a href={a.href} class="agent group" data-reveal="fade" data-cursor="Voir">
+                <div>
+                  <div class="agent__role mono">{a.role}</div>
+                  <div class="agent__name mt-2">{a.name}</div>
+                  <p class="agent__body">{a.body}</p>
+                </div>
+                <div class="sm:text-right">
+                  <div class="agent__fig">{a.fig}</div>
+                  <div class="agent__figlab">{a.figlab}</div>
+                </div>
+              </a>
+            ))}
+            <div class="border-t pt-8" style="border-color: rgba(255,255,255,0.14);">
+              <a
+                href="/realisations"
+                class="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition-all hover:-translate-y-0.5"
+                style="border-color: rgba(255,255,255,0.3); color: #fff;"
+              >
+                Lire les études de cas
+                <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5" aria-hidden="true"><path d="M6 3l5 5-5 5V3z" /></svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    {/* MÉTHODE */}
-    <section class="relative bg-neutral-50 py-24 sm:py-32">
-      <div class="mx-auto max-w-6xl px-6">
-        <div class="mb-16 max-w-2xl">
-          <div
-            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-            style="border-color: rgba(192,38,211,0.28); background: rgba(192,38,211,0.06); color: #a21caf;"
-          >
-            Notre méthode
-          </div>
-          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-            Concevoir. Déployer.<br />
-            <span class="text-gradient">Opérer</span>.
-          </h2>
-        </div>
+    {/* ============================================================= MANGA AI */}
+    <section id="produits" class="cv manga sheet" data-section="Manga AI">
+      <img class="manga__bg" src="/show/mg-bg.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" aria-hidden="true" />
+      <div class="relative mx-auto max-w-6xl px-6">
+        <div class="manga__grid">
+          <div>
+            <img class="manga__logo" src="/show/mg-logo.webp" alt="Manga AI" width="640" height="377" loading="lazy" decoding="async" data-reveal="pop" />
+            <h2 class="manga__title mt-4">
+              Un synopsis entre.<br />Un <em>manga</em> sort.
+            </h2>
+            <p class="mt-6 max-w-xl text-lg leading-relaxed" style="color: #404040;" data-reveal="fade">
+              <strong style="color: #0a0a0a;">Manga AI</strong>, notre produit phare, transforme une simple idée
+              en manga complet, jusqu'à 240 pages, en français, anglais ou espagnol.
+              Sans savoir dessiner, avec une édition case par case.
+            </p>
 
-        <div class="steps-stack">
-          {steps.map((s, i) => (
-            <article
-              class="step-card rounded-2xl border bg-white p-8 sm:p-10"
-              style={`border-color: #e5e5e5; top: ${96 + i * 14}px; z-index: ${i + 1};`}
-            >
-              <div class="flex items-start gap-6">
-                <div class="text-4xl font-bold text-gradient sm:text-5xl">{s.n}</div>
-                <div>
-                  <h3 class="text-xl font-bold tracking-tight sm:text-2xl" style="color: #0a0a0a;">{s.title}</h3>
-                  <p class="mt-2 leading-relaxed" style="color: #404040;">{s.body}</p>
+            <div class="shelf mt-8" data-reveal="fade" role="group" aria-label="Choisir une couverture">
+              {mangaCovers.map((c, i) => (
+                <button type="button" data-cover={c.id} aria-pressed={i === 0 ? "true" : "false"} aria-label={c.title} title={c.title}>
+                  <img src={`/show/mg-cover-${c.id}.webp`} alt="" width="520" height="775" loading="lazy" decoding="async" />
+                </button>
+              ))}
+            </div>
+            <p class="mono mt-3" style="color: #737373;">Mangas générés avec Manga AI · touchez une couverture</p>
+
+            <div class="mt-8 flex flex-wrap items-center gap-4" data-reveal="fade">
+              <a
+                href="https://manga-ai.fr"
+                target="_blank"
+                rel="noopener"
+                data-magnet
+                class="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold text-white transition-transform hover:-translate-y-0.5"
+                style="background: #0a0a0a; box-shadow: 6px 6px 0 #dc2626;"
+              >
+                Essayer Manga AI
+                <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5" aria-hidden="true"><path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" /></svg>
+              </a>
+              <a href="/produits/manga-ai/" class="text-sm font-semibold underline decoration-2 underline-offset-4" style="color: #0a0a0a;">
+                La fiche produit
+              </a>
+              <a href="/produits" class="text-sm font-semibold underline decoration-2 underline-offset-4" style="color: #0a0a0a;">
+                Tous nos produits
+              </a>
+            </div>
+          </div>
+
+          {/* Le livre en 3D : il pivote et s'ouvre au scroll sur de vraies planches */}
+          <div class="book-stage" data-book>
+            <div class="manga__burst" aria-hidden="true"></div>
+            <div class="book">
+              <div class="book__block" aria-hidden="true"></div>
+              <div class="book__right">
+                <img src="/show/mg-page-2.webp" alt="Planche de manga générée par Manga AI" width="600" height="1050" loading="lazy" decoding="async" />
+              </div>
+              <div class="book__cover">
+                <div class="book__face book__face--front">
+                  <img class="book__cover-img" src="/show/mg-cover-dragon.webp" alt="Couverture d'un manga généré par Manga AI" width="520" height="775" loading="lazy" decoding="async" />
+                </div>
+                <div class="book__face book__face--back">
+                  <img src="/show/mg-page-1.webp" alt="Planche de manga générée par Manga AI" width="600" height="1075" loading="lazy" decoding="async" />
                 </div>
               </div>
-            </article>
-          ))}
+            </div>
+            <div class="manga__stamp" aria-hidden="true">240 pages<small>à partir d'un synopsis</small></div>
+          </div>
+        </div>
+
+        {/* L'atelier : du croquis au personnage, et l'écran de travail réel */}
+        <div class="manga__lab">
+          <figure class="cmp" data-cmp data-reveal="tilt">
+            <div class="cmp__box" style="--x: 50%;" role="slider" tabindex="0" aria-label="Du crayonné au personnage en couleurs" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <img src="/show/mg-char-color.webp" alt="Personnage en couleurs" width="400" height="600" loading="lazy" decoding="async" />
+              <img class="cmp__top" src="/show/mg-char-sketch.webp" alt="Le même personnage au crayonné" width="400" height="600" loading="lazy" decoding="async" />
+              <span class="cmp__handle" aria-hidden="true"></span>
+            </div>
+            <figcaption class="mono">Du crayonné à la couleur · glissez</figcaption>
+          </figure>
+          <figure class="manga__app" data-reveal="tilt" data-tilt>
+            <div class="plate__frame">
+              <div class="plate__bar"><i></i><i></i><i></i><span>manga-ai.fr · pages générées</span></div>
+              <img src="/show/mg-app.webp" alt="Capture de l'application Manga AI : dix-huit planches générées" width="800" height="739" loading="lazy" decoding="async" />
+            </div>
+            <figcaption class="mono">L'écran de travail : 18 planches générées, export PDF</figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    {/* PRODUITS — preuve de savoir-faire */}
-    <section id="produits" class="relative py-24 sm:py-32">
-      <div class="mx-auto max-w-6xl px-6">
-        <div class="mb-16 max-w-2xl">
-          <div
-            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-            style="border-color: rgba(220,38,38,0.30); background: rgba(220,38,38,0.05); color: #b91c1c;"
-          >
-            Nos produits
+    {/* ================================================================= SITES */}
+    <section class="sites" data-section="Sites web">
+      <div class="sites__pin">
+        <div class="sites__head">
+          <span class="sec-label">Les sites · en ligne et en chantier</span>
+          <span class="sites__count" aria-hidden="true"><b class="sites__idx">01</b> / {String(sites.length).padStart(2, "0")}</span>
+        </div>
+        <div class="sites__viewport">
+          <div class="sites__track">
+            <div class="sites__intro">
+              <h2 class="h-xl" style="color: #0a0a0a;">
+                Des sites qu'on <em class="text-gradient">remarque</em>.
+              </h2>
+              <p class="mt-5 text-lg" style="color: #404040;">
+                Commerces, restaurants, hébergeurs, indépendants : chaque site a son
+                idée forte, sa mise en scène, et il sort vite.
+              </p>
+              <p class="mono mt-6" style="color: #6d28d9;">Faites défiler →</p>
+            </div>
+
+            {sites.map((s) => (
+              <a class="plate" href={s.href} target="_blank" rel="noopener" data-cursor="Visiter">
+                <div class="plate__frame">
+                  <div class="plate__bar"><i></i><i></i><i></i><span>{s.url}</span></div>
+                  <div class="plate__shot">
+                    <img src={`/show/${s.img}.webp`} alt={`Capture du site ${s.name}`} width="1200" height="750" loading="lazy" decoding="async" />
+                  </div>
+                </div>
+                <div class="plate__meta">
+                  <span class="plate__name">{s.name}</span>
+                  <span class:list={["plate__tag", s.tagKind && `plate__tag--${s.tagKind}`]}>{s.tag}</span>
+                </div>
+                <div class="plate__kind">{s.kind}</div>
+                <div class="plate__note">{s.note}</div>
+              </a>
+            ))}
+
+            <div class="sites__end">
+              <p class="h-xl" style="color: #0a0a0a; font-size: clamp(2rem, 4vw, 3.6rem);">Et le vôtre ?</p>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <a
+                  href="/realisations"
+                  class="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition-all hover:-translate-y-0.5"
+                  style="border-color: #0a0a0a; color: #0a0a0a;"
+                >
+                  Toutes les réalisations
+                </a>
+                <a
+                  href="/contact"
+                  class="btn-x inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white"
+                  style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%);"
+                >
+                  Lancer mon projet
+                  <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5" aria-hidden="true"><path d="M6 3l5 5-5 5V3z" /></svg>
+                </a>
+              </div>
+            </div>
           </div>
-          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-            Nous éditons nos<br />
-            propres <span class="text-gradient">produits IA</span>.
-          </h2>
-          <p class="mt-4 text-lg" style="color: #404040;">
-            La meilleure preuve de notre savoir-faire : trois produits que nous
-            avons conçus, déployés et que nous opérons en production.
+        </div>
+      </div>
+    </section>
+
+    {/* ============================== LA COURSE : les karts tirent le rideau */}
+    <section class="race" data-section="Jeux vidéo" aria-label="Transition vers les jeux vidéo">
+      <div class="race__pin">
+        <div class="race__a">
+          <p class="race__big">Et quand on<br /><em>s'amuse…</em></p>
+        </div>
+        <div class="race__b">
+          <div>
+            <img class="race__logo" src="/show/kartoche-logo.webp" alt="Kartoche" width="760" height="374" loading="lazy" decoding="async" />
+            <p class="race__big">…on fait des<br /><em>jeux vidéo.</em></p>
+          </div>
+        </div>
+        <div class="race__dust" aria-hidden="true"></div>
+        <div class="race__flag" aria-hidden="true"></div>
+        <canvas class="gl" data-gl aria-hidden="true"></canvas>
+        {["picante", "boulon", "marina"].map((k) => (
+          <div class="kwrap race__kart" aria-hidden="true">
+            <img src={`/show/kart-${k}.webp`} alt="" width="560" height="480" loading="lazy" decoding="async" />
+            <span class="speed"></span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* ================================================================== JEUX */}
+    <section class="cv games">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-12 grid gap-6 md:grid-cols-[1.2fr_1fr] md:items-end">
+          <div>
+            <span class="sec-label sec-label--light" data-reveal="fade">Le studio</span>
+            <h2 class="h-xl mt-6">Des mondes <em style="color: #f0abfc;">entiers</em>, conçus ici.</h2>
+          </div>
+          <p class="text-lg leading-relaxed" style="color: rgba(255,255,255,0.72);" data-reveal="fade">
+            Gameplay, direction artistique, moteur : nous concevons nos propres jeux,
+            de la course arcade à l'horreur psychologique. Le meilleur terrain
+            d'essai pour pousser l'IA et le code au bout.
           </p>
         </div>
 
-        <div class="grid gap-5 md:grid-cols-3">
-          {products.map((p) => (
-            <a
-              href={p.href}
-              class="group flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1"
-              style="border-color: #e5e5e5;"
-              onmouseover={`this.style.borderColor='${p.accent}40'; this.style.boxShadow='0 14px 35px -15px ${p.accent}30'`}
-              onmouseout="this.style.borderColor='#e5e5e5'; this.style.boxShadow='none'"
-            >
-              <div class="text-xs uppercase tracking-wider" style={`color: ${p.accent};`}>
-                {p.tagline}
+        {/* Kartoche : le kart du jeu, en vraie 3D, à faire tourner */}
+        <article class="kshow" data-reveal="fade">
+          <div class="kshow__stage" data-kshow>
+            <canvas class="kshow__gl" aria-label="Kart de Kartoche en 3D, à faire tourner"></canvas>
+            <img class="kshow__fallback" src="/show/kart-boulon.webp" alt="Boulon sur son kart" width="560" height="477" loading="lazy" decoding="async" />
+            <span class="kshow__hint mono" aria-hidden="true">↔ Faites-le tourner</span>
+            <span class="kshow__tag mono" aria-hidden="true">Modèle 3D du jeu</span>
+          </div>
+          <div class="kshow__side">
+            <img class="kshow__logo" src="/show/kartoche-logo.webp" alt="Kartoche" width="760" height="374" loading="lazy" decoding="async" />
+            <p class="mt-4 leading-relaxed" style="color: rgba(255,255,255,0.8);">
+              Course de karts arcade à l'humour bien français, façon jouets et fête
+              foraine. Développé en C++ sur Unreal Engine 5. Prototype jouable.
+            </p>
+            <div class="kfeat__facts mt-6">
+              <div><b data-count="28">28</b>pilotes</div>
+              <div><b data-count="24">24</b>karts</div>
+              <div><b data-count="23">23</b>circuits</div>
+            </div>
+            <div class="pilots mt-7" role="group" aria-label="Choisir un pilote">
+              {pilots.map((p, i) => (
+                <button type="button" data-pilot={i} aria-pressed={i === 0 ? "true" : "false"}>
+                  <img src={`/show/tete-${p.id}.webp`} alt="" width="160" height="160" loading="lazy" decoding="async" />
+                  <span><b>{p.name}</b><small>{p.kart}</small></span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </article>
+
+        <p class="mono mt-10" style="color: #c4b5fd;" data-reveal="fade">Captures en jeu · les circuits se présentent</p>
+      </div>
+
+      <div class="kcaps mq mt-4" data-speed="60" data-pause>
+        <div class="mq__track">
+          <div class="mq__group">
+            {circuits.map(([id, label]) => (
+              <figure class="kcap">
+                <img loading="lazy" decoding="async" src={`/show/k-${id}.webp`} alt={`Kartoche, capture en jeu : ${label}`} width="1280" height="584" />
+                <figcaption>{label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-16 max-w-6xl px-6">
+        <div class="grid gap-5 md:grid-cols-2">
+          {games.map((g) => {
+            const Tag = g.href ? "a" : "article";
+            return (
+              <Tag
+                class:list={["game", g.torch && "game--torch", g.wide && "game--wide md:col-span-2"]}
+                data-reveal="tilt"
+                data-shots
+                {...(g.href ? { href: g.href, target: "_blank", rel: "noopener", "data-cursor": "Découvrir" } : {})}
+              >
+                <div class="game__shots">
+                  {g.shots.map((sh, i) => (
+                    <img class:list={["game__img", i === 0 && "is-on"]} src={`/show/${sh}.webp`} alt={i === 0 ? `Capture du jeu ${g.name}` : ""} width="1400" height="788" loading="lazy" decoding="async" />
+                  ))}
+                </div>
+                {g.torch && <span class="game__dark" aria-hidden="true"></span>}
+                <span class="game__status">{g.status}</span>
+                <div class="game__body">
+                  <div class="game__name">{g.name}</div>
+                  <div class="game__kind">{g.kind}</div>
+                  <div class="game__dots" aria-hidden="true">{g.shots.map((_, i) => <i class:list={[i === 0 && "is-on"]}></i>)}</div>
+                </div>
+              </Tag>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    {/* =============================================================== MÉTHODE */}
+    <section class="cv sheet relative bg-white py-24 sm:py-32" data-section="Méthode">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-10 max-w-3xl">
+          <span class="sec-label" data-reveal="fade">Notre méthode</span>
+          <h2 class="h-xl mt-6" style="color: #0a0a0a;">
+            Concevoir. Déployer. <em class="text-gradient">Opérer</em>.
+          </h2>
+        </div>
+
+        <div class="route" data-route>
+          <svg class="route__svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="route-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#7c3aed" />
+                <stop offset="0.5" stop-color="#c026d3" />
+                <stop offset="1" stop-color="#dc2626" />
+              </linearGradient>
+            </defs>
+            <path class="route__ghost" />
+            <path class="route__path" />
+          </svg>
+          <div class="route__bot" aria-hidden="true"><img src="/logo-mark-128.webp" alt="" width="54" height="54" /></div>
+
+          {steps.map((s) => (
+            <div class="rstep">
+              <div class="rstep__dot">{s.n}</div>
+              <div class="rstep__card">
+                <div class="rstep__num" aria-hidden="true">{s.n}</div>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
               </div>
-              <h3 class="mt-2 text-2xl font-bold tracking-tight" style="color: #0a0a0a;">{p.title}</h3>
-              <p class="mt-3 flex-1 leading-relaxed" style="color: #404040;">{p.description}</p>
-              <div class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold" style={`color: ${p.accent};`}>
-                {p.cta}
-                <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden>
-                  <path d="M6 3l5 5-5 5V3z" />
-                </svg>
-              </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>
     </section>
 
-    {/* CRÉDIBILITÉ */}
-    <section class="relative bg-neutral-50 py-24 sm:py-32">
-      <div class="mx-auto max-w-5xl px-6 text-center">
-        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl" style="color: #0a0a0a;">
-          Une expertise reconnue.
+    {/* ==================================================== CLIENTS + PREUVES */}
+    <section class="cv relative bg-neutral-50 py-24 sm:py-32" data-section="Confiance">
+      <div class="mx-auto max-w-6xl px-6">
+        <span class="sec-label" data-reveal="fade">Ils travaillent avec nous</span>
+      </div>
+      <div class="clients-mq mq mt-8" data-speed="80" data-dir="-1" data-pause>
+        <div class="mq__track">
+          <div class="mq__group">
+            {clients.map((c) => (<span>{c} <i>✺</i></span>))}
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-20 max-w-5xl px-6 text-center">
+        <h2 class="h-xl" style="color: #0a0a0a; font-size: clamp(2rem, 4.6vw, 4rem);">
+          Une expertise <em class="text-gradient">reconnue</em>.
         </h2>
-        <p class="mx-auto mt-4 max-w-2xl text-lg" style="color: #404040;">
+        <p class="mx-auto mt-5 max-w-2xl text-lg" style="color: #404040;" data-reveal="fade">
           Lauréats internationaux, statuts officiels, références publiques.
           Notre travail est reconnu par les acteurs majeurs du secteur.
         </p>
 
         <div class="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
-          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style="background: #dc262612; border: 1px solid #dc26262e; color: #dc2626;"><Icon name="trophy" size={24} /></div>
-            <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">Lauréat Make Grid</div>
-            <div class="mt-1 text-xs" style="color: #737373;">Concours international 2025</div>
-          </div>
-          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style="background: #7c3aed12; border: 1px solid #7c3aed2e; color: #7c3aed;"><Icon name="flag" size={24} /></div>
-            <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">National Treasure</div>
-            <div class="mt-1 text-xs" style="color: #737373;">Top 1 % France Lovable</div>
-          </div>
-          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style="background: #c026d312; border: 1px solid #c026d32e; color: #c026d3;"><Icon name="mic" size={24} /></div>
-            <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">Record YouTube FROT</div>
-            <div class="mt-1 text-xs" style="color: #737373;">Webinaire 4,8/5 satisfaction</div>
-          </div>
-          <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;">
-            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style="background: #6d28d912; border: 1px solid #6d28d92e; color: #6d28d9;"><Icon name="graduation" size={24} /></div>
-            <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">23 certifications IA</div>
-            <div class="mt-1 text-xs" style="color: #737373;">Anthropic · Make · Lovable</div>
-          </div>
+          {[
+            { icon: "trophy", c: "#dc2626", t: "Lauréat Make Grid", d: "Concours international 2025" },
+            { icon: "flag", c: "#7c3aed", t: "National Treasure", d: "Top 1 % France Lovable" },
+            { icon: "mic", c: "#c026d3", t: "Record YouTube FROT", d: "Webinaire 4,8/5 satisfaction" },
+            { icon: "graduation", c: "#6d28d9", t: "23 certifications IA", d: "Anthropic · Make · Lovable" },
+          ].map((b, i) => (
+            <div class="rounded-2xl border bg-white p-6" style="border-color: #e5e5e5;" data-reveal="pop" data-delay={i * 0.08} data-pop-rotate={i % 2 ? 10 : -10}>
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl" style={`background: ${b.c}12; border: 1px solid ${b.c}2e; color: ${b.c};`}><Icon name={b.icon} size={24} /></div>
+              <div class="mt-3 text-sm font-bold" style="color: #0a0a0a;">{b.t}</div>
+              <div class="mt-1 text-xs" style="color: #737373;">{b.d}</div>
+            </div>
+          ))}
         </div>
 
         <a
@@ -578,77 +913,58 @@ const faqSchema = {
           style="color: #6d28d9;"
         >
           Découvrir le cabinet et son fondateur
-          <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3" aria-hidden>
-            <path d="M6 3l5 5-5 5V3z" />
-          </svg>
+          <svg viewBox="0 0 16 16" fill="currentColor" class="h-3 w-3" aria-hidden="true"><path d="M6 3l5 5-5 5V3z" /></svg>
         </a>
       </div>
     </section>
 
-    {/* FAQ */}
-    <section class="relative py-24 sm:py-32">
+    {/* =================================================================== FAQ */}
+    <section class="cv sheet relative bg-white py-24 sm:py-32" data-section="FAQ">
       <div class="mx-auto max-w-3xl px-6">
         <div class="mb-12 text-center">
-          <div
-            class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.2em]"
-            style="border-color: rgba(124,58,237,0.30); background: rgba(124,58,237,0.06); color: #6d28d9;"
-          >
-            Questions fréquentes
-          </div>
-          <h2 class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-            Vous vous demandez<br />sûrement…
+          <span class="sec-label" data-reveal="fade">Questions fréquentes</span>
+          <h2 class="h-xl mt-6" style="color: #0a0a0a; font-size: clamp(2.2rem, 5vw, 4.4rem);">
+            Vous vous demandez <em class="text-gradient">sûrement…</em>
           </h2>
         </div>
 
         <div class="space-y-3">
           {faqs.map((f) => (
-            <details class="group rounded-2xl border bg-white px-6 py-4" style="border-color: #e5e5e5;">
+            <details class="group rounded-2xl border bg-white px-6 py-4" style="border-color: #e5e5e5;" data-reveal="fade">
               <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold" style="color: #0a0a0a;">
                 {f.q}
-                <svg
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90"
-                  style="color: #6d28d9;"
-                  aria-hidden
-                >
+                <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" style="color: #6d28d9;" aria-hidden="true">
                   <path d="M6 3l5 5-5 5V3z" />
                 </svg>
               </summary>
-              <p class="mt-3 text-sm leading-relaxed" style="color: #404040;">{f.a}</p>
+              <p class="mt-3 overflow-hidden text-sm leading-relaxed" style="color: #404040;">{f.a}</p>
             </details>
           ))}
         </div>
       </div>
     </section>
 
-    {/* CTA final */}
-    <section class="relative overflow-hidden bg-neutral-50 py-24 sm:py-32">
-      <div
-        aria-hidden
-        class="pointer-events-none absolute inset-x-0 top-1/4 -z-10 h-72 opacity-25"
-        style="background: radial-gradient(ellipse at 30% 50%, #a78bfa 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, #f87171 0%, transparent 60%); filter: blur(80px);"
-      >
-      </div>
-
-      <div class="mx-auto max-w-3xl px-6 text-center">
-        <h2 class="text-4xl font-bold tracking-tight sm:text-5xl" style="color: #0a0a0a;">
-          Votre projet IA<br />commence ici.
+    {/* =================================================================== CTA */}
+    <section class="cv cta" data-section="Contact">
+      <div class="cta__media" aria-hidden="true"></div>
+      <img class="cta__mascot" src="/mascotte/contact.webp" alt="" width="260" height="260" loading="lazy" decoding="async" data-reveal="pop" data-float="30" />
+      <div class="relative mx-auto max-w-5xl px-6 text-center">
+        <h2 class="cta__title" data-noreveal data-reveal="chars">
+          Votre projet IA commence <em>ici.</em>
         </h2>
-        <p class="mx-auto mt-6 max-w-xl text-lg" style="color: #404040;">
+        <p class="mx-auto mt-8 max-w-xl text-lg" style="color: rgba(255,255,255,0.9);" data-reveal="fade">
           Audit offert en 30 minutes. À l'issue, vous repartez avec un
           diagnostic clair, un plan d'action concret et un devis transparent.
         </p>
-        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div class="mt-10 flex justify-center" data-reveal="fade">
           <a
             href="/contact"
-            class="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-8 py-3.5 text-base font-semibold text-white transition-all hover:-translate-y-0.5"
-            style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%); box-shadow: 0 12px 30px -10px rgba(220,38,38,0.45);"
+            data-magnet
+            class="btn-x inline-flex items-center gap-2 rounded-full bg-white px-9 py-4 text-base font-semibold transition-colors hover:text-white"
+            style="color: #0a0a0a; box-shadow: 0 18px 40px -14px rgba(13,7,24,0.6);"
           >
             Prendre rendez-vous
-            <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden>
-              <path d="M6 3l5 5-5 5V3z" />
-            </svg>
+            <svg viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M6 3l5 5-5 5V3z" /></svg>
           </a>
         </div>
       </div>
@@ -658,93 +974,5 @@ const faqSchema = {
   <Footer />
 
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(gamesSchema)} />
 </Layout>
-
-<style>
-  /* ---- Marquee clients (100% CSS, transform GPU) ---- */
-  .marquee {
-    position: relative;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  }
-  .marquee-track {
-    display: flex;
-    width: max-content;
-    gap: 3rem;
-    animation: marquee 32s linear infinite;
-  }
-  .marquee:hover .marquee-track { animation-play-state: paused; }
-  .marquee-item {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #525252;
-    white-space: nowrap;
-  }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* ---- Bento : halo au survol ---- */
-  .bento-glow {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    pointer-events: none;
-    background: radial-gradient(420px circle at 50% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
-  }
-  .bento-card:hover .bento-glow { opacity: 1; }
-  .bento-card { transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
-  .bento-card:hover {
-    border-color: color-mix(in srgb, var(--accent) 40%, #e5e5e5) !important;
-    box-shadow: 0 16px 38px -18px color-mix(in srgb, var(--accent) 55%, transparent);
-  }
-
-  /* ---- Méthode : cartes empilées au scroll ---- */
-  .steps-stack { display: flex; flex-direction: column; gap: 1.25rem; }
-  .step-card { position: sticky; }
-  @media (prefers-reduced-motion: reduce) {
-    .step-card { position: static; }
-    .marquee-track { animation: none; }
-  }
-</style>
-
-<script>
-  // Compteurs animés — démarrent quand la section entre dans le viewport
-  const counters = document.querySelectorAll<HTMLElement>(".count");
-  if (counters.length) {
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const fmt = (v: number, dec: number) =>
-      dec ? v.toFixed(dec).replace(".", ",") : Math.round(v).toString();
-
-    const run = (el: HTMLElement) => {
-      const to = parseFloat(el.dataset.to || "0");
-      const dec = parseInt(el.dataset.dec || "0", 10);
-      if (reduce) { el.textContent = fmt(to, dec); return; }
-      const dur = 1400;
-      const t0 = performance.now();
-      const tick = (t: number) => {
-        const p = Math.min((t - t0) / dur, 1);
-        // easeOutCubic
-        el.textContent = fmt(to * (1 - Math.pow(1 - p, 3)), dec);
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    };
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            run(e.target as HTMLElement);
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.6 },
-    );
-    counters.forEach((c) => io.observe(c));
-  }
-</script>

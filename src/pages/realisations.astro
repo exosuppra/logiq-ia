@@ -6,6 +6,8 @@ import Footer from "../components/Footer.astro";
 type Project = {
   name: string;
   monogram: string;
+  /** capture réelle du projet (public/show/<img>.webp) ; sinon le monogramme */
+  img?: string;
   category: string;
   concept: string;
   client?: string;
@@ -15,6 +17,7 @@ type Project = {
   internal?: boolean;
   ownDomain?: boolean;
   featured?: boolean;
+  isNew?: boolean;
   private?: boolean;
   status?: string;
   accent: string;
@@ -31,11 +34,13 @@ const categories = [
   "Loisir & Expérience",
   "Jeu vidéo",
   "Services locaux",
+  "Concept",
 ];
 
 const projects: Project[] = [
   {
     name: "Manga AI",
+    img: "site-mangaai",
     monogram: "MA",
     category: "Produit IA",
     concept: "Générateur de manga par IA",
@@ -58,6 +63,64 @@ const projects: Project[] = [
     href: "",
     private: true,
     accent: "#7c3aed",
+  },
+  {
+    name: "Cas'Design",
+    monogram: "CD",
+    img: "site-casdesign-2",
+    category: "Services locaux",
+    concept: "Dessinateur · infographiste",
+    client: "Cas'Design",
+    description:
+      "Le site d'un dessinateur-infographiste, pensé comme une planche d'architecte : au scroll, la maison se construit sous les yeux du visiteur — le plan coté, puis le volume, puis la matière et la lumière. Rendus 3D calculés pour l'occasion, étude d'ensoleillement animée, fiche contact mobile accessible par QR code.",
+    tags: ["Motion design", "Rendus 3D", "GSAP"],
+    href: "https://casdesign.fr",
+    ownDomain: true,
+    isNew: true,
+    accent: "#b45309",
+  },
+  {
+    name: "Madame Monsieur",
+    monogram: "MM",
+    img: "site-madamemonsieur",
+    category: "Services locaux",
+    concept: "Salon de coiffure à Gréoux-les-Bains",
+    client: "Madame Monsieur",
+    description:
+      "Le site vitrine d'un salon de coiffure : une identité claire et chaleureuse, les prestations, les réalisations du salon et la prise de rendez-vous en ligne reliée à la plateforme de réservation. Trois directions artistiques proposées, une retenue.",
+    tags: ["Site vitrine", "Réservation en ligne", "SEO local"],
+    href: "https://madamemonsieur-greoux.fr",
+    ownDomain: true,
+    isNew: true,
+    accent: "#c026d3",
+  },
+  {
+    name: "La Brasserie du Soleil",
+    monogram: "BS",
+    img: "site-brasserie",
+    category: "Hôtellerie & Restauration",
+    concept: "Brasserie, pizzeria et bar à Gréoux-les-Bains",
+    client: "La Brasserie du Soleil",
+    description:
+      "Le site d'une brasserie de village, conçu comme une revue culinaire : la vraie carte, les horaires, la terrasse et la réservation par téléphone en un geste. Trois directions artistiques proposées, la direction « Comptoir » retenue par le client.",
+    tags: ["Restaurant", "Carte en ligne", "SEO local"],
+    href: "https://www.labrasseriedusoleil.fr",
+    ownDomain: true,
+    isNew: true,
+    accent: "#b91c1c",
+  },
+  {
+    name: "Manoztralia",
+    monogram: "MZ",
+    img: "site-manoztralia",
+    category: "Concept",
+    concept: "Concept de refonte · non officiel",
+    description:
+      "Une proposition de refonte, réalisée à notre initiative, pour une agence d'éducation spécialiste de l'Australie. Le fil conducteur : on scrolle de Paris à Sydney. Carte d'embarquement en guise de chargement, hublot qui s'ouvre en plein écran, visas tamponnés, carte tracée au fil du défilement. Maquette non officielle, sans lien commercial avec la marque.",
+    tags: ["Concept", "Motion design", "GSAP"],
+    href: "https://exosuppra.github.io/manoztralia-refonte/",
+    status: "Concept de refonte",
+    accent: "#0e7490",
   },
   {
     name: "Apidia",
@@ -100,6 +163,7 @@ const projects: Project[] = [
   },
   {
     name: "LoveLink",
+    img: "site-lovelink",
     monogram: "LL",
     category: "Produit IA",
     concept: "Compagnons IA conversationnels",
@@ -111,6 +175,7 @@ const projects: Project[] = [
   },
   {
     name: "Le Jardin de Célina",
+    img: "site-celina",
     monogram: "JC",
     category: "Hôtellerie & Restauration",
     concept: "Maison d'hôtes & restaurant premium",
@@ -123,6 +188,7 @@ const projects: Project[] = [
   },
   {
     name: "L'Oustaù de Greù",
+    img: "site-oustau",
     monogram: "OG",
     category: "Commerce & Boutique",
     concept: "Épicerie & cave à vins de Provence",
@@ -135,6 +201,7 @@ const projects: Project[] = [
   },
   {
     name: "Esparron-de-Verdon",
+    img: "site-esparron",
     monogram: "EV",
     category: "Tourisme & Territoire",
     concept: "Guide touristique officiel",
@@ -146,6 +213,7 @@ const projects: Project[] = [
   },
   {
     name: "Verdon Mystères",
+    img: "site-verdonmysteres",
     monogram: "VM",
     category: "Loisir & Expérience",
     concept: "Jeu d'énigmes grandeur nature + mini-jeu en ligne",
@@ -156,19 +224,33 @@ const projects: Project[] = [
     accent: "#c026d3",
   },
   {
-    name: "La Pièce Qui Attend",
+    name: "Kartoche",
+    monogram: "K",
+    img: "k-nice",
+    category: "Jeu vidéo",
+    concept: "Course de karts arcade",
+    description:
+      "Un jeu de course de karts à l'humour bien français, dans un univers de jouets et de fête foraine : 28 pilotes, 24 karts, 23 circuits, des Toits de Paris au Corso de Nice. Développé en C++ sur Unreal Engine 5, sans Blueprint. Course, Grand Prix, contre-la-montre et écran partagé jusqu'à quatre joueurs.",
+    tags: ["Unreal Engine 5", "C++", "Multijoueur local"],
+    href: "",
+    status: "Prototype jouable",
+    accent: "#dc2626",
+  },
+  {
+    name: "La Pièce qui attend",
     monogram: "LPQA",
+    img: "lpqa-2",
     category: "Jeu vidéo",
     concept: "Jeu d'horreur psychologique 3D",
     description:
       "Notre projet le plus ambitieux côté création : un jeu d'horreur narratif à la première personne (~30-45 min), construit avec Three.js et WebGL, packagé en .exe Windows hors-ligne via Electron. Audio spatialisé HRTF, miroirs reflétés en temps réel, assets PBR libres (CC0). Des énigmes scénarisées — radio, dessins, frigo — s'enchaînent jusqu'à une révélation finale en plein jour. Une V2 est prévue sur Unreal Engine 5, avec une sortie commerciale envisagée sur Steam.",
     tags: ["Three.js · WebGL", "Electron", "Audio spatialisé HRTF"],
-    href: "",
-    status: "En développement · sortie Steam envisagée",
+    href: "https://exosuppra.github.io/la-piece-qui-attend-site/",
     accent: "#b91c1c",
   },
   {
     name: "RENOVXPERTS",
+    img: "site-renovxperts",
     monogram: "RX",
     category: "Services locaux",
     concept: "Artisan rénovation multi-métiers",
@@ -189,23 +271,23 @@ const projects: Project[] = [
     href: "https://mealandmove.lovable.app",
     accent: "#6d28d9",
   },
-  {
-    name: "Intense Verdon",
-    monogram: "IV",
-    category: "Application & SaaS",
-    concept: "Plateforme de comité éditorial",
-    description:
-      "Un outil métier collaboratif avec authentification : gestion, planification et validation de la ligne éditoriale d'un média local, à plusieurs mains.",
-    tags: ["Outil métier", "Authentification", "Collaboratif"],
-    href: "https://intense-verdon-edito.lovable.app",
-    accent: "#7c3aed",
-  },
 ];
+
+const clients = [
+  "Office de Tourisme & des Congrès du Pays de Manosque",
+  "Le Jardin de Célina",
+  "L'Oustaù de Greù",
+  "Madame Monsieur",
+  "La Brasserie du Soleil",
+  "Cas'Design",
+  "RENOVXPERTS",
+];
+const sectors = new Set(projects.map((p) => p.category)).size;
 ---
 
 <Layout
-  title="Réalisations LOGIQ IA · Sites, applications et produits IA"
-  description="Découvrez les réalisations LOGIQ IA : sites vitrines, applications web, plateformes métier et produits IA. Du guide touristique au SaaS, en passant par l'artisan local et l'hôtellerie premium."
+  title="Réalisations LOGIQ IA · Sites web, agents IA, produits et jeux"
+  description="Les réalisations de LOGIQ IA : sites vitrines (Cas'Design, Madame Monsieur, La Brasserie du Soleil), agents IA en production, Manga AI, applications métier et jeux vidéo. Projets et études de cas chiffrées."
   canonical="https://logiq-ia.fr/realisations/"
 >
   <Header />
@@ -250,12 +332,12 @@ const projects: Project[] = [
         {/* Stats */}
         <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
           <div>
-            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">14</div>
+            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;"><span data-count={projects.length}>{projects.length}</span></div>
             <div class="text-sm" style="color: #737373;">projets réalisés</div>
           </div>
           <div>
-            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;">9</div>
-            <div class="text-sm" style="color: #737373;">secteurs couverts</div>
+            <div class="text-3xl font-bold tracking-tight" style="color: #0a0a0a;"><span data-count={sectors}>{sectors}</span></div>
+            <div class="text-sm" style="color: #737373;">univers couverts</div>
           </div>
           <div>
             <div class="text-3xl font-bold tracking-tight text-gradient">∞</div>
@@ -275,12 +357,7 @@ const projects: Project[] = [
           Ils nous font confiance
         </div>
         <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-3">
-          {[
-            "Office de Tourisme & des Congrès du Pays de Manosque",
-            "Le Jardin de Célina",
-            "L'Oustaù de Greù",
-            "RENOVXPERTS",
-          ].map((c) => (
+          {clients.map((c) => (
             <span
               class="rounded-full border px-4 py-2 text-sm font-semibold"
               style="border-color: #e5e5e5; background: #ffffff; color: #0a0a0a;"
@@ -324,6 +401,7 @@ const projects: Project[] = [
           <article
             class="project-card group flex flex-col overflow-hidden rounded-2xl border bg-white transition-all hover:-translate-y-1"
             data-category={p.category}
+            data-reveal="tilt"
             style={`border-color: ${p.featured ? "rgba(220,38,38,0.30)" : "#e5e5e5"}; box-shadow: 0 10px 30px -18px ${p.accent}55;`}
           >
             {/* Visual tile */}
@@ -336,12 +414,32 @@ const projects: Project[] = [
                 class="pointer-events-none absolute -right-6 -top-8 h-32 w-32 rounded-full opacity-40"
                 style={`background: radial-gradient(circle, ${p.accent}40 0%, transparent 70%); filter: blur(24px);`}
               ></span>
-              <span
-                class="text-5xl font-black tracking-tighter"
-                style={`background: linear-gradient(135deg, ${p.accent} 0%, #0a0a0a 130%); -webkit-background-clip: text; background-clip: text; color: transparent;`}
-              >
-                {p.monogram}
-              </span>
+              {p.img ? (
+                <img
+                  src={`/show/${p.img}.webp`}
+                  alt={`Aperçu du projet ${p.name}`}
+                  width="1200"
+                  height="750"
+                  loading="lazy"
+                  decoding="async"
+                  class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                />
+              ) : (
+                <span
+                  class="text-5xl font-black tracking-tighter"
+                  style={`background: linear-gradient(135deg, ${p.accent} 0%, #0a0a0a 130%); -webkit-background-clip: text; background-clip: text; color: transparent;`}
+                >
+                  {p.monogram}
+                </span>
+              )}
+              {p.isNew && (
+                <span
+                  class="absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
+                  style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%);"
+                >
+                  Nouveau
+                </span>
+              )}
               {p.featured && (
                 <span
                   class="absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white"
@@ -420,7 +518,7 @@ const projects: Project[] = [
                   class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5"
                   style={`background: ${p.accent}; box-shadow: 0 12px 26px -12px ${p.accent};`}
                 >
-                  {p.internal ? "Voir la fiche produit" : "Visiter le site"}
+                  {p.internal ? "Voir la fiche produit" : p.status ? "Voir le concept" : "Visiter le site"}
                   <svg viewBox="0 0 16 16" fill="currentColor" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden>
                     <path d="M5.5 3a.5.5 0 010-1h7a.5.5 0 01.5.5v7a.5.5 0 01-1 0V3.707l-8.146 8.147a.5.5 0 01-.708-.708L11.293 3H5.5z" />
                   </svg>

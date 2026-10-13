@@ -1,0 +1,303 @@
+/* ==========================================================================
+   Couche « motion » commune à toutes les pages : habillage fixe (progression,
+   curseur, HUD, rideau de transition), reveals déclaratifs, marquees, boutons.
+   Piloté par src/scripts/motion.ts.
+   ========================================================================== */
+
+:root {
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --grad: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%);
+  --ink: #0d0718;
+  --ink-2: #1a1030;
+  --paper: #f7f3ea;
+  --r-sec: clamp(26px, 3.4vw, 54px);
+}
+
+/* ---- Lenis ---- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---- Accent italique des titres ---- */
+.serif-i {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Micro-typo mono (labels, HUD, cartouches) ---- */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---- Split de texte : masque + remontée ---- */
+.w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.1em 0.1em 0.22em 0.02em;
+  margin: -0.1em -0.1em -0.22em -0.02em;
+}
+.wi { display: inline-block; will-change: transform; }
+.text-gradient .wi,
+.wi .text-gradient { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+/* ---- Barre de progression ---- */
+.pg-bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  background: var(--grad);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* ---- En-tête : se range en descente ---- */
+#site-header { transition: transform 0.6s var(--ease), background-color 0.3s ease; }
+#site-header.is-hidden { transform: translateY(-110%); }
+
+/* ---- Grain ---- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Curseur ---- */
+.cur {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9200;
+  pointer-events: none;
+  display: none;
+}
+html.has-cursor .cur { display: block; }
+.cur__dot {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #7c3aed;
+  transition: transform 0.35s var(--ease), background-color 0.3s ease, opacity 0.3s ease;
+}
+.cur__label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  margin: -42px 0 0 -42px;
+  border-radius: 50%;
+  background: var(--grad);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: scale(0);
+  transition: transform 0.45s var(--ease);
+}
+.cur.is-link .cur__dot { transform: scale(3.2); background: rgba(192, 38, 211, 0.28); }
+.cur.is-label .cur__dot { opacity: 0; }
+.cur.is-label .cur__label { transform: scale(1); }
+
+/* ---- HUD de section ---- */
+.hud {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(13, 7, 24, 0.86);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.6s var(--ease);
+  pointer-events: none;
+}
+.hud.is-on { opacity: 1; transform: none; }
+.hud__dot { position: relative; width: 7px; height: 7px; border-radius: 50%; background: #c026d3; }
+.hud__dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #c026d3; animation: lq-pulse 2s ease-out infinite; }
+.hud__track { position: relative; width: 64px; height: 2px; background: rgba(255, 255, 255, 0.22); border-radius: 2px; overflow: hidden; }
+.hud__fill { position: absolute; inset: 0; background: var(--grad); transform: scaleX(0); transform-origin: 0 50%; }
+.hud__num { color: #c4b5fd; }
+/* transform + opacity uniquement : l'animation reste sur le compositeur */
+@keyframes lq-pulse {
+  from { transform: scale(1); opacity: 0.7; }
+  70%, to { transform: scale(3.4); opacity: 0; }
+}
+.hud:not(.is-on) .hud__dot::after { animation: none; }
+@media (max-width: 640px) { .hud { display: none; } }
+
+/* ---- Rideau de changement de page : un kart tire le rideau ---- */
+.wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  background: var(--ink);
+  transform: translateX(101%);
+  pointer-events: none;
+  will-change: transform;
+  visibility: hidden; /* le kart déborde du rideau : rien ne doit dépasser au repos */
+}
+html.is-leaving .wipe, html.is-arriving .wipe { visibility: visible; }
+.wipe::before {
+  /* liseré damier sur le bord d'attaque */
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -18px;
+  width: 18px;
+  background:
+    conic-gradient(#fff 25%, #0d0718 0 50%, #fff 0 75%, #0d0718 0) 0 0 / 18px 18px;
+}
+.wipe::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 80% at 20% 30%, rgba(124, 58, 237, 0.55), transparent 70%),
+    radial-gradient(50% 70% at 85% 75%, rgba(220, 38, 38, 0.4), transparent 70%);
+}
+.wipe__kart {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 50%;
+  width: min(34vw, 300px);
+  height: auto;
+  transform: translate(-58%, -50%);
+  filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.35));
+}
+.wipe__word {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 7vw, 6rem);
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  opacity: 0.14;
+}
+html.is-arriving .wipe { animation: lq-wipe-out 0.85s cubic-bezier(0.76, 0, 0.24, 1) 0.08s both; }
+html.is-arriving .wipe__kart { display: none; }
+@keyframes lq-wipe-out {
+  from { transform: translateX(0); }
+  to { transform: translateX(-104%); }
+}
+
+/* ---- Marquee piloté par le script ---- */
+.mq { overflow: hidden; }
+.mq__track { display: flex; width: max-content; will-change: transform; }
+.mq__group { display: flex; flex: none; align-items: center; }
+
+/* ---- Bandeau incliné, à cheval sur la couture de deux sections ---- */
+.band {
+  position: relative;
+  z-index: 6;
+  width: 108vw;
+  margin: -30px 0 -30px -4vw;
+  padding: 16px 0;
+  background: var(--grad);
+  color: #fff;
+  transform: rotate(-1.6deg);
+  box-shadow: 0 14px 40px -14px rgba(13, 7, 24, 0.5);
+}
+.band .mq__group > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.6rem;
+  padding-right: 1.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.2vw, 1.9rem);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.band i { display: inline-block; font-style: normal; animation: lq-spin 7s linear infinite; }
+@keyframes lq-spin { to { transform: rotate(360deg); } }
+
+/* ---- Bouton pilule : remplissage montant + icône qui pivote ---- */
+.btn-x { position: relative; overflow: hidden; isolation: isolate; }
+.btn-x::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #0d0718;
+  transform: translateY(102%);
+  transition: transform 0.55s var(--ease);
+}
+.btn-x:hover::before { transform: translateY(0); }
+.btn-x svg { transition: transform 0.45s var(--ease); }
+.btn-x:hover svg { transform: translateX(3px); }
+
+/* ---- Carte qui se remplit depuis le point d'entrée du curseur ---- */
+.fillcard { position: relative; isolation: isolate; overflow: hidden; }
+.fillcard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--fill, #0d0718);
+  clip-path: circle(0% at var(--mx, 50%) var(--my, 100%));
+  transition: clip-path 0.75s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .fillcard:hover::before { clip-path: circle(150% at var(--mx, 50%) var(--my, 100%)); }
+  .fillcard:hover .fc-fg { color: #fff !important; }
+  .fillcard:hover .fc-muted { color: rgba(255, 255, 255, 0.78) !important; }
+}
+.fc-fg, .fc-muted { transition: color 0.4s ease; }
+
+/* ---- Mot géant du pied de page ---- */
+.foot-word {
+  display: block;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16vw;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  text-align: center;
+  padding-top: 0.06em;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .band i, .hud__dot::after { animation: none; }
+  .grain { display: none; }
+}

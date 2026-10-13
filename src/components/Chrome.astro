@@ -1,0 +1,31 @@
+---
+// Habillage fixe commun à toutes les pages : progression, curseur, HUD de
+// section, grain, rideau de changement de page.
+---
+
+<div class="pg-bar" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="cur" aria-hidden="true">
+  <span class="cur__dot"></span>
+  <span class="cur__label"></span>
+</div>
+
+<div class="hud" aria-hidden="true">
+  <span class="hud__dot"></span>
+  <span class="hud__name">LOGIQ IA</span>
+  <span class="hud__track"><span class="hud__fill"></span></span>
+  <span class="hud__num">00 %</span>
+</div>
+
+<div class="wipe" aria-hidden="true">
+  <span class="wipe__word">LOGIQ IA</span>
+  {/* image chargée au premier geste du visiteur (voir initPageWipe) */}
+  <img class="wipe__kart" data-src="/show/kart-boulon.webp" alt="" width="560" height="477" decoding="async" />
+</div>
+
+<script>
+  // Le moteur d'animation n'est demandé qu'une fois la page peinte : ni son
+  // téléchargement ni son exécution ne retardent le premier affichage.
+  requestAnimationFrame(() => setTimeout(() => import("../scripts/motion.ts"), 0));
+</script>

@@ -1,27 +1,47 @@
 ---
 import "../styles/global.css";
+import Chrome from "../components/Chrome.astro";
+// police des titres (le plus grand texte du premier écran), préchargée
+import fontDisplay from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
 
 interface Props {
   title?: string;
   description?: string;
   canonical?: string;
   keywords?: string;
+  /** "home" active les scènes de l'accueil */
+  page?: string;
 }
 
 const {
   title = "LOGIQ IA · L'IA qui transforme votre entreprise",
-  description = "LOGIQ IA conçoit, déploie et opère des produits IA qui livrent. Manga AI, Apidia, OTO : nos solutions IA en production. Cabinet d'ingénierie IA basé en Provence, intervention partout en France.",
+  description = "LOGIQ IA, cabinet d'ingénierie IA à Gréoux-les-Bains (Provence) : agents IA sur mesure, automatisation, sites web et plateformes métier, produits IA. Audit offert de 30 minutes, intervention partout en France.",
   canonical = "https://logiq-ia.fr/",
-  keywords = "LOGIQ IA, Manga AI, générateur de manga, agent IA, automatisation, intelligence artificielle entreprise, transformation digitale, IA, PACA, France, produit IA",
+  keywords = "LOGIQ IA, agent IA, automatisation, création de site web, intelligence artificielle entreprise, Manga AI, Apidia, Gréoux-les-Bains, Manosque, Provence, PACA",
+  page = "",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    {/* Drapeaux posés avant le premier rendu : JS présent, arrivée par le rideau */}
+    <script is:inline>
+      (function () {
+        var r = document.documentElement;
+        r.className = r.className.replace("no-js", "js");
+        try {
+          var s = sessionStorage;
+          var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+          if (s.getItem("lq-wipe")) { s.removeItem("lq-wipe"); if (!reduce) r.classList.add("is-arriving"); }
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="preload" as="font" type="font/woff2" href={fontDisplay} crossorigin />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -37,13 +57,15 @@ const {
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="LOGIQ IA" />
-    <meta property="og:image" content="https://logiq-ia.fr/logo.png" />
-    <meta property="og:image:width" content="1024" />
-    <meta property="og:image:height" content="1024" />
+    <meta property="og:image" content="https://logiq-ia.fr/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="LOGIQ IA · L'IA qui transforme votre entreprise" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://logiq-ia.fr/logo.png" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://logiq-ia.fr/og.jpg" />
     <meta name="theme-color" content="#ffffff" />
 
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -58,8 +80,20 @@ const {
         name: "LOGIQ IA",
         url: "https://logiq-ia.fr",
         logo: "https://logiq-ia.fr/logo.png",
+        slogan: "L'IA qui transforme votre entreprise",
         description:
-          "Cabinet d'ingénierie IA. Concepteur et éditeur de produits IA grand public et métier.",
+          "Cabinet d'ingénierie IA : agents IA sur mesure, automatisation, sites web et plateformes métier. Concepteur et éditeur de produits IA grand public et métier.",
+        email: "contact@logiq-ia.fr",
+        founder: { "@type": "Person", name: "Quentin Duroy", url: "https://quentin-duroy.fr" },
+        knowsAbout: [
+          "Agents IA",
+          "Automatisation des processus",
+          "Création de sites web",
+          "Intelligence artificielle générative",
+          "Make",
+          "n8n",
+          "Développement de jeux vidéo",
+        ],
         address: {
           "@type": "PostalAddress",
           addressLocality: "Gréoux-les-Bains",
@@ -85,7 +119,8 @@ const {
       })}
     />
   </head>
-  <body class="min-h-screen overflow-x-hidden antialiased">
+  <body class="min-h-screen overflow-x-hidden antialiased" data-page={page}>
     <slot />
+    <Chrome />
   </body>
 </html>
