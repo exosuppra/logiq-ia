@@ -283,6 +283,10 @@ const clients = [
   "RENOVXPERTS",
 ];
 const sectors = new Set(projects.map((p) => p.category)).size;
+
+// Texte des pastilles de catégorie : teinte assombrie quand la couleur d'accent manque de contraste sur fond clair.
+const INK: Record<string, string> = { "#dc2626": "#b91c1c", "#c026d3": "#a21caf" };
+const ink = (c: string) => INK[c] ?? c;
 ---
 
 <Layout
@@ -462,7 +466,7 @@ const sectors = new Set(projects.map((p) => p.category)).size;
             <div class="flex flex-1 flex-col p-6">
               <div
                 class="inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide"
-                style={`background: ${p.accent}12; color: ${p.accent};`}
+                style={`background: ${p.accent}12; color: ${ink(p.accent)};`}
               >
                 {p.category}
               </div>

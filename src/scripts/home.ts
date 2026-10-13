@@ -109,7 +109,10 @@ async function initHero() {
     .to({}, { duration: 0.06 });
 
   await breathe();
-  // la mosaïque ne tourne que lorsqu'elle est à l'écran
+  // la mosaïque s'anime au premier geste du visiteur (au chargement, l'image reste stable)
+  const live = () => sec.classList.add("is-live");
+  (["scroll", "pointermove", "touchstart", "keydown"] as const).forEach((ev) => addEventListener(ev, live, { once: true, passive: true }));
+  // … et seulement lorsqu'elle est à l'écran
   new IntersectionObserver(([e]) => sec.classList.toggle("is-away", !e.isIntersecting)).observe(sec);
 
   // parallaxe souris sur la mosaïque
@@ -125,9 +128,9 @@ async function initHero() {
   // Entrée : le titre et le texte sont affichés dès le premier rendu (rien ne
   // retarde l'affichage) ; seuls le store de la fenêtre et le badge s'animent.
   gsap.timeline({ defaults: { ease: "expo.out" } })
-    .to(".hero__shade", { yPercent: -101, duration: 1.5, ease: "expo.inOut" }, 0.1)
-    .fromTo(".hero__badge", { scale: 0, rotate: -140 }, { scale: 1, rotate: 0, duration: 1.1, ease: "back.out(1.5)" }, 0.8)
-    .fromTo(".hero__scroll", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }, 1.1);
+    .to(".hero__shade", { yPercent: -101, duration: 0.9, ease: "expo.inOut" }, 0)
+    .fromTo(".hero__badge", { scale: 0, rotate: -140 }, { scale: 1, rotate: 0, duration: 0.9, ease: "back.out(1.5)" }, 0.45)
+    .fromTo(".hero__scroll", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, 0.7);
 }
 
 /* ================================================================ 2. Manifeste */

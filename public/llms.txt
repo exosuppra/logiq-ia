@@ -1,0 +1,37 @@
+# LOGIQ IA
+
+> LOGIQ IA est un cabinet d'ingénierie IA et automatisation basé à Gréoux-les-Bains (Alpes-de-Haute-Provence, France), fondé par Quentin Duroy. Il conçoit, déploie et opère des agents IA sur mesure, des automatisations, des sites web et plateformes métier, et édite ses propres produits IA. Intervention en Provence-Alpes-Côte d'Azur, partout en France et à distance. Audit offert de 30 minutes.
+
+Slogan : « L'IA qui transforme votre entreprise ». Contact : contact@logiq-ia.fr.
+
+## Pages principales
+
+- [Accueil](https://logiq-ia.fr/): présentation du cabinet, services, réalisations, méthode et questions fréquentes
+- [Services](https://logiq-ia.fr/services/): agents IA sur mesure, automatisation des workflows, conseil stratégique IA, sites web et plateformes métier
+- [Réalisations](https://logiq-ia.fr/realisations/): sites, agents IA, produits et jeux réalisés, avec études de cas chiffrées
+- [Produits](https://logiq-ia.fr/produits/): Manga AI, Apidia et OTO, les produits conçus et opérés par LOGIQ IA
+- [Manga AI](https://logiq-ia.fr/produits/manga-ai/): générateur de manga par IA, jusqu'à 240 pages à partir d'un synopsis, en français, anglais et espagnol
+- [À propos](https://logiq-ia.fr/a-propos/): le cabinet, son fondateur, ses reconnaissances et certifications
+- [Contact](https://logiq-ia.fr/contact/): demande d'audit gratuit et coordonnées
+
+## Services
+
+- Agents IA sur mesure : assistants dédiés à un métier, connectés aux outils existants (Microsoft 365, Google Workspace, CRM, ERP)
+- Automatisation des workflows : synchronisation de données, reporting automatique, suppression des doubles saisies (Make, n8n)
+- Conseil stratégique IA : audit, feuille de route, conformité RGPD et EU AI Act, formation des équipes
+- Sites web et plateformes métier : sites vitrines, e-commerce, plateformes SaaS, ERP et CRM sur mesure
+
+## Réalisations notables
+
+- Apidia : agent conseiller en séjour et qualification automatique de la donnée touristique, plus de 6 000 fiches actualisées chaque jour, pour l'Office de Tourisme et des Congrès du Pays de Manosque
+- OTO et OTO_Mail : agents IA métier prenant en charge une soixantaine de tâches par jour
+- Agent SDR autonome : agent commercial autonome de prospection B2B
+- Manga AI : produit grand public, [manga-ai.fr](https://manga-ai.fr)
+- Sites clients : Cas'Design, Madame Monsieur, La Brasserie du Soleil, Le Jardin de Célina, L'Oustaù de Greù, RENOVXPERTS
+- Jeux vidéo : Kartoche (course de karts arcade, Unreal Engine 5), La Pièce qui attend (horreur psychologique)
+
+## Reconnaissances
+
+- Lauréat du concours international Make Grid (2025)
+- National Treasure Lovable (top 1 % France)
+- 23 certifications IA (Anthropic, Make Academy, Lovable)
