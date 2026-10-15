@@ -58,7 +58,9 @@ export class Kart {
       const box = new THREE.Box3().setFromObject(o);
       const r = (box.max.y - box.min.y) / 2 || 0.22;
       // les roues droites sont retournées de 180° : leur axe local est inversé
-      this.wheels.push({ o, sign: o.name.endsWith("R") ? 1 : -1, r });
+      // axe de la roue = Z local ; une roue retournée de 180° tourne dans l'autre sens
+      const flipped = Math.abs(o.quaternion.y) > 0.5 || Math.abs(o.quaternion.w) < 0.5;
+      this.wheels.push({ o, sign: flipped ? 1 : -1, r });
     });
     const shadow = new THREE.Mesh(
       new THREE.PlaneGeometry(2.9, 2.1),
