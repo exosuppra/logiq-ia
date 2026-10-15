@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+// Servie avec le statut 404 par Cloudflare Pages : sans elle, toute adresse
+// inconnue renvoyait l'accueil en « 200 », vu comme du contenu dupliqué.
+---
+
+<Layout
+  title="Page introuvable · LOGIQ IA"
+  description="Cette page n'existe pas ou plus. Retrouvez les services, les réalisations et les produits de LOGIQ IA."
+  canonical="https://logiq-ia.fr/404/"
+>
+  <Header />
+  <main class="bg-white">
+    <section class="relative overflow-hidden pt-32 sm:pt-40">
+      <div class="mx-auto max-w-3xl px-6 pb-24 text-center">
+        <img
+          src="/show/kart-boulon.webp"
+          alt=""
+          width="560"
+          height="477"
+          decoding="async"
+          class="mx-auto w-56 rotate-[-14deg] sm:w-64"
+          style="filter: drop-shadow(0 18px 18px rgba(13,7,24,0.25));"
+        />
+        <p class="mono mt-6" style="color: #6d28d9;">Erreur 404 · sortie de piste</p>
+        <h1 class="mt-4 text-5xl font-bold tracking-tight sm:text-6xl" style="color: #0a0a0a;">
+          Cette page a quitté <span class="text-gradient">le circuit</span>.
+        </h1>
+        <p class="mx-auto mt-6 max-w-xl text-lg" style="color: #404040;">
+          L'adresse n'existe pas, ou plus. Reprenez la course par l'une de ces
+          entrées :
+        </p>
+        <div class="mt-10 flex flex-wrap justify-center gap-3">
+          <a
+            href="/"
+            class="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold text-white"
+            style="background: linear-gradient(90deg, #7c3aed 0%, #c026d3 50%, #dc2626 100%);"
+          >
+            Retour à l'accueil
+          </a>
+          <a href="/services" class="inline-flex items-center rounded-full border px-6 py-3 text-sm font-semibold" style="border-color: #d4d4d4; color: #0a0a0a;">Services</a>
+          <a href="/realisations" class="inline-flex items-center rounded-full border px-6 py-3 text-sm font-semibold" style="border-color: #d4d4d4; color: #0a0a0a;">Réalisations</a>
+          <a href="/contact" class="inline-flex items-center rounded-full border px-6 py-3 text-sm font-semibold" style="border-color: #d4d4d4; color: #0a0a0a;">Contact</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
