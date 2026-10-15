@@ -78,11 +78,12 @@ export class Kart {
 class Stage {
   renderer: THREE.WebGLRenderer;
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 200);
+  camera: THREE.PerspectiveCamera;
   w = 1;
   h = 1;
 
-  constructor(public canvas: HTMLCanvasElement) {
+  constructor(public canvas: HTMLCanvasElement, fov = FOV) {
+    this.camera = new THREE.PerspectiveCamera(fov, 1, 0.1, 400);
     this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -125,9 +126,13 @@ export type Crossing = {
 export function createCrossing(
   canvas: HTMLCanvasElement,
   ids: string[],
-  opts: { frac: () => number; ground: number; lanes: number[] },
+  opts: { frac: () => number; ground: number; lanes: number[]; tilt?: number },
 ): Crossing {
-  const stage = new Stage(canvas);
+  // Téléobjectif : presque sans perspective, les roues du côté caché restent
+  // derrière celles du côté visible au lieu de dépasser à côté d'elles.
+  const CFOV = 11;
+  const CTAN = Math.tan(THREE.MathUtils.degToRad(CFOV / 2));
+  const stage = new Stage(canvas, CFOV);
   const karts: (Kart | null)[] = ids.map(() => null);
   const last: number[] = ids.map(() => NaN);
   let dist = 10;
@@ -135,8 +140,8 @@ export function createCrossing(
   const resize = () => {
     stage.resize();
     const aspect = stage.w / stage.h;
-    dist = opts.lanes[0] + KART_LEN / opts.frac() / (2 * aspect * TAN);
-    const camY = dist * 0.09 + 0.45; // caméra basse : vue de côté plutôt que plongeante
+    dist = opts.lanes[0] + KART_LEN / opts.frac() / (2 * aspect * CTAN);
+    const camY = dist * (opts.tilt ?? 0.05) + 0.4; // caméra basse : vue de profil
     stage.camera.position.set(0, camY, dist);
     // vise le point qui place l'origine du sol exactement à la hauteur demandée
     const ndc = 1 - opts.ground * 2; // -1 bas … 1 haut
@@ -155,13 +160,13 @@ export function createCrossing(
     if (!k) return;
     const z = opts.lanes[i % opts.lanes.length];
     const aspect = stage.w / stage.h;
-    const wx = (x / stage.w - 0.5) * 2 * aspect * TAN * (dist - z);
+    const wx = (x / stage.w - 0.5) * 2 * aspect * CTAN * (dist - z);
     if (!Number.isNaN(last[i])) k.roll(last[i] - wx); // avance vers la gauche
     last[i] = wx;
     k.root.position.set(wx, 0, z);
     // presque de profil, nez vers la gauche : les quatre roues restent bien
     // distinctes (de trois-quarts, la roue arrière passait derrière l'avant)
-    k.root.rotation.y = Math.PI + 0.16 + Math.sin(t * 7 + i * 2.1) * 0.05;
+    k.root.rotation.y = Math.PI + 0.03 + Math.sin(t * 7 + i * 2.1) * 0.025;
     k.body.rotation.x = Math.sin(t * 11 + i) * 0.035; // roulis
     k.body.position.y = Math.abs(Math.sin(t * 26 + i * 1.3)) * 0.035; // cahots
   };

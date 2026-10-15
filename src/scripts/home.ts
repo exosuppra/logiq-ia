@@ -354,8 +354,7 @@ function initRace(sec: HTMLElement) {
   // peloton : retard de chaque kart derrière le rideau (en largeurs d'écran) et hauteur (repli 2D)
   const pack = [
     { dx: 0.02, y: 0.7 },
-    { dx: 0.3, y: 0.56 },
-    { dx: 0.56, y: 0.42 },
+    { dx: 0.36, y: 0.5 },
   ];
   const st = { p: 0 };
   let w = 0, h = 0;
@@ -413,8 +412,8 @@ function initRace(sec: HTMLElement) {
 
   if (canvas && canWebGL) {
     loadK3().then((m) => {
-      const c = m.createCrossing(canvas, ["picante", "boulon", "marina"], {
-        frac: () => (innerWidth < 900 ? 0.46 : 0.28), ground: 0.6, lanes: [1.6, -1.6, -4.8],
+      const c = m.createCrossing(canvas, ["picante", "boulon"], {
+        frac: () => (innerWidth < 900 ? 0.46 : 0.28), ground: 0.6, lanes: [1.6, -2.2], tilt: 0.13,
       });
       c.ready.then(() => { gl = c; pin.classList.add("is-3d"); measure(); draw(); });
     }).catch(() => {});
@@ -429,7 +428,7 @@ function initGames(sec: HTMLElement) {
   const picks = $$<HTMLButtonElement>(".pilots button", sec);
   if (stage && canvas && canWebGL) {
     loadK3().then((m) => {
-      const v = m.createViewer(canvas, ["boulon", "picante", "marina"], reduce);
+      const v = m.createViewer(canvas, ["boulon", "picante"], reduce);
       v.ready.then(() => {
         stage.classList.add("is-3d");
         new IntersectionObserver(([e]) => v.setActive(e.isIntersecting), { threshold: 0.05 }).observe(stage);

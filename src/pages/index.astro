@@ -127,11 +127,10 @@ const games = [
   { name: "Chœur de Sel", kind: "FPS narratif stylisé · artworks du jeu", status: "Build jouable", shots: ["choeur-1", "choeur-2"] },
 ];
 
-// Les trois karts jouables en 3D sur la page (modèles du jeu).
+// Les karts présentés en 3D sur la page (modèles du jeu).
 const pilots = [
   { id: "boulon", name: "Boulon", kart: "La Fusée" },
   { id: "picante", name: "El Picante", kart: "La Flamme" },
-  { id: "marina", name: "Marina", kart: "Le Buggy" },
 ];
 
 // Cinématiques d'ouverture des circuits, capturées en jeu.
@@ -732,7 +731,7 @@ const faqSchema = {
         <div class="race__dust" aria-hidden="true"></div>
         <div class="race__flag" aria-hidden="true"></div>
         <canvas class="gl" data-gl aria-hidden="true"></canvas>
-        {["picante", "boulon", "marina"].map((k) => (
+        {["picante", "boulon"].map((k) => (
           <div class="kwrap race__kart" aria-hidden="true">
             <img src={`/show/kart-${k}.webp`} alt="" width="560" height="480" loading="lazy" decoding="async" />
             <span class="speed"></span>
