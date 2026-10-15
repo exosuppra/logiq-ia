@@ -136,7 +136,7 @@ export function createCrossing(
     stage.resize();
     const aspect = stage.w / stage.h;
     dist = opts.lanes[0] + KART_LEN / opts.frac() / (2 * aspect * TAN);
-    const camY = dist * 0.17 + 0.5;
+    const camY = dist * 0.09 + 0.45; // caméra basse : vue de côté plutôt que plongeante
     stage.camera.position.set(0, camY, dist);
     // vise le point qui place l'origine du sol exactement à la hauteur demandée
     const ndc = 1 - opts.ground * 2; // -1 bas … 1 haut
@@ -159,8 +159,9 @@ export function createCrossing(
     if (!Number.isNaN(last[i])) k.roll(last[i] - wx); // avance vers la gauche
     last[i] = wx;
     k.root.position.set(wx, 0, z);
-    // nez vers la gauche et un peu vers la caméra, avec un léger dérapage
-    k.root.rotation.y = Math.PI + 0.42 + Math.sin(t * 7 + i * 2.1) * 0.16;
+    // presque de profil, nez vers la gauche : les quatre roues restent bien
+    // distinctes (de trois-quarts, la roue arrière passait derrière l'avant)
+    k.root.rotation.y = Math.PI + 0.16 + Math.sin(t * 7 + i * 2.1) * 0.05;
     k.body.rotation.x = Math.sin(t * 11 + i) * 0.035; // roulis
     k.body.position.y = Math.abs(Math.sin(t * 26 + i * 1.3)) * 0.035; // cahots
   };
